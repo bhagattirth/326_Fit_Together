@@ -1,0 +1,61 @@
+body {
+	box-sizing: border-box;
+	margin: 0;
+}
+
+/* NAV SECTION */
+.nav-link {
+	color: white;
+}
+
+.nav-link:hover {
+	color: grey;
+}
+
+.user-icon {
+	width: 80px;
+	height: 75px;
+	border-radius: 50%;
+	object-fit: cover;
+	cursor: pointer;
+}
+
+.company-logo {
+	width: 75px;
+	height: 75px;
+	object-fit: cover;
+}
+
+/* MAIN SECTION */
+
+main {
+	height: 50vh;
+	width: 100%;
+	background-image: url("https://www.umass.edu/cp/sites/default/files/2017_07_13_03_Recreation%20Center_Southeast%20Exterior%20Perspective_Night.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+}
+
+/* INFO SECTION */
+.info {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 1em;
+}
+
+.info-text {
+	width: 70%;
+}
+
+.info-title {
+	text-align: center;
+	font-size: 3rem;
+}
+
+.info-pic {
+	height: 200px;
+	width: 200px;
+	object-fit: cover;
+}
