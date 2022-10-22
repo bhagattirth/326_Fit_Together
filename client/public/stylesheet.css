@@ -134,6 +134,5 @@ body#login{
 	width: 300px;
 	height: 500px;
 	background-color: rgba(181, 186, 186, 0.925);
-	border: 3px solid green;
-	
+	border: 5px solid green;
 }
