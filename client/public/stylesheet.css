@@ -121,3 +121,19 @@ body {
 	background: none;
 	border: none;
 }
+
+/* Login */
+body#login{
+	background-image: url("https://nypost.com/wp-content/uploads/sites/2/2018/01/012018_gym_buddies.jpg?quality=75&strip=all");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-color: navy;
+}
+
+#rectangleBox{
+	width: 300px;
+	height: 500px;
+	background-color: rgba(181, 186, 186, 0.925);
+	border: 3px solid green;
+	
+}
