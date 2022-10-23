@@ -121,3 +121,25 @@ body {
 	background: none;
 	border: none;
 }
+
+/* MATCH HISTORY*/
+.workouts-carousel-item {
+	height: 300px;
+}
+
+.border-2 {
+	height: 300px;
+}
+
+.carousel-control-next,
+.carousel-control-prev,
+.carousel-indicators {
+	filter: invert(100%);
+	margin-bottom: 4em;
+}
+
+.add-workout-icon {
+	object-fit: cover;
+	width: 140px;
+	height: 140px;
+}
