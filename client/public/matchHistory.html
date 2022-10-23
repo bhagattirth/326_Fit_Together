@@ -111,7 +111,7 @@
 											type="button"
 											id="availability"
 										>
-											View Availability
+											View Availability Preferences
 										</button>
 										<br /><br />
                                         <label for="selectRating">Rate This Workout Partner:</label>
@@ -129,7 +129,58 @@
 								<div class="col-10 text-center">
                                     
 									<h2>Past Workouts</h2>
-									<div class="container-fluid"></div>
+									<div class="container-fluid">
+                                        <div class = "row">
+                                            <div class="col-4">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h3 class="card-title"> 10/23/2022</h3>
+                                                        <strong>
+                                                            Legs:
+                                                        </strong>
+                                                        <p class="card-text">
+                                                            5x5 Squat <br>
+                                                            4x12 Quad Extension <br>
+                                                            4x12 Leg Press <br>
+                                                            3x15 RDL <br>
+                                                            1xFailure Calf Raises
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h3 class="card-title"> 10/25/2022</h3>
+                                                        <strong>
+                                                            Push:
+                                                        </strong>
+                                                        <p class="card-text">
+                                                            3x12 Bench <br>
+                                                            3x12 Incline Bench <br>
+                                                            4x12 Shoulder Press <br>
+                                                            3x12 Lateral Raises <br>
+                                                            5x12 Triceps <br>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h3 class="card-title"> Add Workout</h3>
+                                                        <img
+                                                            class="card-img-top"
+                                                            src="https://www.freepnglogos.com/uploads/plus-icon/plus-icon-plus-sign-icon-vector-graphic-pixabay-7.png"
+                                                            width = "100"
+                                                            height = "150"
+                                                            alt="Buff Dude"
+                                                         />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 								</div>
 							</div>
 						</div>
@@ -138,88 +189,145 @@
 			</div>
 		</div>
 
-		<div class="container border">
-			<!-- I cannot figure how to remove the margin. Can you try to fix it? -->
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-3">
-						<div class="card border-0">
-							<img
-								class="card-img-top"
-								src="https://fitnessvolt.com/wp-content/uploads/2022/07/becoming-a-bodybuilder-750x422.jpg"
-								alt="Buff Dude"
-							/>
-							<div class="card-body">
-								<!-- I dont know how to add star button -->
-
-								<button
-									class="btn btn-danger"
-									type="submit"
-									id="report"
-								>
-									Report Partner
-								</button>
-								<br /><br />
-								<button
-									class="btn btn-danger"
-									type="submit"
-									id="remove"
-								>
-									Remove Match
-								</button>
-								<br /><br />
-								<button
-									class="btn btn-success"
-									type="submit"
-									id="rating"
-								>
-									View Availability
-								</button>
-								<br />
+        <div class="accordion w-75 mx-auto" id="previousMatches">
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="matchTwo">
+					<button
+						class="accordion-button"
+						type="button"
+						data-bs-toggle="collapse"
+						data-bs-target="#collapseOne"
+						aria-expanded="true"
+						aria-controls="collapseOne"
+					>
+						<div class="container-fluid">
+							<div class="row align-items-center">
+								<div class="col-4">
+									<div class="border-0">
+										<img
+											class="card-img-top"
+											src="https://fitnessvolt.com/wp-content/uploads/2022/07/becoming-a-bodybuilder-750x422.jpg"
+											alt="Buff Dude"
+										/>
+									</div>
+								</div>
+								<div class="col-4 text-center">
+									<h1>Chris Bumstead</h1>
+									<br />
+									<h5>Last Matched On 1/1/2022</h5>
+									<br />
+								</div>
+								<div class="col-4 text-center"></div>
+                                <!-- Put Information about workout split in here-->
+                                </div>
 							</div>
 						</div>
-					</div>
-
-					<div class="col">
-						<h1>Jake From State Farm</h1>
-						<br />
-						<h4>Last Match: 2 Months Ago</h4>
-						<br />
-						<h4>Contact Info: xxx-xxx-xxxx</h4>
-						<br />
-						<h4>Past Workouts:</h4>
-						<br />
-
-						<div class="container">
+					</button>
+				</h2>
+				<div
+					id="collapseOne"
+					class="accordion-collapse collapse show"
+					aria-labelledby="matchTwo"
+					data-bs-parent="#accordionExample"
+				>
+					<div class="accordion-body">
+						<div class="container-fluid">
 							<div class="row">
-								<div class="col-4">
-									<div class="card">
-										<div class="card-body">
-											<div class="card">
-												<div class="card-body">
-													9/20/2022
-												</div>
-											</div>
-
-											TODO: Fill In Workout 1
-										</div>
+								<div
+									class="col-2 text-center align-self-center"
+								>
+									<div class="card-body">
+										<button
+											class="btn btn-danger"
+											type="button"
+											id="report"
+										>
+											Report Partner
+										</button>
+										<br /><br />
+										<button
+											class="btn btn-danger"
+											type="button"
+											id="remove"
+										>
+											Remove Match
+										</button>
+										<br /><br />
+										<button
+											class="btn btn-success"
+											type="button"
+											id="availability"
+										>
+											View Availability Preferences
+										</button>
+										<br /><br />
+                                        <label for="selectRating">Rate This Workout Partner:</label>
+                                        <select class="form-select" aria-label="selectRating" aria-readonly="true" id="selectRating">
+                                            <option selected value="1">1/5</option>
+                                            <option value="2">2/5</option>
+                                            <option value="3">3/5</option>
+                                            <option value="4">4/5</option>
+                                            <option value="5">5/5</option>
+                                        </select>
+                                        
 									</div>
 								</div>
 
-								<div class="col-4">
-									<div class="card">
-										<div class="card-body">
-											TODO: Fill in Workout 2
-										</div>
-									</div>
-								</div>
-
-								<div class="col-4">
-									<div class="card">
-										<div class="card-body">
-											TODO: Add Workout
-										</div>
-									</div>
+								<div class="col-10 text-center">
+                                    
+									<h2>Past Workouts</h2>
+									<div class="container-fluid">
+                                        <div class = "row">
+                                            <div class="col-4">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h3 class="card-title"> 10/23/2022</h3>
+                                                        <strong>
+                                                            Legs:
+                                                        </strong>
+                                                        <p class="card-text">
+                                                            5x5 Squat <br>
+                                                            4x12 Quad Extension <br>
+                                                            4x12 Leg Press <br>
+                                                            3x15 RDL <br>
+                                                            1xFailure Calf Raises
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h3 class="card-title"> 10/25/2022</h3>
+                                                        <strong>
+                                                            Push:
+                                                        </strong>
+                                                        <p class="card-text">
+                                                            3x12 Bench <br>
+                                                            3x12 Incline Bench <br>
+                                                            4x12 Shoulder Press <br>
+                                                            3x12 Lateral Raises <br>
+                                                            5x12 Triceps <br>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h3 class="card-title"> Add Workout</h3>
+                                                        <img
+                                                            class="card-img-top"
+                                                            src="https://www.freepnglogos.com/uploads/plus-icon/plus-icon-plus-sign-icon-vector-graphic-pixabay-7.png"
+                                                            width = "100"
+                                                            height = "150"
+                                                            alt="Buff Dude"
+                                                         />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 								</div>
 							</div>
 						</div>
@@ -227,6 +335,458 @@
 				</div>
 			</div>
 		</div>
+
+        <div class="accordion w-75 mx-auto" id="previousMatches">
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="matchThree">
+					<button
+						class="accordion-button"
+						type="button"
+						data-bs-toggle="collapse"
+						data-bs-target="#collapseOne"
+						aria-expanded="true"
+						aria-controls="collapseOne"
+					>
+						<div class="container-fluid">
+							<div class="row align-items-center">
+								<div class="col-4">
+									<div class="border-0">
+										<img
+											class="card-img-top"
+											src="https://fitnessvolt.com/wp-content/uploads/2022/07/becoming-a-bodybuilder-750x422.jpg"
+											alt="Buff Dude"
+										/>
+									</div>
+								</div>
+								<div class="col-4 text-center">
+									<h1>Chris Bumstead</h1>
+									<br />
+									<h5>Last Matched On 1/1/2022</h5>
+									<br />
+								</div>
+								<div class="col-4 text-center"></div>
+                                <!-- Put Information about workout split in here-->
+                                </div>
+							</div>
+						</div>
+					</button>
+				</h2>
+				<div
+					id="collapseOne"
+					class="accordion-collapse collapse show"
+					aria-labelledby="matchThree"
+					data-bs-parent="#accordionExample"
+				>
+					<div class="accordion-body">
+						<div class="container-fluid">
+							<div class="row">
+								<div
+									class="col-2 text-center align-self-center"
+								>
+									<div class="card-body">
+										<button
+											class="btn btn-danger"
+											type="button"
+											id="report"
+										>
+											Report Partner
+										</button>
+										<br /><br />
+										<button
+											class="btn btn-danger"
+											type="button"
+											id="remove"
+										>
+											Remove Match
+										</button>
+										<br /><br />
+										<button
+											class="btn btn-success"
+											type="button"
+											id="availability"
+										>
+											View Availability Preferences
+										</button>
+										<br /><br />
+                                        <label for="selectRating">Rate This Workout Partner:</label>
+                                        <select class="form-select" aria-label="selectRating" aria-readonly="true" id="selectRating">
+                                            <option selected value="1">1/5</option>
+                                            <option value="2">2/5</option>
+                                            <option value="3">3/5</option>
+                                            <option value="4">4/5</option>
+                                            <option value="5">5/5</option>
+                                        </select>
+                                        
+									</div>
+								</div>
+
+								<div class="col-10 text-center">
+                                    
+									<h2>Past Workouts</h2>
+									<div class="container-fluid">
+                                        <div class = "row">
+                                            <div class="col-4">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h3 class="card-title"> 10/23/2022</h3>
+                                                        <strong>
+                                                            Legs:
+                                                        </strong>
+                                                        <p class="card-text">
+                                                            5x5 Squat <br>
+                                                            4x12 Quad Extension <br>
+                                                            4x12 Leg Press <br>
+                                                            3x15 RDL <br>
+                                                            1xFailure Calf Raises
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h3 class="card-title"> 10/25/2022</h3>
+                                                        <strong>
+                                                            Push:
+                                                        </strong>
+                                                        <p class="card-text">
+                                                            3x12 Bench <br>
+                                                            3x12 Incline Bench <br>
+                                                            4x12 Shoulder Press <br>
+                                                            3x12 Lateral Raises <br>
+                                                            5x12 Triceps <br>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h3 class="card-title"> Add Workout</h3>
+                                                        <img
+                                                            class="card-img-top"
+                                                            src="https://www.freepnglogos.com/uploads/plus-icon/plus-icon-plus-sign-icon-vector-graphic-pixabay-7.png"
+                                                            width = "100"
+                                                            height = "150"
+                                                            alt="Buff Dude"
+                                                         />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+        <div class="accordion w-75 mx-auto" id="previousMatches">
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="matchFour">
+					<button
+						class="accordion-button"
+						type="button"
+						data-bs-toggle="collapse"
+						data-bs-target="#collapseOne"
+						aria-expanded="true"
+						aria-controls="collapseOne"
+					>
+						<div class="container-fluid">
+							<div class="row align-items-center">
+								<div class="col-4">
+									<div class="border-0">
+										<img
+											class="card-img-top"
+											src="https://fitnessvolt.com/wp-content/uploads/2022/07/becoming-a-bodybuilder-750x422.jpg"
+											alt="Buff Dude"
+										/>
+									</div>
+								</div>
+								<div class="col-4 text-center">
+									<h1>Chris Bumstead</h1>
+									<br />
+									<h5>Last Matched On 1/1/2022</h5>
+									<br />
+								</div>
+								<div class="col-4 text-center"></div>
+                                <!-- Put Information about workout split in here-->
+                                </div>
+							</div>
+						</div>
+					</button>
+				</h2>
+				<div
+					id="collapseOne"
+					class="accordion-collapse collapse show"
+					aria-labelledby="matchFour"
+					data-bs-parent="#accordionExample"
+				>
+					<div class="accordion-body">
+						<div class="container-fluid">
+							<div class="row">
+								<div
+									class="col-2 text-center align-self-center"
+								>
+									<div class="card-body">
+										<button
+											class="btn btn-danger"
+											type="button"
+											id="report"
+										>
+											Report Partner
+										</button>
+										<br /><br />
+										<button
+											class="btn btn-danger"
+											type="button"
+											id="remove"
+										>
+											Remove Match
+										</button>
+										<br /><br />
+										<button
+											class="btn btn-success"
+											type="button"
+											id="availability"
+										>
+											View Availability Preferences
+										</button>
+										<br /><br />
+                                        <label for="selectRating">Rate This Workout Partner:</label>
+                                        <select class="form-select" aria-label="selectRating" aria-readonly="true" id="selectRating">
+                                            <option selected value="1">1/5</option>
+                                            <option value="2">2/5</option>
+                                            <option value="3">3/5</option>
+                                            <option value="4">4/5</option>
+                                            <option value="5">5/5</option>
+                                        </select>
+                                        
+									</div>
+								</div>
+
+								<div class="col-10 text-center">
+                                    
+									<h2>Past Workouts</h2>
+									<div class="container-fluid">
+                                        <div class = "row">
+                                            <div class="col-4">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h3 class="card-title"> 10/23/2022</h3>
+                                                        <strong>
+                                                            Legs:
+                                                        </strong>
+                                                        <p class="card-text">
+                                                            5x5 Squat <br>
+                                                            4x12 Quad Extension <br>
+                                                            4x12 Leg Press <br>
+                                                            3x15 RDL <br>
+                                                            1xFailure Calf Raises
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h3 class="card-title"> 10/25/2022</h3>
+                                                        <strong>
+                                                            Push:
+                                                        </strong>
+                                                        <p class="card-text">
+                                                            3x12 Bench <br>
+                                                            3x12 Incline Bench <br>
+                                                            4x12 Shoulder Press <br>
+                                                            3x12 Lateral Raises <br>
+                                                            5x12 Triceps <br>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h3 class="card-title"> Add Workout</h3>
+                                                        <img
+                                                            class="card-img-top"
+                                                            src="https://www.freepnglogos.com/uploads/plus-icon/plus-icon-plus-sign-icon-vector-graphic-pixabay-7.png"
+                                                            width = "100"
+                                                            height = "150"
+                                                            alt="Buff Dude"
+                                                         />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+        <div class="accordion w-75 mx-auto" id="previousMatches">
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="matchFive">
+					<button
+						class="accordion-button"
+						type="button"
+						data-bs-toggle="collapse"
+						data-bs-target="#collapseOne"
+						aria-expanded="true"
+						aria-controls="collapseOne"
+					>
+						<div class="container-fluid">
+							<div class="row align-items-center">
+								<div class="col-4">
+									<div class="border-0">
+										<img
+											class="card-img-top"
+											src="https://fitnessvolt.com/wp-content/uploads/2022/07/becoming-a-bodybuilder-750x422.jpg"
+											alt="Buff Dude"
+										/>
+									</div>
+								</div>
+								<div class="col-4 text-center">
+									<h1>Chris Bumstead</h1>
+									<br />
+									<h5>Last Matched On 1/1/2022</h5>
+									<br />
+								</div>
+								<div class="col-4 text-center"></div>
+                                <!-- Put Information about workout split in here-->
+                                </div>
+							</div>
+						</div>
+					</button>
+				</h2>
+				<div
+					id="collapseOne"
+					class="accordion-collapse collapse show"
+					aria-labelledby="matchFive"
+					data-bs-parent="#accordionExample"
+				>
+					<div class="accordion-body">
+						<div class="container-fluid">
+							<div class="row">
+								<div
+									class="col-2 text-center align-self-center"
+								>
+									<div class="card-body">
+										<button
+											class="btn btn-danger"
+											type="button"
+											id="report"
+										>
+											Report Partner
+										</button>
+										<br /><br />
+										<button
+											class="btn btn-danger"
+											type="button"
+											id="remove"
+										>
+											Remove Match
+										</button>
+										<br /><br />
+										<button
+											class="btn btn-success"
+											type="button"
+											id="availability"
+										>
+											View Availability Preferences
+										</button>
+										<br /><br />
+                                        <label for="selectRating">Rate This Workout Partner:</label>
+                                        <select class="form-select" aria-label="selectRating" aria-readonly="true" id="selectRating">
+                                            <option selected value="1">1/5</option>
+                                            <option value="2">2/5</option>
+                                            <option value="3">3/5</option>
+                                            <option value="4">4/5</option>
+                                            <option value="5">5/5</option>
+                                        </select>
+                                        
+									</div>
+								</div>
+
+								<div class="col-10 text-center">
+                                    
+									<h2>Past Workouts</h2>
+									<div class="container-fluid">
+                                        <div class = "row">
+                                            <div class="col-4">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h3 class="card-title"> 10/23/2022</h3>
+                                                        <strong>
+                                                            Legs:
+                                                        </strong>
+                                                        <p class="card-text">
+                                                            5x5 Squat <br>
+                                                            4x12 Quad Extension <br>
+                                                            4x12 Leg Press <br>
+                                                            3x15 RDL <br>
+                                                            1xFailure Calf Raises
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h3 class="card-title"> 10/25/2022</h3>
+                                                        <strong>
+                                                            Push:
+                                                        </strong>
+                                                        <p class="card-text">
+                                                            3x12 Bench <br>
+                                                            3x12 Incline Bench <br>
+                                                            4x12 Shoulder Press <br>
+                                                            3x12 Lateral Raises <br>
+                                                            5x12 Triceps <br>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h3 class="card-title"> Add Workout</h3>
+                                                        <img
+                                                            class="card-img-top"
+                                                            src="https://www.freepnglogos.com/uploads/plus-icon/plus-icon-plus-sign-icon-vector-graphic-pixabay-7.png"
+                                                            width = "100"
+                                                            height = "150"
+                                                            alt="Buff Dude"
+                                                         />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+        <br>
+
+        <div class="container">
+            <div class="row">
+              <div class="col text-center">
+                <button class="btn btn-primary center" type="button"> Next</button>
+              </div>
+            </div>
+          </div>
+        
 
 		<script
 			src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
