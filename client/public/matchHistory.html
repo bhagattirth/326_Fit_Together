@@ -11,10 +11,67 @@
 			integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
 			crossorigin="anonymous"
 		/>
-	<link href="stylesheet.css" rel="stylesheet" />
-    
+	<link href="stylesheet.css" rel="stylesheet" />   
 </head>
 <body>
-    
+
+    <div>
+        <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"
+                    ><img
+                        class="company-logo"
+                        src="https://cdn-icons-png.flaticon.com/512/1053/1053916.png"
+                        alt="company logo"
+                /></a>
+
+                    <form>
+                        <!-- I do not know why this the search button is doing that thing -->
+                        <label class="form-label" for="search"> Search</label>
+                        <input type="text" id="search" class="form-control" placeholder="Search Name e.g. Taylor Swift" />
+                        <button class="btn btn-primary" type="submit" id="textbox">Search</button>
+                    </form>
+            </div>
+        </nav>
+    </div>
+
+    <br>
+
+
+    <div class="container border">
+        
+        <div class="container-fluid pull-left">      
+            <div class="row">
+                <div class="col-3">
+                    <div class="card border-0">
+                        <img class="card-img-top" src="https://fitnessvolt.com/wp-content/uploads/2022/07/becoming-a-bodybuilder-750x422.jpg" alt="Buff Dude">
+                        <div class="card-body">
+                            <!-- I dont know how to add star button -->   
+                            <button class="btn btn-danger" type="submit" id="report">Report Partner</button> <br><br>
+                            <button class="btn btn-danger" type="submit" id="remove">Remove Match</button> <br><br>
+                            <button class="btn btn-success" type="submit" id="rating"> View Availability</button> <br>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <h1>Jake From State Farm</h1><br>
+                    <h4>Last Match:2 Months Ago</h4><br>
+                    <h4>Contact Info: xxx-xxx-xxxx</h4>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"
+    ></script>
 </body>
 </html>
