@@ -137,7 +137,10 @@ body#login {
 	background-color: rgba(181, 186, 186, 0.925);
 	border: 5px solid green;
 	text-align: center;
+	margin: auto;
 }
+
+
 /* MATCH HISTORY*/
 .workouts-carousel-item {
 	height: 300px;
