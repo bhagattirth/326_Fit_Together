@@ -21,7 +21,7 @@ UFIT’s Login Page
 ***
 This is the first page people see when they get to the site. The page offers information about the service and allows people to head to the login/signup page to access the entire site. If the user is already logged in, they can hit the profile button, allowing them to modify their profile or get match to a “gym buddy.”
 
-![wireframe of the home page]([http://url/to/img.png](/raw_images/index.jpg))
+![wireframe of the home page](https://github.com/bhagattirth/326_Fit_Together/blob/main/docs/raw_images/index.jpg)
 
 ## Profile
 ***
