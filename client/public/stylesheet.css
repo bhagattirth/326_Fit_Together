@@ -143,3 +143,26 @@ body {
 	width: 140px;
 	height: 140px;
 }
+
+.prev-match-img {
+	height: 250px;
+	width: 250px;
+	object-fit: cover;
+	margin-right: 4em;
+}
+
+.prev-matches-header {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.prev-matches-name {
+	font-size: 210%;
+	font-weight: 500;
+}
+
+.prev-matches-date {
+	font-size: 150%;
+	font-weight: 400;
+}
