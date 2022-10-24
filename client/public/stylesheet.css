@@ -124,17 +124,61 @@ body {
 
 /* Login */
 
-body#login{
+body#login {
 	background-image: url("https://nypost.com/wp-content/uploads/sites/2/2018/01/012018_gym_buddies.jpg?quality=75&strip=all");
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-color: navy;
 }
 
-#rectangleBox{
+#rectangleBox {
 	width: 300px;
 	height: 350px;
 	background-color: rgba(181, 186, 186, 0.925);
 	border: 5px solid green;
 	text-align: center;
+}
+/* MATCH HISTORY*/
+.workouts-carousel-item {
+	height: 300px;
+}
+
+.border-2 {
+	height: 300px;
+}
+
+.carousel-control-next,
+.carousel-control-prev,
+.carousel-indicators {
+	filter: invert(100%);
+	margin-bottom: 4em;
+}
+
+.add-workout-icon {
+	object-fit: cover;
+	width: 140px;
+	height: 140px;
+}
+
+.prev-match-img {
+	height: 250px;
+	width: 250px;
+	object-fit: cover;
+	margin-right: 4em;
+}
+
+.prev-matches-header {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.prev-matches-name {
+	font-size: 210%;
+	font-weight: 500;
+}
+
+.prev-matches-date {
+	font-size: 150%;
+	font-weight: 400;
 }
