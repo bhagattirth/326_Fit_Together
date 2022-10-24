@@ -1,7 +1,7 @@
 # Milestone 1
 
-** Team PSI - UFIT **
-** Team overview: Kenneth Moore - kjmoore12 Tirth Bhagat - bhagattirth Mark McEnnis - Mark5013 **
+**Team PSI - UFIT**
+**Team overview: Kenneth Moore - kjmoore12 Tirth Bhagat - bhagattirth Mark McEnnis - Mark5013**
 
 
 ## Data Interaction
