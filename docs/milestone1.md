@@ -6,7 +6,7 @@
 
 ## Data Interaction
 
-Our plan for data interaction is the same as last time. TODO
+Our plan for data interaction is the same as last time. *One component of our final project is our gym buddy preview. This will consist of an image storing functionality which stores images associated with each account so that you will be able to see what your potential gym buddies look like. This will require storing image data. Another component of our final project is our match system. This will allow for Person A to match with Person B, and Person B to be notified. Then, Person B will either accept or reject the match. Once matched, it will be stored as a match in the database. This will require storing all half and complete match data. After a complete match, the contact information provided during sign up will be exchanged. A third component of our final project is our rating system. This will allow for individuals who have matched with another person to rate them after a complete match. This data will not be available to the public, but will be stored for safety reasons. If an individual gets too many bad reviews, they will be banned from the platform for being a bad workout partner. This will require storing review data pertaining to each individual. A fourth component of our final project will be the availability section. This will allow individuals to select their availability and change it as needed. This will ensure that you are attempting to find workout partners that are available at the same times and dates as you. This requires storing date and time information for each individual and sorting it based on overlapping times to provide the matching functionality.*
 
 
 ## Wireframe + Website Images
@@ -38,7 +38,7 @@ Allows the user to input his workout schedule and preference, so the algorithm c
 This page allows members to find “gym buddies” that they want to work out with. The page tries to match the user to match their preference, and when it finds the best fit, you are able to see the other participant’s profile. Then, you have the choice of working out with them (by clicking the check mark) or finding a different one (by using the “x” button).
 
 ![wireframe of matching page](https://github.com/bhagattirth/326_Fit_Together/blob/main/docs/raw_images/matching.jpg)
-![matching page webpage](https://github.com/bhagattirth/326_Fit_Together/blob/main/docs/raw_images/matching_web.jpg)
+![matching page webpage](https://github.com/bhagattirth/326_Fit_Together/blob/main/docs/raw_images/match_web.jpg)
 
 ## Matching History
 ***
