@@ -10,7 +10,6 @@ Our plan for data interaction is the same as last time. TODO
 
 
 ## Wireframe + Website Images
-—
 ### Login
 ***
 
