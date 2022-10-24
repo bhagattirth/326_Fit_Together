@@ -51,7 +51,7 @@ Allows the user to view whom they workout out with in the past. They can either 
 
 
 ![wireframe of matching page](https://github.com/bhagattirth/326_Fit_Together/blob/main/docs/raw_images/matchHistory.jpg)
-![matching webpage](https://github.com/bhagattirth/326_Fit_Together/blob/main/docs/raw_images/matchHistory_web.jpg)
+![matching webpage](https://github.com/bhagattirth/326_Fit_Together/blob/main/docs/raw_images/matchHistory_Web.png)
 
 
 ## Division of Labor
