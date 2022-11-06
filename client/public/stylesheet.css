@@ -140,6 +140,11 @@ body#login {
 	margin: auto;
 }
 
+#error-text {
+	color: red;
+	margin: 0;
+}
+
 /* MATCH HISTORY*/
 .workouts-carousel-item {
 	height: 300px;
