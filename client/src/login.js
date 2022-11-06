@@ -37,7 +37,7 @@ const loginUser = (e) => {
 };
 
 // sign up user
-const signupUser = (e) => {
+const signupUser = async (e) => {
 	if (e.target.tagName !== "BUTTON") return;
 	e.stopPropagation();
 
@@ -50,6 +50,16 @@ const signupUser = (e) => {
 		alert("invalid password");
 		return;
 	}
+
+	const res = await fetch("http://localhost:5000/auth/signup", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({ email: email.value, password: pass.value }),
+	});
+	const msg = await res.json();
+	console.log(msg);
 
 	// make it here, create post request to backend
 	// then redirect upon success`

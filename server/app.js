@@ -1,13 +1,13 @@
 import express from "express";
 import cors from "cors";
-import { loginRoutes } from "./routes/login-route.js";
+import { authRoutes } from "./routes/auth-routes.js";
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// login route
-app.use("/login", loginRoutes);
+// auth routes
+app.use("/auth", authRoutes);
 
 app.listen(5000, (req, res) => {
 	console.log("listening on port 5000");
