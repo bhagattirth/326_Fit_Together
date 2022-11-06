@@ -18,51 +18,84 @@ const validatePassword = (password) => {
 };
 
 // login user
-const loginUser = (e) => {
-	if (e.target.tagName !== "BUTTON") return;
+const loginUser = async (e) => {
+	if (e.target.id !== "login") return;
 	e.stopPropagation();
 
+	// email validation
 	if (!validateEmail(email.value)) {
 		alert("invalid email");
 		return;
 	}
 
+	// password validation
 	if (!validatePassword(pass.value)) {
 		alert("invalid password");
 		return;
 	}
 
-	// make it here, post req to backend
-	// then redirect upon success
+	// attempt to log user in
+	try {
+		const res = await fetch("http://localhost:5000/auth/login", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ email: email.value, password: pass.value }),
+		});
+		const msg = await res.json();
+
+		if (!res.ok) {
+			throw new Error("Invalid email/password combination");
+		}
+	} catch (err) {
+		const text = document.getElementById("error-text");
+		text.hidden = false;
+		return;
+	}
+
+	// redirect back to homepage here
+	location.href = "index.html";
 };
 
 // sign up user
 const signupUser = async (e) => {
-	if (e.target.tagName !== "BUTTON") return;
+	if (e.target.id !== "signup") return;
 	e.stopPropagation();
 
+	// email validation
 	if (!validateEmail(email.value)) {
 		alert("invalid email");
 		return;
 	}
 
+	// password validation
 	if (!validatePassword(pass.value)) {
 		alert("invalid password");
 		return;
 	}
 
-	const res = await fetch("http://localhost:5000/auth/signup", {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify({ email: email.value, password: pass.value }),
-	});
-	const msg = await res.json();
-	console.log(msg);
+	// attempt to sign user up
+	try {
+		const res = await fetch("http://localhost:5000/auth/signup", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ email: email.value, password: pass.value }),
+		});
+		const msg = await res.json();
 
-	// make it here, create post request to backend
-	// then redirect upon success`
+		if (!res.ok) {
+			throw new Error("Something went wrong please try again later");
+		}
+	} catch (err) {
+		//display dropdown
+		return;
+	}
+
+	//redirect user back to homepage here
+	location.href = "index.html";
 };
 
 signupBtn.addEventListener("click", signupUser);
