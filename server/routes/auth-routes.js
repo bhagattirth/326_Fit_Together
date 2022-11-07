@@ -1,5 +1,11 @@
 import express from "express";
-import { loginUser, signupUser } from "../controllers/login-controller.js";
+import {
+	loginUser,
+	signupUser,
+	validateUser,
+} from "../controllers/login-controller.js";
+
+import { validateToken } from "../helpers/JWT.js";
 
 const router = express.Router();
 
@@ -8,5 +14,7 @@ router.post("/login", loginUser);
 
 // sign up route
 router.post("/signup", signupUser);
+
+router.get("/validateUser", validateToken, validateUser);
 
 export { router as authRoutes };

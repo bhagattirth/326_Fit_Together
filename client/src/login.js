@@ -38,6 +38,7 @@ const loginUser = async (e) => {
 	try {
 		const res = await fetch("http://localhost:5000/auth/login", {
 			method: "POST",
+			credentials: "include",
 			headers: {
 				"Content-Type": "application/json",
 			},
@@ -79,6 +80,7 @@ const signupUser = async (e) => {
 	try {
 		const res = await fetch("http://localhost:5000/auth/signup", {
 			method: "POST",
+			credentials: "include",
 			headers: {
 				"Content-Type": "application/json",
 			},
