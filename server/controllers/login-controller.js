@@ -1,4 +1,5 @@
 import bcrypt from "bcrypt";
+import { createToken } from "../helpers/JWT.js";
 
 export const loginUser = async (req, res, next) => {
 	// do something to log user in
@@ -15,7 +16,12 @@ export const loginUser = async (req, res, next) => {
 
 	if (!valid) {
 		res.status(400).send({ message: "Invalid password" });
+		return;
 	}
+
+	const token = createToken({ id: "2398423940" });
+	res.cookie("accessToken", token, { maxAge: 60 * 60 * 24 * 30 * 1000 });
+	res.status(200).send({ message: "Logged in" });
 };
 
 export const signupUser = async (req, res, next) => {
@@ -24,5 +30,16 @@ export const signupUser = async (req, res, next) => {
 	console.log(email, hashedPassword);
 
 	// create user here
+	const token = createToken({ id: "238974327" });
+	res.cookie("accessToken", token, { maxAge: 60 * 60 * 24 * 30 * 1000 });
 	res.status(200).send({ message: "user created" });
+};
+
+export const validateUser = (req, res, next) => {
+	if (req.authenticated) {
+		console.log("here");
+		res.status(200).send({ message: "valid token" });
+	} else {
+		res.status(400).send({ message: "Not valid" });
+	}
 };
