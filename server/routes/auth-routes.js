@@ -3,6 +3,7 @@ import {
 	loginUser,
 	signupUser,
 	validateUser,
+	logoutUser,
 } from "../controllers/login-controller.js";
 
 import { validateToken } from "../helpers/JWT.js";
@@ -16,5 +17,8 @@ router.post("/login", loginUser);
 router.post("/signup", signupUser);
 
 router.get("/validateUser", validateToken, validateUser);
+
+// logout route
+router.post("/logout", logoutUser);
 
 export { router as authRoutes };
