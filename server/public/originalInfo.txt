@@ -1,0 +1,19 @@
+[
+{
+    "name":"Chris Bumstead",
+    "contact" : "987-xxx-xxx",
+    "imgURL": null,
+    "ratings":"4",
+    "pastWorkout": [["Legs", "quads", "squats"],["Arms","Triceps","Biceps"]]
+
+},
+{
+    "name":"Arnold Cane",
+    "contact" : "587-xxx-xxx",
+    "imgURL": null,
+    "ratings":"4.3",
+    "pastWorkout": [["Back", "shoulders", "chest"],["Arms","Triceps","Biceps"]]
+
+}
+
+]

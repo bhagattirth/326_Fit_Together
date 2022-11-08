@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import { authRoutes } from "./routes/auth-routes.js";
+import{matchHistoryRouter} from "./routes/matchHistory-routes.js";
 
 const app = express();
 // app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
@@ -13,6 +14,11 @@ const app = express();
 
 
 app.use(express.static('./public'));
+app.use(express.urlencoded({extended:false}));
+
+
+app.use("/", matchHistoryRouter);
+
 
 
 
