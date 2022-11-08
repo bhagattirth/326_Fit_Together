@@ -1,5 +1,6 @@
 server/node_modules/bcrypt/build-tmp-napi-v3/action_after_build.vcxproj
 server/node_modules/bcrypt/build-tmp-napi-v3/action_after_build.vcxproj.filters
+server/node_modules/bcrypt/build-tmp-napi-v3/action_after_build.vcxproj
 server/node_modules/bcrypt/build-tmp-napi-v3/bcrypt_lib.vcxproj
 server/node_modules/bcrypt/build-tmp-napi-v3/bcrypt_lib.vcxproj.filters
 server/node_modules/bcrypt/build-tmp-napi-v3/binding.sln
