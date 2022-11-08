@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Match History - UFit</title>
+
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+			crossorigin="anonymous"
+		/>
+		<link href="./css/stylesheet.css" rel="stylesheet" />
+	</head>
+	<body>
+		<div>
+			<nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+				<div class="container-fluid">
+					<a class="navbar-brand" href="#"
+						><img
+							class="company-logo"
+							src="https://cdn-icons-png.flaticon.com/512/1053/1053916.png"
+							alt="company logo"
+					/></a>
+
+					<div class="input-group w-25 p-3">
+						<input
+							type="text"
+							class="form-control"
+							placeholder="Search Name e.g. Taylor Swift"
+						/>
+						<div class="input-group-append">
+							<button class="btn btn-primary" type="button">
+								Search
+							</button>
+						</div>
+					</div>
+				</div>
+			</nav>
+		</div>
+
+		<br />
+
+		<div class="accordion w-75 mx-auto" id="previousMatchesOne">
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="matchOne">
+					<button
+						class="accordion-button"
+						type="button"
+						data-bs-toggle="collapse"
+						data-bs-target="#collapseOne"
+						aria-expanded="true"
+						aria-controls="collapseOne"
+					>
+						<span class="prev-matches-header">
+							<img
+								class="card-img-top prev-match-img"
+								src="https://fitnessvolt.com/wp-content/uploads/2022/07/becoming-a-bodybuilder-750x422.jpg"
+								alt="Buff Dude"
+							/>
+							<span class="prev-matches-info">
+								<span class="prev-matches-name">
+									Chris Bumstead
+								</span>
+								<br />
+								Last Matched On 1/1/2022
+								<br />
+								Contact: 978-000-0202
+							</span>
+							<br />
+						</span>
+					</button>
+				</h2>
+				<div
+					id="collapseOne"
+					class="accordion-collapse collapse show"
+					aria-labelledby="matchOne"
+					data-bs-parent="#accordionExample"
+				>
+					<div class="accordion-body">
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-2 text-center">
+									<div class="card-body">
+										<button
+											class="btn btn-danger"
+											type="button"
+											id="reportOne"
+										>
+											Report Partner
+										</button>
+										<br /><br />
+										<button
+											class="btn btn-danger"
+											type="button"
+											id="removeOne"
+										>
+											Remove Match
+										</button>
+										<br /><br />
+										<button
+											class="btn btn-success"
+											type="button"
+											id="availabilityOne"
+										>
+											View Availability Preferences
+										</button>
+										<br /><br />
+										<label for="selectRatingOne"
+											>Rate This Workout Partner:</label
+										>
+										<select
+											class="form-select"
+											aria-label="selectRatingOne"
+											aria-readonly="true"
+											id="selectRatingOne"
+										>
+											<option selected value="1">
+												1/5
+											</option>
+											<option value="2">2/5</option>
+											<option value="3">3/5</option>
+											<option value="4">4/5</option>
+											<option value="5">5/5</option>
+										</select>
+										<br />
+									</div>
+								</div>
+
+								<div class="col text-center">
+									<div class="container-fluid">
+										<h2>Past Workouts</h2>
+										<div class="row">
+											<div class="col-8">
+												<div
+													id="carouselOne"
+													class="carousel slide"
+													data-bs-ride="false"
+												>
+													<div
+														class="carousel-inner border-2"
+													>
+														<div
+															class="carousel-item active"
+														>
+															<div class="card">
+																<div
+																	class="card-body"
+																>
+																	<h3
+																		class="card-title"
+																	>
+																		10/23/2022
+																	</h3>
+																	<strong>
+																		Legs:
+																	</strong>
+																	<p
+																		class="card-text"
+																	>
+																		5x5
+																		Squat
+																		<br />
+																		4x12
+																		Quad
+																		Extension
+																		<br />
+																		4x12 Leg
+																		Press
+																		<br />
+																		3x15 RDL
+																		<br />
+																		1xFailure
+																		Calf
+																		Raises
+																	</p>
+																</div>
+															</div>
+														</div>
+														<div
+															class="carousel-item"
+														>
+															<div class="card">
+																<div
+																	class="card-body"
+																>
+																	<h3
+																		class="card-title"
+																	>
+																		10/25/2022
+																	</h3>
+																	<strong>
+																		Push:
+																	</strong>
+																	<p
+																		class="card-text"
+																	>
+																		3x12
+																		Bench
+																		<br />
+																		3x12
+																		Incline
+																		Bench
+																		<br />
+																		4x12
+																		Shoulder
+																		Press
+																		<br />
+																		3x12
+																		Lateral
+																		Raises
+																		<br />
+																		5x12
+																		Triceps
+																		<br />
+																	</p>
+																</div>
+															</div>
+														</div>
+														<button
+															class="carousel-control-prev carousel-arrow-color"
+															type="button"
+															data-bs-target="#carouselOne"
+															data-bs-slide="prev"
+														>
+															<span
+																class="carousel-control-prev-icon"
+																aria-hidden="true"
+															></span>
+															<span
+																class="visually-hidden"
+																>Previous</span
+															>
+														</button>
+														<button
+															class="carousel-control-next"
+															type="button"
+															data-bs-target="#carouselOne"
+															data-bs-slide="next"
+														>
+															<span
+																class="carousel-control-next-icon"
+																aria-hidden="true"
+															></span>
+															<span
+																class="visually-hidden"
+																>Next</span
+															>
+														</button>
+													</div>
+												</div>
+											</div>
+											<div class="col-4">
+												<div class="card">
+													<div class="card-body">
+														<h3 class="card-title">
+															Add Workout
+														</h3>
+														<img
+															class="card-img-top add-workout-icon"
+															src="https://www.freepnglogos.com/uploads/plus-icon/plus-icon-plus-sign-icon-vector-graphic-pixabay-7.png"
+															alt="Plus Symbol"
+														/>
+														<a
+															href="#"
+															class="btn btn-transparent stretched-link"
+															role="button"
+														></a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="accordion w-75 mx-auto" id="previousMatchesTwo">
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="matchTwo">
+					<button
+						class="accordion-button collapsed"
+						type="button"
+						data-bs-toggle="collapse"
+						data-bs-target="#collapseTwo"
+						aria-expanded="true"
+						aria-controls="collapseTwo"
+					>
+						<span class="prev-matches-header">
+							<img
+								class="card-img-top prev-match-img"
+								src="https://fitnessvolt.com/wp-content/uploads/2022/07/becoming-a-bodybuilder-750x422.jpg"
+								alt="Buff Dude"
+							/>
+							<span class="prev-matches-info">
+								<span class="prev-matches-name">
+									Chris Bumstead2
+								</span>
+								<br />
+								Last Matched On 1/1/2022
+								<br />
+								Contact: 978-000-0203
+							</span>
+							<br />
+						</span>
+					</button>
+				</h2>
+				<div
+					id="collapseTwo"
+					class="accordion-collapse collapse"
+					aria-labelledby="matchTwo"
+					data-bs-parent="#accordionExample"
+				>
+					<div class="accordion-body">
+						<div class="container-fluid">
+							<div class="row">
+								<div
+									class="col-2 text-center align-self-center"
+								>
+									<div class="card-body">
+										<button
+											class="btn btn-danger"
+											type="button"
+											id="reportTwo"
+										>
+											Report Partner
+										</button>
+										<br /><br />
+										<button
+											class="btn btn-danger"
+											type="button"
+											id="removeTwo"
+										>
+											Remove Match
+										</button>
+										<br /><br />
+										<button
+											class="btn btn-success"
+											type="button"
+											id="availabilityTwo"
+										>
+											View Availability Preferences
+										</button>
+										<br /><br />
+										<label for="selectRatingTwo"
+											>Rate This Workout Partner:</label
+										>
+										<select
+											class="form-select"
+											aria-label="selectRatingTwo"
+											aria-readonly="true"
+											id="selectRatingTwo"
+										>
+											<option selected value="1">
+												1/5
+											</option>
+											<option value="2">2/5</option>
+											<option value="3">3/5</option>
+											<option value="4">4/5</option>
+											<option value="5">5/5</option>
+										</select>
+									</div>
+								</div>
+
+								<div class="col text-center">
+									<div class="container-fluid">
+										<h2>Past Workouts</h2>
+										<div class="row">
+											<div class="col-8">
+												<div
+													id="carouselTwo"
+													class="carousel slide"
+													data-bs-ride="false"
+												>
+													<div
+														class="carousel-inner border-2"
+													>
+														<div
+															class="carousel-item active"
+														>
+															<div class="card">
+																<div
+																	class="card-body"
+																>
+																	<h3
+																		class="card-title"
+																	>
+																		10/23/2022
+																	</h3>
+																	<strong>
+																		Legs:
+																	</strong>
+																	<p
+																		class="card-text"
+																	>
+																		5x5
+																		Squat
+																		<br />
+																		4x12
+																		Quad
+																		Extension
+																		<br />
+																		4x12 Leg
+																		Press
+																		<br />
+																		3x15 RDL
+																		<br />
+																		1xFailure
+																		Calf
+																		Raises
+																	</p>
+																</div>
+															</div>
+														</div>
+														<div
+															class="carousel-item"
+														>
+															<div class="card">
+																<div
+																	class="card-body"
+																>
+																	<h3
+																		class="card-title"
+																	>
+																		10/25/2022
+																	</h3>
+																	<strong>
+																		Push:
+																	</strong>
+																	<p
+																		class="card-text"
+																	>
+																		3x12
+																		Bench
+																		<br />
+																		3x12
+																		Incline
+																		Bench
+																		<br />
+																		4x12
+																		Shoulder
+																		Press
+																		<br />
+																		3x12
+																		Lateral
+																		Raises
+																		<br />
+																		5x12
+																		Triceps
+																		<br />
+																	</p>
+																</div>
+															</div>
+														</div>
+														<button
+															class="carousel-control-prev carousel-arrow-color"
+															type="button"
+															data-bs-target="#carouselTwo"
+															data-bs-slide="prev"
+														>
+															<span
+																class="carousel-control-prev-icon"
+																aria-hidden="true"
+															></span>
+															<span
+																class="visually-hidden"
+																>Previous</span
+															>
+														</button>
+														<button
+															class="carousel-control-next"
+															type="button"
+															data-bs-target="#carouselTwo"
+															data-bs-slide="next"
+														>
+															<span
+																class="carousel-control-next-icon"
+																aria-hidden="true"
+															></span>
+															<span
+																class="visually-hidden"
+																>Next</span
+															>
+														</button>
+													</div>
+												</div>
+											</div>
+											<div class="col-4">
+												<div class="card">
+													<div class="card-body">
+														<h3 class="card-title">
+															Add Workout
+														</h3>
+														<img
+															class="card-img-top add-workout-icon"
+															src="https://www.freepnglogos.com/uploads/plus-icon/plus-icon-plus-sign-icon-vector-graphic-pixabay-7.png"
+															alt="Plus Symbol"
+														/>
+														<a
+															href="#"
+															class="btn btn-transparent stretched-link"
+															role="button"
+														></a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="accordion w-75 mx-auto" id="previousMatchesThree">
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="matchThree">
+					<button
+						class="accordion-button collapsed"
+						type="button"
+						data-bs-toggle="collapse"
+						data-bs-target="#collapseThree"
+						aria-expanded="false"
+						aria-controls="collapseThree"
+					>
+						<span class="prev-matches-header">
+							<img
+								class="card-img-top prev-match-img"
+								src="https://fitnessvolt.com/wp-content/uploads/2022/07/becoming-a-bodybuilder-750x422.jpg"
+								alt="Buff Dude"
+							/>
+							<span class="prev-matches-info">
+								<span class="prev-matches-name">
+									Chris Bumstead3
+								</span>
+								<br />
+								Last Matched On 1/1/2022
+								<br />
+								Contact: 978-000-0204
+							</span>
+							<br />
+						</span>
+					</button>
+				</h2>
+				<div
+					id="collapseThree"
+					class="accordion-collapse collapse"
+					aria-labelledby="matchThree"
+					data-bs-parent="#accordionExample"
+				>
+					<div class="accordion-body">
+						<div class="container-fluid">
+							<div class="row">
+								<div
+									class="col-2 text-center align-self-center"
+								>
+									<div class="card-body">
+										<button
+											class="btn btn-danger"
+											type="button"
+											id="reportThree"
+										>
+											Report Partner
+										</button>
+										<br /><br />
+										<button
+											class="btn btn-danger"
+											type="button"
+											id="removeThree"
+										>
+											Remove Match
+										</button>
+										<br /><br />
+										<button
+											class="btn btn-success"
+											type="button"
+											id="availabilityThree"
+										>
+											View Availability Preferences
+										</button>
+										<br /><br />
+										<label for="selectRatingThree"
+											>Rate This Workout Partner:</label
+										>
+										<select
+											class="form-select"
+											aria-label="selectRatingThree"
+											aria-readonly="true"
+											id="selectRatingThree"
+										>
+											<option selected value="1">
+												1/5
+											</option>
+											<option value="2">2/5</option>
+											<option value="3">3/5</option>
+											<option value="4">4/5</option>
+											<option value="5">5/5</option>
+										</select>
+									</div>
+								</div>
+
+								<div class="col text-center">
+									<div class="container-fluid">
+										<h2>Past Workouts</h2>
+										<div class="row">
+											<div class="col-8">
+												<div
+													id="carouselThree"
+													class="carousel slide"
+													data-bs-ride="false"
+												>
+													<div
+														class="carousel-inner border-2"
+													>
+														<div
+															class="carousel-item active"
+														>
+															<div class="card">
+																<div
+																	class="card-body"
+																>
+																	<h3
+																		class="card-title"
+																	>
+																		10/23/2022
+																	</h3>
+																	<strong>
+																		Legs:
+																	</strong>
+																	<p
+																		class="card-text"
+																	>
+																		5x5
+																		Squat
+																		<br />
+																		4x12
+																		Quad
+																		Extension
+																		<br />
+																		4x12 Leg
+																		Press
+																		<br />
+																		3x15 RDL
+																		<br />
+																		1xFailure
+																		Calf
+																		Raises
+																	</p>
+																</div>
+															</div>
+														</div>
+														<div
+															class="carousel-item"
+														>
+															<div class="card">
+																<div
+																	class="card-body"
+																>
+																	<h3
+																		class="card-title"
+																	>
+																		10/25/2022
+																	</h3>
+																	<strong>
+																		Push:
+																	</strong>
+																	<p
+																		class="card-text"
+																	>
+																		3x12
+																		Bench
+																		<br />
+																		3x12
+																		Incline
+																		Bench
+																		<br />
+																		4x12
+																		Shoulder
+																		Press
+																		<br />
+																		3x12
+																		Lateral
+																		Raises
+																		<br />
+																		5x12
+																		Triceps
+																		<br />
+																	</p>
+																</div>
+															</div>
+														</div>
+														<button
+															class="carousel-control-prev carousel-arrow-color"
+															type="button"
+															data-bs-target="#carouselThree"
+															data-bs-slide="prev"
+														>
+															<span
+																class="carousel-control-prev-icon"
+																aria-hidden="true"
+															></span>
+															<span
+																class="visually-hidden"
+																>Previous</span
+															>
+														</button>
+														<button
+															class="carousel-control-next"
+															type="button"
+															data-bs-target="#carouselThree"
+															data-bs-slide="next"
+														>
+															<span
+																class="carousel-control-next-icon"
+																aria-hidden="true"
+															></span>
+															<span
+																class="visually-hidden"
+																>Next</span
+															>
+														</button>
+													</div>
+												</div>
+											</div>
+											<div class="col-4">
+												<div class="card">
+													<div class="card-body">
+														<h3 class="card-title">
+															Add Workout
+														</h3>
+														<img
+															class="card-img-top add-workout-icon"
+															src="https://www.freepnglogos.com/uploads/plus-icon/plus-icon-plus-sign-icon-vector-graphic-pixabay-7.png"
+															alt="Plus Symbol"
+														/>
+														<a
+															href="#"
+															class="btn btn-transparent stretched-link"
+															role="button"
+														></a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<br />
+
+		<div class="container">
+			<div class="row">
+				<div class="col text-center mb-2">
+					<button class="btn btn-primary" type="button">
+						Previous
+					</button>
+				</div>
+				<div class="col text-center mb-2">
+					<button class="btn btn-primary" type="button">Next</button>
+				</div>
+			</div>
+		</div>
+
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+			crossorigin="anonymous"
+		></script>
+	</body>
+</html>

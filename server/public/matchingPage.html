@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Find A Match - UFit</title>
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+			crossorigin="anonymous"
+		/>
+		<link href="./css/stylesheet.css" rel="stylesheet" />
+		<script
+			src="https://kit.fontawesome.com/39ea3817af.js"
+			crossorigin="anonymous"
+		></script>
+	</head>
+	<body>
+		<nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="#"
+					><img
+						class="company-logo"
+						src="https://cdn-icons-png.flaticon.com/512/1053/1053916.png"
+						alt="company logo"
+				/></a>
+
+				<div class="dropdown">
+					<img
+						class="user-icon dropdown-toggle"
+						data-bs-toggle="dropdown"
+						src="https://penntoday.upenn.edu/sites/default/files/2021-11/Taylor%20Swift-Main.jpg"
+						alt="user icon"
+					/>
+					<ul class="dropdown-menu">
+						<li>
+							<a class="dropdown-item" href="#">Profile</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="#">Matches</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="#">Logout</a>
+						</li>
+					</ul>
+				</div>
+				<!-- Only one of these shows at once -->
+				<!-- <button class="btn btn-outline-success">Login</button> -->
+			</div>
+		</nav>
+		<h1 class="title">Find a Fit!</h1>
+		<main class="slider">
+			<div
+				id="carouselExampleIndicators"
+				class="carousel slide"
+				data-bs-ride="false"
+			>
+				<div class="carousel-inner">
+					<div class="carousel-item active">
+						<img
+							class="caro-img"
+							src="https://static01.nyt.com/images/2020/11/18/arts/16taylor-masters/merlin_179096598_efc4232d-7251-4c29-b1c3-b4c4fb4d22fb-mediumSquareAt3X.jpg"
+							alt="..."
+						/>
+						<p class="name">Taylor Swift</p>
+						<div>
+							<p>Workout Split: Vocal Training</p>
+						</div>
+						<div class="dropdown">
+							<button
+								class="btn btn-secondary dropdown-toggle"
+								type="button"
+								data-bs-toggle="dropdown"
+								aria-expanded="false"
+							>
+								More info
+							</button>
+							<ul class="dropdown-menu">
+								<li>
+									<a class="dropdown-item" href="#">Some</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="#">More</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="#">Info</a>
+								</li>
+							</ul>
+						</div>
+						<div class="selection">
+							<button class="select-btn">
+								<i class="fa-solid fa-check yes"></i>
+							</button>
+							<button class="select-btn">
+								<i class="fa-solid fa-x no"></i>
+							</button>
+						</div>
+					</div>
+					<div class="carousel-item">
+						<img
+							class="caro-img"
+							src="https://s3.amazonaws.com/static.rogerebert.com/uploads/blog_post/primary_image/features/on-the-rise-of-taylor-swift-filmmaker/taylor-swift-filmmaker-2022.jpeg"
+							alt="..."
+						/>
+						<p class="name">T Swift</p>
+						<div>
+							<p>Workout Split: Legs</p>
+						</div>
+						<div class="dropdown">
+							<button
+								class="btn btn-secondary dropdown-toggle"
+								type="button"
+								data-bs-toggle="dropdown"
+								aria-expanded="false"
+							>
+								More info
+							</button>
+							<ul class="dropdown-menu">
+								<li>
+									<a class="dropdown-item" href="#">Some</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="#">More</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="#">Info</a>
+								</li>
+							</ul>
+						</div>
+						<div class="selection">
+							<button class="select-btn">
+								<i class="fa-solid fa-check yes"></i>
+							</button>
+							<button class="select-btn">
+								<i class="fa-solid fa-x no"></i>
+							</button>
+						</div>
+					</div>
+					<div class="carousel-item">
+						<img
+							class="caro-img"
+							src="https://www.billboard.com/wp-content/uploads/2020/12/04-taylor-swift-press-cr-Beth-Garrabrant-2020-billboard-1548-1607617377-1608654918.jpg?w=942&h=623&crop=1"
+							alt="..."
+						/>
+						<p class="name">Este Swift</p>
+						<div>
+							<p>Workout Split: Calesthenics</p>
+						</div>
+						<div class="dropdown">
+							<button
+								class="btn btn-secondary dropdown-toggle"
+								type="button"
+								data-bs-toggle="dropdown"
+								aria-expanded="false"
+							>
+								More info
+							</button>
+							<ul class="dropdown-menu">
+								<li>
+									<a class="dropdown-item" href="#">Some</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="#">More</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="#">Info</a>
+								</li>
+							</ul>
+						</div>
+						<div class="selection">
+							<button class="select-btn">
+								<i class="fa-solid fa-check yes"></i>
+							</button>
+							<button class="select-btn">
+								<i class="fa-solid fa-x no"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+				<button
+					class="carousel-control-prev"
+					type="button"
+					data-bs-target="#carouselExampleIndicators"
+					data-bs-slide="prev"
+				>
+					<span
+						class="carousel-control-prev-icon"
+						aria-hidden="true"
+					></span>
+					<span class="visually-hidden">Previous</span>
+				</button>
+				<button
+					class="carousel-control-next"
+					type="button"
+					data-bs-target="#carouselExampleIndicators"
+					data-bs-slide="next"
+				>
+					<span
+						class="carousel-control-next-icon"
+						aria-hidden="true"
+					></span>
+					<span class="visually-hidden">Next</span>
+				</button>
+			</div>
+		</main>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+			crossorigin="anonymous"
+		></script>
+	</body>
+</html>
