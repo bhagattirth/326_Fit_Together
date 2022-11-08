@@ -1,4 +1,4 @@
-import { addWorkout, getXPastData, ratingUpdate } from "../helpers/matchHistoryHelper.js";
+import { addWorkout, getXPastData, ratingUpdate, deleteUser, getDays } from "../helpers/matchHistoryHelper.js";
 
 
 export const getXPastUser =  (req, res, next)=>{
@@ -55,8 +55,45 @@ export const updateRating = (req, res, next) =>{
 
 
 export const deleteEntry = (req, res, next)=>{
-
     
-    //Will finish later
+    const {removeMatch1} = req.body;
+    const {removeMatch2} = req.body;
+    const {removeMatch3} = req.body;
+
+    if(removeMatch1 !=null){
+        let modifyUserData = deleteUser(removeMatch1);
+        res.json(modifyUserData);
+    }
+
+    else if(removeMatch2 !=null){
+        let modifyUserData = deleteUser(removeMatch2);
+        res.json(modifyUserData);
+    }
+    else if(removeMatch3 !=null){
+        let modifyUserData = deleteUser(removeMatch3);
+        res.json(modifyUserData);
+    } 
+}
+
+export const getPreference = (req, res, next)=>{
+    
+    const {preferences1} = req.query;
+    const {preferences2} = req.query;
+    const {preferences3} = req.query;
+
+    console.log(req.query);
+    if(preferences1 !=null){
+        let data = getDays(preferences1);
+        res.json(data);
+    }
+
+    else if(preferences2 !=null){
+        let data = getDays(preferences2);
+        res.json(data);
+    }
+    else if(preferences3 !=null){
+        let data = getDays(preferences3);
+        res.json(data);
+    } 
 
 }

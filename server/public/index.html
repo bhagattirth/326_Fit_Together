@@ -142,13 +142,17 @@
 											</div>
 										</div>
 										<br /><br />
-										<button
-											class="btn btn-success"
-											type="button"
-											id="availabilityOne"
-										>
-											View Availability Preferences
-										</button>
+										<form action="/getPreference" method="get">
+											<button
+												value="1";
+												name = "preferences1"
+												class="btn btn-success"
+												type="submit"
+												id="availabilityOne"
+											>
+												View Availability Preferences
+											</button>
+										</form>
 										<br /><br />
 										<form action="/rating" method="post", id="ratingForm1">
 											<label for="selectRatingOne"

@@ -33,3 +33,22 @@ export function ratingUpdate(number, rating){
     fs.writeFileSync("./public/dummyEntries.json", JSON.stringify(json));
     return json;
 }
+
+export function deleteUser(arg){
+    arg = Number(arg.substring(1,2));
+    const raw = fs.readFileSync("./public/dummyEntries.json");
+    const json = JSON.parse(raw);
+    let newJson = json.splice(arg-1,arg);
+    fs.writeFileSync("./public/dummyEntries.json", JSON.stringify(newJson));
+    return json;
+}
+
+
+export function getDays(arg){
+
+    arg = arg.substring(arg.length-1, arg.length);
+    const raw = fs.readFileSync("./public/dummyEntries.json");
+    const json = JSON.parse(raw);
+    let user = json[Number(arg)-1];
+    return user.preference;
+}
