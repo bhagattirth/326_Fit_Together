@@ -43,3 +43,17 @@ export const validateUser = (req, res, next) => {
 		res.status(400).send({ message: "Not valid" });
 	}
 };
+
+export const logoutUser = (req, res, next) => {
+	if (req.cookies["accessToken"]) {
+		res.cookie("accessToken", "", {
+			secure: true,
+			httpOnly: true,
+			sameSite: "none",
+			maxAge: 0,
+		});
+		res.status(200).json({ message: "cookie destroyed" });
+	} else {
+		res.status(400).json({ message: "No cookie found" });
+	}
+};

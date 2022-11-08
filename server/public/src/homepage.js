@@ -1,11 +1,27 @@
 // when script laods probably check if user has logged in before, prob use json web tokens
-
 const loginBtn = document.getElementById("login-btn");
 
 // redirect user to login page when clicking on login btn
 loginBtn.addEventListener("click", () => {
 	location.href = "login.html";
 });
+
+const logout = async () => {
+	const res = await fetch("http://localhost:5000/auth/logout", {
+		method: "POST",
+		credentials: "include",
+		headers: { "Content-type": "application/json" },
+		body: null,
+	});
+
+	const msg = await res.json();
+
+	if (res.ok) {
+		location.href = "index.html";
+	} else {
+		alert("failed to logout");
+	}
+};
 
 const checkToken = async () => {
 	console.log("validating...");
@@ -22,7 +38,7 @@ const checkToken = async () => {
 	const msg = await res.json();
 	console.log(msg);
 	// change page
-	const html = `<div class="dropdown">
+	const html = `<div id='profile-dropdown' class="dropdown">
 			<img
 				class="user-icon dropdown-toggle"
 				data-bs-toggle="dropdown"
@@ -31,13 +47,13 @@ const checkToken = async () => {
 			/>
 			<ul class="dropdown-menu">
 				<li>
-					<a class="dropdown-item" href="#">
+					<a id="profile" class="dropdown-item" href="#">
 						Profile
 					</a>
 				</li>
 				<li>
-					<a class="dropdown-item" href="#">
-						Settings
+					<a id="logout" class="dropdown-item" href="#">
+						Log out
 					</a>
 				</li>
 			</ul>
@@ -47,6 +63,14 @@ const checkToken = async () => {
 
 	loginBtn.parentNode.insertBefore(wrapper, loginBtn);
 	loginBtn.remove();
+
+	const profileBtn = document.getElementById("profile");
+	profileBtn.addEventListener("click", () => {
+		location.href = "profilePage.html";
+	});
+
+	const logoutBtn = document.getElementById("logout");
+	logoutBtn.addEventListener("click", logout);
 };
 
 checkToken();
