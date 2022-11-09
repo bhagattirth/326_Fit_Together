@@ -5,9 +5,9 @@ import { authRoutes } from "./routes/auth-routes.js";
 import{matchHistoryRouter} from "./routes/matchHistory-routes.js";
 
 const app = express();
-// app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
-// app.use(express.json());
-// app.use(cookieParser());
+app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+app.use(express.json());
+app.use(cookieParser());
 
 // auth routes
 // app.use("/auth", authRoutes);
@@ -18,9 +18,6 @@ app.use(express.urlencoded({extended:false}));
 
 
 app.use("/", matchHistoryRouter);
-
-
-
 
 
 app.listen(5000, (req, res) => {

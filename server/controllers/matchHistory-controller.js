@@ -3,7 +3,7 @@ import { addWorkout, getXPastData, ratingUpdate, deleteUser, getDays } from "../
 
 export const getXPastUser =  (req, res, next)=>{
     const {number} = req.params;
-    res.json(getXPastData(Number(number))); 
+    res.send(JSON.stringify(getXPastData(Number(number)))); 
 };
 
 export const addWorkoutToUser = (req, res, next) =>{
