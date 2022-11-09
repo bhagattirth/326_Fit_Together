@@ -23,7 +23,6 @@ body {
 .company-logo {
 	width: 75px;
 	height: 75px;
-	object-fit: cover;
 }
 
 /* MAIN SECTION */
@@ -188,4 +187,14 @@ body#login {
 .prev-matches-info {
 	font-size: 150%;
 	font-weight: 400;
+}
+
+.hidden-file-picker {
+	display: none;
+}
+
+.profile-picture-preview {
+	width: 200px;
+	height: 200px;
+	object-fit: cover;
 }

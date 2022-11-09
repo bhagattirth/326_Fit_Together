@@ -19,7 +19,7 @@
 	<body>
 		<nav class="navbar navbar-dark navbar-expand-lg bg-dark">
 			<div class="container-fluid">
-				<a class="navbar-brand" href="#"
+				<a class="navbar-brand" href="index.html"
 					><img
 						class="company-logo"
 						src="https://cdn-icons-png.flaticon.com/512/1053/1053916.png"
@@ -35,13 +35,14 @@
 					/>
 					<ul class="dropdown-menu">
 						<li>
-							<a class="dropdown-item" href="#">Profile</a>
+							<a class="dropdown-item" href="#" id="matchesOption"
+								>Matches</a
+							>
 						</li>
 						<li>
-							<a class="dropdown-item" href="#">Matches</a>
-						</li>
-						<li>
-							<a class="dropdown-item" href="#">Logout</a>
+							<a class="dropdown-item" href="#" id="logoutOption"
+								>Logout</a
+							>
 						</li>
 					</ul>
 				</div>
@@ -82,6 +83,12 @@
 				</div>
 				<div class="row align-items-center mt-3">
 					<div class="col text-center">
+						<input
+							type="file"
+							class="file hidden-file-picker"
+							id="hiddenFilepicker"
+							accept="image/png, image/gif, image/jpeg"
+						/>
 						<button
 							class="btn btn-outline-secondary"
 							type="button"
@@ -90,6 +97,22 @@
 						>
 							Select Profile Picture
 						</button>
+					</div>
+				</div>
+				<div class="row align-items-center mt-3">
+					<div
+						class="col text-center"
+						id="profilePictureSelectedDiv"
+					></div>
+				</div>
+				<div class="row align-items-center mt-3">
+					<div class="col text-center">
+						<img
+							id="profilePicturePreview"
+							hidden="true"
+							class="profile-picture-preview"
+							src=""
+						/>
 					</div>
 				</div>
 				<div class="row align-items-center mt-3">
@@ -323,6 +346,18 @@
 						</button>
 					</div>
 				</div>
+				<div class="row align-items-center mt-3">
+					<div class="col text-center">
+						<button
+							class="btn btn-danger"
+							type="button"
+							id="deleteProfile"
+							disabled
+						>
+							Delete Profile
+						</button>
+					</div>
+				</div>
 			</div>
 		</main>
 		<script
@@ -330,5 +365,6 @@
 			integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
 			crossorigin="anonymous"
 		></script>
+		<script src="./src/profilePage.js"></script>
 	</body>
 </html>
