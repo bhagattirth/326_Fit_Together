@@ -1,4 +1,4 @@
-// when script laods probably check if user has logged in before, prob use json web tokens
+import user from "./shared";
 const loginBtn = document.getElementById("login-btn");
 
 // redirect user to login page when clicking on login btn
@@ -17,6 +17,7 @@ const logout = async () => {
 	const msg = await res.json();
 
 	if (res.ok) {
+		user.logout();
 		location.href = "index.html";
 	} else {
 		alert("failed to logout");
@@ -37,6 +38,8 @@ const checkToken = async () => {
 	}
 	const msg = await res.json();
 	console.log(msg);
+	// update user id here, subject to change
+
 	// change page
 	const html = `<div id='profile-dropdown' class="dropdown">
 			<img
