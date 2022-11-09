@@ -52,6 +52,7 @@ matchesOption.addEventListener("click", () => {
 });
 logoutOption.addEventListener("click", logout);
 
+// Replace from shared once set up
 async function logout() {
 	const res = await fetch("http://localhost:5000/auth/logout", {
 		method: "POST",
