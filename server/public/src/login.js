@@ -2,6 +2,7 @@ const email = document.getElementById("email");
 const pass = document.getElementById("password");
 const loginBtn = document.getElementById("login");
 const signupBtn = document.getElementById("signup");
+import user from "./shared";
 
 // email validation
 const validateEmail = (email) => {
@@ -45,6 +46,7 @@ const loginUser = async (e) => {
 			body: JSON.stringify({ email: email.value, password: pass.value }),
 		});
 		const msg = await res.json();
+		// update User with userId returned, subject to change
 
 		if (!res.ok) {
 			throw new Error("Invalid email/password combination");
@@ -87,6 +89,7 @@ const signupUser = async (e) => {
 			body: JSON.stringify({ email: email.value, password: pass.value }),
 		});
 		const msg = await res.json();
+		// Update user with userId returned, subject to change
 
 		if (!res.ok) {
 			throw new Error("Something went wrong please try again later");
