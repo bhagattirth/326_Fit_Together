@@ -24,18 +24,7 @@
 							alt="company logo"
 					/></a>
 
-					<div class="input-group w-25 p-3">
-						<input
-							type="text"
-							class="form-control"
-							placeholder="Search Name e.g. Taylor Swift"
-						/>
-						<div class="input-group-append">
-							<button class="btn btn-primary" type="button">
-								Search
-							</button>
-						</div>
-					</div>
+					
 				</div>
 			</nav>
 		</div>
@@ -89,27 +78,25 @@
 											class="btn btn-danger"
 											type="button"
 											id="removeOne"
-											data-bs-toggle="modal" data-bs-target="#delModal"
+											data-bs-toggle="modal" data-bs-target="#delModal1"
 										>
 											Remove Match
 										</button>
 
-										<div class="modal" id="delModal">
+										<div class="modal" id="delModal1">
 											<div class="modal-dialog">
 											  <div class="modal-content">
 										  
 												<div class="modal-header">
 												  <h4 class="modal-title">Are You Sure?</h4>
 												  <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
-												</div>	
-												<form action="/delete" method="delete">													  
+												</div>														  
 													<div class="modal-body">																		
 														<div class="form-group">
 															<button class="btn btn-success" data-bs-dismiss="modal">No</button>
-															<button val="1" name="removeMatch1" type="submit" class="btn btn-danger" data-bs-dismiss="modal">Yes</button>
+															<button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="removeMatch1" value="1">Yes</button>
 														</div>
 													</div>														  
-												</form>
 											  </div>
 											</div>
 										</div>
@@ -120,9 +107,7 @@
 												<div class="modal-header">
 												  <h4 class="modal-title">Add Workout</h4>
 												  <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
-												</div>
-										  
-
+												</div>										
 												<div class="modal-body">
 												  Modal body..
 												</div>
@@ -134,40 +119,41 @@
 											</div>
 										</div>
 										<br /><br />
-										<form action="/getPreference" method="get">
-											<button
-												value="1";
-												name = "preferences1"
-												class="btn btn-success"
-												type="submit"
-												id="availabilityOne"
-											>
-												View Availability Preferences
-											</button>
-										</form>
+										<button
+											value="1";
+											class="btn btn-success"
+											type="button"
+											id="availability1"
+											data-bs-toggle="modal" data-bs-target="#prefModal1"
+										>
+											View Availability Preferences
+										</button>
+										<div class="modal" id="prefModal1">
+											<div class="modal-dialog">
+											    <div class="modal-content">
+										  
+													<div class="modal-header">
+														<h4 class="modal-title">Member's Workout Days</h4>
+														<button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+													</div>													  
+													<div class="modal-body">		
+														<span id="prefDate1"></span>																
+													</div>
+											    </div>
+											</div>
+										</div>
 										<br /><br />
-										<form id="ratingForm1">
-											<label for="selectRatingOne"
+											<label for="selectRating1"
 												>Rate This Workout Partner:</label
 											>
 											<select
-												name="ratingVal1"
 												class="form-select"
-												aria-label="selectRatingOne"
+												aria-label="selectRating1"
 												aria-readonly="true"
-												id="selectRatingOne"
+												id="selectRating1"
 											>
-												<option value="1">
-													1/5
-												</option>
-												<option value="2">2/5</option>
-												<option value="3">3/5</option>
-												<option value="4">4/5</option>
-												<option value="5">5/5</option>
 											</select>
-											<button type="submit" class="btn btn-success">submit</button>
-											<!-- <input type="submit"/> -->
-										</form>
+											<button type="button" id ="updateRating1" class="btn btn-success">Update</button>
 									</div>
 								</div>
 
@@ -197,32 +183,29 @@
 														<button
 															class="btn btn-transparent stretched-link"
 															type="button"
-															data-bs-toggle="modal" data-bs-target="#myModal"
-														></button>
-
-														<button
-															class="btn btn-transparent stretched-link"
-															type="button"
 															data-bs-toggle="modal" data-bs-target="#myModal1"
 														></button>  
 														<div class="modal" id="myModal1">
 															<div class="modal-dialog">
 															  <div class="modal-content">
-														  
 																<div class="modal-header">
 																  <h4 class="modal-title">Add Workout</h4>
 																  <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
 																</div>	
-																<form action="/addWorkout" method="POST">													  
+																<form>													  
 																	<div class="modal-body">																		
 																		<div class="form-group">
+																			<label for="date1">Date</label>
+																			<input type="text" class="form-control" id="date1" aria-describedby="date1" placeholder="Enter a Valid Date">
+																			<label for="wType1">Workout Type</label>
+																			<input type="text" class="form-control" id="wType1" aria-describedby="wType1" placeholder="Workout Type">
 																			<label for="workout1"> Workout </label>
-																			<input type="text" name="workout1" class="form-control" id="workout1" aria-describedby="workout1" placeholder="Enter workout">
-																			<small id="workoutTip1" class="form-text text-muted">Please Seperate Each Exercise by a Comma.</small>
+																			<input type="text" class="form-control" id="workout1" aria-describedby="workout1" placeholder="Enter workout">
+																			<small id="workoutTip1" class="form-text text-muted">Please Seperate Each Exercise by a Comma if you Want To Make Different Entries.</small>
 																		</div>
 																	</div>														  
 																	<div class="modal-footer">
-																		<button type="submit" id="add1" class="btn btn-success" data-bs-dismiss="modal">Enter</button>
+																		<button type="button" id="add1" class="btn btn-success" data-bs-dismiss="modal">Enter</button>
 																	</div>
 																</form>
 															  </div>
@@ -291,37 +274,67 @@
 											type="button"
 											id="removeTwo"
 											data-bs-toggle="modal" 
-											data-bs-target="#delModal"
+											data-bs-target="#delModal2"
 										>
 											Remove Match
 										</button>
+										<div class="modal" id="delModal2">
+											<div class="modal-dialog">
+											  <div class="modal-content">
+										  
+												<div class="modal-header">
+												  <h4 class="modal-title">Are You Sure?</h4>
+												  <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+												</div>														  
+													<div class="modal-body">																		
+														<div class="form-group">
+															<button class="btn btn-success" data-bs-dismiss="modal">No</button>
+															<button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="removeMatch2" value="1">Yes</button>
+														</div>
+													</div>														  
+											  </div>
+											</div>
+										</div>
 								
 										<br /><br />
 										<button
 											class="btn btn-success"
 											type="button"
-											id="availabilityTwo"
+											id="availability2"
+											data-bs-toggle="modal"
+											data-bs-target="#prefModal2"
 										>
 											View Availability Preferences
 										</button>
+
+
+										<div class="modal" id="prefModal2">
+											<div class="modal-dialog">
+											    <div class="modal-content">
+										  
+													<div class="modal-header">
+														<h4 class="modal-title">Member's Workout Days</h4>
+														<button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+													</div>													  
+													<div class="modal-body">
+														<span id="prefDate2"></span>																										
+													</div>														  														
+											    </div>
+											</div>
+										</div>
+
 										<br /><br />
-										<label for="selectRatingTwo"
+										<label for="selectRating2"
 											>Rate This Workout Partner:</label
 										>
 										<select
 											class="form-select"
-											aria-label="selectRatingTwo"
+											aria-label="selectRating2"
 											aria-readonly="true"
-											id="selectRatingTwo"
+											id="selectRating2"
 										>
-											<option selected value="1">
-												1/5
-											</option>
-											<option value="2">2/5</option>
-											<option value="3">3/5</option>
-											<option value="4">4/5</option>
-											<option value="5">5/5</option>
 										</select>
+										<button type="button" id ="updateRating2" class="btn btn-success">Update</button>
 									</div>
 								</div>
 
@@ -348,11 +361,39 @@
 															src="https://www.freepnglogos.com/uploads/plus-icon/plus-icon-plus-sign-icon-vector-graphic-pixabay-7.png"
 															alt="Plus Symbol"
 														/>
-														<a
-															href="#"
+														<button
 															class="btn btn-transparent stretched-link"
-															role="button"
-														></a>
+															type="button"
+															data-bs-toggle="modal" data-bs-target="#myModal2"
+														></button>  
+														<div class="modal" id="myModal2">
+															<div class="modal-dialog">
+															  <div class="modal-content">
+																<div class="modal-header">
+																  <h4 class="modal-title">Add Workout</h4>
+																  <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+																</div>	
+																<form>													  
+																	<div class="modal-body">																		
+																		<div class="form-group">
+																			<label for="date2">Date</label>
+																			<input type="text" class="form-control" id="date2" aria-describedby="date2" placeholder="Enter a Valid Date">
+
+																			<label for="wType2">Workout Type</label>
+																			<input type="text" class="form-control" id="wType2" aria-describedby="wType2" placeholder="Workout Type">
+																			
+																			<label for="workout2"> Workout </label>																			
+																			<input type="text" class="form-control" id="workout2" aria-describedby="workout2" placeholder="Enter Workout">
+																			<small id="workoutTip2" class="form-text text-muted">Please Seperate Each Exercise by a Comma if you Want To Make Different Entries.</small>
+																		</div>
+																	</div>														  
+																	<div class="modal-footer">
+																		<button type="button" id="add2" class="btn btn-success" data-bs-dismiss="modal">Enter</button>
+																	</div>
+																</form>
+															  </div>
+															</div>
+														</div>	
 													</div>
 												</div>
 											</div>
@@ -380,17 +421,11 @@
 						<span class="prev-matches-header">
 							<img
 								class="card-img-top prev-match-img"
-								src="https://fitnessvolt.com/wp-content/uploads/2022/07/becoming-a-bodybuilder-750x422.jpg"
+								src= "#"
 								alt="Buff Dude"
+								id="profilePic3"
 							/>
-							<span class="prev-matches-info">
-								<span class="prev-matches-name">
-									Chris Bumstead3
-								</span>
-								<br />
-								Last Matched On 1/1/2022
-								<br />
-								Contact: 978-000-0204
+							<span class="prev-matches-info" id="profile3">
 							</span>
 							<br />
 						</span>
@@ -421,35 +456,66 @@
 											class="btn btn-danger"
 											type="button"
 											id="removeThree"
+											data-bs-toggle="modal" 
+											data-bs-target="#delModal3"
 										>
 											Remove Match
 										</button>
+										<div class="modal" id="delModal3">
+											<div class="modal-dialog">
+											  <div class="modal-content">
+										  
+												<div class="modal-header">
+												  <h4 class="modal-title">Are You Sure?</h4>
+												  <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+												</div>														  
+													<div class="modal-body">																		
+														<div class="form-group">
+															<button class="btn btn-success" data-bs-dismiss="modal">No</button>
+															<button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="removeMatch3" value="3">Yes</button>
+														</div>
+													</div>														  
+											  </div>
+											</div>
+										</div>
 										<br /><br />
 										<button
 											class="btn btn-success"
 											type="button"
-											id="availabilityThree"
+											id="availability3"
+											data-bs-toggle="modal"
+											data-bs-target="#prefModal3"
 										>
 											View Availability Preferences
 										</button>
+										<div class="modal" id="prefModal3">
+											<div class="modal-dialog">
+											    <div class="modal-content">
+										  
+													<div class="modal-header">
+														<h4 class="modal-title">Member's Workout Days</h4>
+														<button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+													</div>													  
+													<div class="modal-body">	
+														<span id="prefDate3"></span>																									
+													</div>														  														
+											    </div>
+											</div>
+										</div>
+
+
 										<br /><br />
-										<label for="selectRatingThree"
+										<label for="selectRating3"
 											>Rate This Workout Partner:</label
 										>
 										<select
 											class="form-select"
-											aria-label="selectRatingThree"
+											aria-label="selectRating3"
 											aria-readonly="true"
-											id="selectRatingThree"
-										>
-											<option selected value="1">
-												1/5
-											</option>
-											<option value="2">2/5</option>
-											<option value="3">3/5</option>
-											<option value="4">4/5</option>
-											<option value="5">5/5</option>
+											id="selectRating3"
+										>									
 										</select>
+										<button type="button" id ="updateRating3" class="btn btn-success">Update</button>
 									</div>
 								</div>
 
@@ -459,121 +525,10 @@
 										<div class="row">
 											<div class="col-8">
 												<div
-													id="carouselThree"
+													id="carousel3"
 													class="carousel slide"
 													data-bs-ride="false"
 												>
-													<div
-														class="carousel-inner border-2"
-													>
-														<div
-															class="carousel-item active"
-														>
-															<div class="card">
-																<div
-																	class="card-body"
-																>
-																	<h3
-																		class="card-title"
-																	>
-																		10/23/2022
-																	</h3>
-																	<strong>
-																		Legs:
-																	</strong>
-																	<p
-																		class="card-text"
-																	>
-																		5x5
-																		Squat
-																		<br />
-																		4x12
-																		Quad
-																		Extension
-																		<br />
-																		4x12 Leg
-																		Press
-																		<br />
-																		3x15 RDL
-																		<br />
-																		1xFailure
-																		Calf
-																		Raises
-																	</p>
-																</div>
-															</div>
-														</div>
-														<div
-															class="carousel-item"
-														>
-															<div class="card">
-																<div
-																	class="card-body"
-																>
-																	<h3
-																		class="card-title"
-																	>
-																		10/25/2022
-																	</h3>
-																	<strong>
-																		Push:
-																	</strong>
-																	<p
-																		class="card-text"
-																	>
-																		3x12
-																		Bench
-																		<br />
-																		3x12
-																		Incline
-																		Bench
-																		<br />
-																		4x12
-																		Shoulder
-																		Press
-																		<br />
-																		3x12
-																		Lateral
-																		Raises
-																		<br />
-																		5x12
-																		Triceps
-																		<br />
-																	</p>
-																</div>
-															</div>
-														</div>
-														<button
-															class="carousel-control-prev carousel-arrow-color"
-															type="button"
-															data-bs-target="#carouselThree"
-															data-bs-slide="prev"
-														>
-															<span
-																class="carousel-control-prev-icon"
-																aria-hidden="true"
-															></span>
-															<span
-																class="visually-hidden"
-																>Previous</span
-															>
-														</button>
-														<button
-															class="carousel-control-next"
-															type="button"
-															data-bs-target="#carouselThree"
-															data-bs-slide="next"
-														>
-															<span
-																class="carousel-control-next-icon"
-																aria-hidden="true"
-															></span>
-															<span
-																class="visually-hidden"
-																>Next</span
-															>
-														</button>
-													</div>
 												</div>
 											</div>
 											<div class="col-4">
@@ -587,11 +542,37 @@
 															src="https://www.freepnglogos.com/uploads/plus-icon/plus-icon-plus-sign-icon-vector-graphic-pixabay-7.png"
 															alt="Plus Symbol"
 														/>
-														<a
-															href="#"
+														<button
 															class="btn btn-transparent stretched-link"
-															role="button"
-														></a>
+															type="button"
+															data-bs-toggle="modal" data-bs-target="#myModal3"
+														></button>  
+														<div class="modal" id="myModal3">
+															<div class="modal-dialog">
+															  <div class="modal-content">
+																<div class="modal-header">
+																  <h4 class="modal-title">Add Workout</h4>
+																  <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+																</div>	
+																<form>													  
+																	<div class="modal-body">																		
+																		<div class="form-group">
+																			<label for="date3">Date</label>
+																			<input type="text" class="form-control" id="date3" aria-describedby="date3" placeholder="Enter a Valid Date - DD/MM/YYYY">
+																			<label for="wType3">Workout Type</label>
+																			<input type="text" class="form-control" id="wType3" aria-describedby="wType3" placeholder="Workout Type">
+																			<label for="workout3"> Workout </label>
+																			<input type="text" class="form-control" id="workout3" aria-describedby="workout3" placeholder="Enter workout">
+																			<small id="workoutTip3" class="form-text text-muted">Please Seperate Each Exercise by a Comma if you Want To Make Different Entries.</small>
+																		</div>
+																	</div>														  
+																	<div class="modal-footer">
+																		<button type="button" id="add3" class="btn btn-success" data-bs-dismiss="modal">Enter</button>
+																	</div>
+																</form>
+															  </div>
+															</div>
+														</div>	
 													</div>
 												</div>
 											</div>
@@ -610,12 +591,12 @@
 		<div class="container">
 			<div class="row">
 				<div class="col text-center mb-2">
-					<button class="btn btn-primary" type="button">
+					<button class="btn btn-primary" type="button" id="back">
 						Previous
 					</button>
 				</div>
 				<div class="col text-center mb-2">
-					<button class="btn btn-primary" type="button">Next</button>
+					<button class="btn btn-primary" type="button" id="next">Next</button>
 				</div>
 			</div>
 		</div>

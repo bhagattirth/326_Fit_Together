@@ -1,54 +1,47 @@
 import fs from 'fs';
 
-
-export function getXPastData(number){
-    
+export function getPastData(){
     const raw = fs.readFileSync("./public/dummyEntries.json");
-    
     const json = JSON.parse(raw);
-    let list = [];
-    for(let i=0; i<number; i++){
-        list.push(json[i]);
+    return json;
+}
+
+export function addWorkout(user, workout,date, type){
+
+    let mini = [];
+    mini.push(date);
+    mini.push(type);
+
+    const raw = fs.readFileSync("./public/dummyEntries.json");
+    const json = JSON.parse(raw);
+    let userData = json.find((e)=> e.name === user);
+    let list = workout.replace(/ /g, '').split(",");
+    mini.push(...list);
+    userData.pastWorkout.push(mini);
+    fs.writeFileSync("./public/dummyEntries.json", JSON.stringify(json));
+    return 1;
+}
+
+
+export function ratingUpdate(user, rating){
+
+    const raw = fs.readFileSync("./public/dummyEntries.json");
+    const json = JSON.parse(raw);
+    let userData = json.find((e)=> e.name === user);
+    userData.ratings = rating;
+    fs.writeFileSync("./public/dummyEntries.json", JSON.stringify(json));
+    return 1;
+}
+
+
+export function deleteUser(user){
+    const raw = fs.readFileSync("./public/dummyEntries.json");
+    const json = JSON.parse(raw);
+    for(let i=0; i<json.length; i++){
+        if(user === json[i].name){
+            json.splice(i,1);
+        }
     }
-    return list;   
-}
-
-export function addWorkout(number, workout){
-
-    const raw = fs.readFileSync("./public/dummyEntries.json");
-    const json = JSON.parse(raw);
-    let user = json[number-1];
-    user.pastWorkout.push(workout);
     fs.writeFileSync("./public/dummyEntries.json", JSON.stringify(json));
-    return json;
-
-}
-
-export function ratingUpdate(number, rating){
-
-    const raw = fs.readFileSync("./public/dummyEntries.json");
-    const json = JSON.parse(raw);
-    let user = json[number-1];
-    user.ratings = rating;
-    fs.writeFileSync("./public/dummyEntries.json", JSON.stringify(json));
-    return json;
-}
-
-export function deleteUser(arg){
-    arg = Number(arg.substring(1,2));
-    const raw = fs.readFileSync("./public/dummyEntries.json");
-    const json = JSON.parse(raw);
-    let newJson = json.splice(arg-1,arg);
-    fs.writeFileSync("./public/dummyEntries.json", JSON.stringify(newJson));
-    return json;
-}
-
-
-export function getDays(arg){
-
-    arg = arg.substring(arg.length-1, arg.length);
-    const raw = fs.readFileSync("./public/dummyEntries.json");
-    const json = JSON.parse(raw);
-    let user = json[Number(arg)-1];
-    return user.preference;
+    return 1;
 }

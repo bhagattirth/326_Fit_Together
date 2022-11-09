@@ -4,6 +4,9 @@ import cookieParser from "cookie-parser";
 import { authRoutes } from "./routes/auth-routes.js";
 import{matchHistoryRouter} from "./routes/matchHistory-routes.js";
 
+
+
+
 const app = express();
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(express.json());

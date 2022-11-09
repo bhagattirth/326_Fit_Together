@@ -1,32 +1,57 @@
+let userMap = {"user1": null, "user2": null, "user3": null};
+let firstEntryOnPage = 0;
+let lastEntryOnPage = 2;
+let jsonSize = 0;
 
 
 const startup = async ()=> {
-    console.log("checking");
-    const res = await fetch("http://localhost:5000/getPast/2");
+    const res = await fetch("http://localhost:5000/getPast");
     const json = await res.json();
 
-    
-    for(let i = 1; i<=json.length; i++){
-       addProfileInfo(json[i-1],i);
-       createCarousel(json[i-1].pastWorkout,i);
+    jsonSize = json.length;
+    checkLocalStorage();
+    let count = 1;
+    let i = firstEntryOnPage;
+    while(i<=lastEntryOnPage && i<json.length){
+       userMap["user"+ count] = json[i].name;
+       addProfileInfo(json[i], count);
+       createCarousel(json[i].pastWorkout, count);
+       showRating(json[i], count);
+       i++;
+       count++;
     }
+    activateListeners();
+}
 
+function checkLocalStorage(){
+    const storage = window.localStorage;
+    const first = storage.getItem("firstEntryOnPage");
+    const last = storage.getItem("lastEntryOnPage");
 
-
+    firstEntryOnPage = first === null? 0: JSON.parse(first);
+    lastEntryOnPage = last === null? 2: JSON.parse(last);
 }
 
 function addProfileInfo(userData, i){
     
     let profileInfo = document.getElementById("profile"+i);
     let profilePic = document.getElementById("profilePic"+i);
+    let prefDate = document.getElementById("prefDate"+i);
     let name = document.createElement("SPAN");
 
     name.classList.add("prev-matches-name");
     name.innerHTML = userData.name;
     profileInfo.appendChild(name);
     profileInfo.innerHTML+= "</br>"
-    profileInfo.innerHTML+= userData.contact;
+    profileInfo.innerHTML+= "Last Workout On: " + userData.lastWorkout;
+    profileInfo.innerHTML+= "</br>";
+    profileInfo.innerHTML+="Contact: "+ userData.contact;
     profilePic.src= userData.imgURL;
+
+    for(let days of userData.preference){
+        prefDate.innerText+= days + " ";
+    }
+    
 }
 
 
@@ -41,7 +66,6 @@ function createCarousel(workouts, i){
         createWorkoutCard(e, carouselBody, isFirst);
         isFirst = false;
     });
-
 
     //Buttons
     let leftButton = document.createElement("button");
@@ -81,6 +105,27 @@ function createCarousel(workouts, i){
 
 }
 
+function getNextPage(){
+    const storage = window.localStorage;
+    if(lastEntryOnPage+1<jsonSize){
+        storage.setItem("firstEntryOnPage", (firstEntryOnPage+3).toString());
+        storage.setItem("lastEntryOnPage", (lastEntryOnPage+3).toString());
+        location.reload();
+    }
+     
+ }
+
+ function prevPage(){
+    const storage = window.localStorage;
+    if(0<lastEntryOnPage-3){
+        storage.setItem("firstEntryOnPage", (firstEntryOnPage-3).toString());
+        storage.setItem("lastEntryOnPage", (lastEntryOnPage-3).toString());
+        location.reload(); 
+    }
+    
+ }
+
+
 
 function createWorkoutCard(exercises, cBody, isFirst){
     
@@ -118,10 +163,117 @@ function createWorkoutCard(exercises, cBody, isFirst){
 
 }
 
+function showRating(userData, i){
+
+    let dropDown = document.getElementById("selectRating"+i);
+    ["1/5","2/5","3/5","4/5","5/5"].forEach(function(e){
+        let option = document.createElement("option");
+        option.setAttribute("value", e.substring(0,1));
+        option.innerText = e;
+
+        if(e.substring(0,1) === userData.ratings){
+            option.selected = true;
+        }
+
+        dropDown.appendChild(option);
+    })
+}
+
 function setAttributes(el, attrs) {
     for(var key in attrs) {
       el.setAttribute(key, attrs[key]);
     }
-  }
+}
 
-window.onload = startup;
+
+const addWorkoutListner = (i)=> async () => {
+    
+   let workouts = document.getElementById("workout"+i).value;
+   let date = document.getElementById("date"+i).value;
+   let wType = document.getElementById("wType"+i).value;
+
+   
+   if(workouts ==="" || date === "" || wType === ""|| !date.match(/^\d{2}[./-]\d{2}[./-]\d{4}$/)){
+        alert("Please Fill in the Fields Correctly");
+   }
+   else{
+        const res = await fetch("http://localhost:5000/addWorkout", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+
+            body: JSON.stringify({ user: userMap["user"+i], workout: workouts, dates: date, type: wType }),
+
+            });
+            const msg = await res.json();
+            location.reload();
+   }      
+}
+
+
+const updateRatingListiner = (i)=> async () => {
+    let newRating = document.getElementById("selectRating"+i).value;
+    const res = await fetch("http://localhost:5000/ratingUpdate", {
+             method: "POST",
+             headers: {
+                 "Content-Type": "application/json",
+             },
+             body: JSON.stringify({ user: userMap["user"+i], rating: newRating}),
+         });
+     const msg = await res.json();
+     location.reload();
+ }
+
+ const deleteUserListiner = (i)=> async () => {
+    
+    let  user= "user"+ document.getElementById("removeMatch"+i).value;
+    const res = await fetch("http://localhost:5000/deleteEntry", {
+             method: "POST",
+             headers: {
+                 "Content-Type": "application/json",
+             },
+             body: JSON.stringify({ user: userMap[user]}),
+         });
+     const msg = await res.json();
+     location.reload();
+ }
+
+
+ 
+
+
+function activateListeners(){
+    if(userMap["user1"] !== null){
+        document.getElementById("previousMatchesOne").style.display = "";
+        document.getElementById("updateRating1").addEventListener("click", updateRatingListiner(1));
+        document.getElementById("add1").addEventListener("click", addWorkoutListner(1));
+        document.getElementById("removeMatch1").addEventListener("click", deleteUserListiner(1));
+    }else{
+        document.getElementById("previousMatchesOne").style.display = "none";
+    }
+
+    if(userMap["user2"] !== null){
+        document.getElementById("previousMatchesTwo").style.display = "";
+        document.getElementById("updateRating2").addEventListener("click", updateRatingListiner(2));
+        document.getElementById("add2").addEventListener("click", addWorkoutListner(2));
+        document.getElementById("removeMatch2").addEventListener("click", deleteUserListiner(2));
+    }else{
+        document.getElementById("previousMatchesTwo").style.display = "none";
+    }
+
+    if(userMap["user3"] !== null){
+        document.getElementById("previousMatchesThree").style.display = "";
+        document.getElementById("updateRating3").addEventListener("click", updateRatingListiner(3));
+        document.getElementById("add3").addEventListener("click", addWorkoutListner(3));
+        document.getElementById("removeMatch3").addEventListener("click", deleteUserListiner(3));
+    }else{
+        document.getElementById("previousMatchesThree").style.display = "none";
+    }
+}   
+
+window.onload = startup();
+
+document.getElementById("next").addEventListener("click", getNextPage);
+document.getElementById("back").addEventListener("click",prevPage);
+
