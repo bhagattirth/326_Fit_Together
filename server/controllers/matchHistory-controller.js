@@ -9,14 +9,9 @@ export const getPastUser =  (req, res, next)=>{
 export const addWorkoutToUser = (req, res, next) =>{
    
     const {user, workout, dates, type} = req.body
-    let outcome = addWorkout(user,workout, dates, type);
-
-    if (outcome ===-1){
-        res.send({message:"Workouts has not been updated"});
-    }
-    else{
-        res.send({message:"Workouts has been updated"});
-    }
+    addWorkout(user,workout, dates, type);
+   
+    res.status(200).send({message:"Workouts has been been updated"});
 }
 
 
@@ -24,25 +19,16 @@ export const addWorkoutToUser = (req, res, next) =>{
 export const updateRating = (req, res, next) =>{
 
     const {user, rating} = req.body;
-    let outcome = ratingUpdate(user,rating);
-    if (outcome ===-1){
-        res.send({message:"Rating has not been updated"});
-    }
-    else{
-        res.send({message:"Rating has been updated"});
-    }
+    ratingUpdate(user,rating);
+ 
+    res.status(200).send({message:"Rating has been updated"});
 }
 
 
 export const deleteEntry = (req, res, next)=>{
     
     const {user} = req.body;
-
-    let outcome = deleteUser(user);
-    if (outcome ===-1){
-        res.send({message:"Rating has not been updated"});
-    }
-    else{
-        res.send({message:"Rating has been updated"});
-    }
+    deleteUser(user);
+    res.status(200).send({message:"Rating has not been updated"});
+    
 }

@@ -11,7 +11,6 @@ export function addWorkout(user, workout,date, type){
     let mini = [];
     mini.push(date);
     mini.push(type);
-
     const raw = fs.readFileSync("./public/dummyEntries.json");
     const json = JSON.parse(raw);
     let userData = json.find((e)=> e.name === user);
@@ -19,7 +18,7 @@ export function addWorkout(user, workout,date, type){
     mini.push(...list);
     userData.pastWorkout.push(mini);
     fs.writeFileSync("./public/dummyEntries.json", JSON.stringify(json));
-    return 1;
+
 }
 
 
@@ -30,7 +29,7 @@ export function ratingUpdate(user, rating){
     let userData = json.find((e)=> e.name === user);
     userData.ratings = rating;
     fs.writeFileSync("./public/dummyEntries.json", JSON.stringify(json));
-    return 1;
+
 }
 
 
@@ -43,5 +42,5 @@ export function deleteUser(user){
         }
     }
     fs.writeFileSync("./public/dummyEntries.json", JSON.stringify(json));
-    return 1;
+  
 }
