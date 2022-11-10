@@ -8,6 +8,11 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 import { profileRoutes } from "./routes/profile-routes.js";
 import { matchRoutes } from "./routes/match-routes.js";
+import{matchHistoryRouter} from "./routes/matchHistory-routes.js";
+
+
+
+
 
 const app = express();
 app.use(cors({ credentials: true, origin: "http://localhost:5500" }));
@@ -15,8 +20,10 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.static(__dirname + "/"));
 
-// auth routes
-app.use("/auth", authRoutes);
+
+
+app.use("/matchHistory", matchHistoryRouter);
+
 
 // profile routes
 app.use("/profile", profileRoutes);
