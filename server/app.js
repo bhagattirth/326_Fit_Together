@@ -26,6 +26,6 @@ app.use("/profile", profileRoutes);
 // match routes
 app.use("/matches", matchRoutes);
 
-app.listen(5000, (req, res) => {
+app.listen(process.env.PORT, (req, res) => {
 	console.log("listening on port 5000");
 });
