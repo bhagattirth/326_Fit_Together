@@ -1,6 +1,6 @@
 class User {
-	constructor(userId) {
-		this.userId = userId;
+	constructor() {
+		this.userId = null;
 	}
 
 	logout() {
@@ -9,6 +9,10 @@ class User {
 
 	getUserId() {
 		return this.userId;
+	}
+
+	setUserId(id) {
+		this.userId = id;
 	}
 }
 
