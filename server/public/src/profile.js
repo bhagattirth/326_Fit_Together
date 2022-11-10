@@ -93,7 +93,7 @@ async function initialize(id) {
 			}
 		);
 		const msg = await res.json();
-		if (!res.ok) {
+		if (!res.ok || res.status === 400) {
 			throw new Error("Something went wrong please try again later");
 		}
 
@@ -114,7 +114,7 @@ async function setProfilePicture(id) {
 		});
 		const msg = await res.json();
 		profilePictureImage.src = msg["picture"];
-		if (!res.ok) {
+		if (!res.ok || res.status === 400) {
 			throw new Error("Something went wrong please try again later");
 		}
 	} catch (err) {
@@ -156,12 +156,11 @@ async function updateProfile(id) {
 				body: JSON.stringify(jsonObject),
 			}
 		);
-		const msg = await res.json();
-		if (!res.ok) {
+		if (!res.ok || res.status === 400) {
 			throw new Error("Something went wrong please try again later");
 		}
 
-		populateProfile(msg);
+		populateProfile(jsonObject);
 	} catch (err) {
 		alert("Profile changes could not be saved");
 		return;
@@ -181,7 +180,7 @@ async function updateProfile(id) {
 				}
 			);
 			const msg = await res.json();
-			if (!res.ok) {
+			if (!res.ok || res.status === 400) {
 				throw new Error("Something went wrong please try again later");
 			}
 		} catch (err) {
@@ -239,7 +238,7 @@ async function deleteProfile(id) {
 				"Content-Type": "application/json",
 			},
 		});
-		if (!res.ok) {
+		if (!res.ok || res.status === 400) {
 			throw new Error("Something went wrong please try again later");
 		}
 		user.logout();

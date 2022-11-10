@@ -95,7 +95,6 @@ async function acceptMatch(otherID) {
 				credentials: "include",
 			}
 		);
-		const msg = await res.json();
 		if (!res.ok) {
 			throw new Error("Something went wrong please try again later");
 		}
@@ -143,7 +142,6 @@ async function denyMatch(otherID) {
 				credentials: "include",
 			}
 		);
-		const msg = await res.json();
 		if (!res.ok) {
 			throw new Error("Something went wrong please try again later");
 		}
