@@ -14,7 +14,7 @@ const profilePictureImage = document.getElementById("profilePicture");
 initialize(user.getUserId());
 // Replace from shared once set up
 async function logout() {
-	const res = await fetch(`${process.env.URL}/auth/logout`, {
+	const res = await fetch(`https://ufit12.herokuapp.com/auth/logout`, {
 		method: "POST",
 		credentials: "include",
 		headers: { "Content-type": "application/json" },
@@ -32,10 +32,13 @@ async function logout() {
 
 async function initialize(id) {
 	try {
-		const res = await fetch(`${process.env.URL}/matches/${id}/potential`, {
-			method: "GET",
-			credentials: "include",
-		});
+		const res = await fetch(
+			`https://ufit12.herokuapp.com/matches/${id}/potential`,
+			{
+				method: "GET",
+				credentials: "include",
+			}
+		);
 		const msg = await res.json();
 		if (!res.ok) {
 			throw new Error("Something went wrong please try again later");
@@ -67,10 +70,13 @@ async function initialize(id) {
 
 async function setProfilePicture(id) {
 	try {
-		const res = await fetch(`${process.env.URL}/profile/${id}/picture`, {
-			method: "GET",
-			credentials: "include",
-		});
+		const res = await fetch(
+			`https://ufit12.herokuapp.com/profile/${id}/picture`,
+			{
+				method: "GET",
+				credentials: "include",
+			}
+		);
 		const msg = await res.json();
 		console.log(msg);
 		profilePictureImage.src = msg["picture"];

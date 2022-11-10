@@ -4,7 +4,9 @@ let lastEntryOnPage = 2;
 let jsonSize = 0;
 
 const startup = async () => {
-	const res = await fetch(`${process.env.URL}/matchHistory/getPast`);
+	const res = await fetch(
+		`https://ufit12.herokuapp.com/matchHistory/getPast`
+	);
 	const json = await res.json();
 
 	jsonSize = json.length;
@@ -192,19 +194,22 @@ const addWorkoutListner = (i) => async () => {
 	) {
 		alert("Please Fill in the Fields Correctly");
 	} else {
-		const res = await fetch(`${process.env.URL}/matchHistory/addWorkout`, {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
+		const res = await fetch(
+			`https://ufit12.herokuapp.com/matchHistory/addWorkout`,
+			{
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
 
-			body: JSON.stringify({
-				user: userMap["user" + i],
-				workout: workouts,
-				dates: date,
-				type: wType,
-			}),
-		});
+				body: JSON.stringify({
+					user: userMap["user" + i],
+					workout: workouts,
+					dates: date,
+					type: wType,
+				}),
+			}
+		);
 		const msg = await res.json();
 		location.reload();
 	}
@@ -212,26 +217,35 @@ const addWorkoutListner = (i) => async () => {
 
 const updateRatingListiner = (i) => async () => {
 	let newRating = document.getElementById("selectRating" + i).value;
-	const res = await fetch(`${process.env.URL}/matchHistory/ratingUpdate`, {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify({ user: userMap["user" + i], rating: newRating }),
-	});
+	const res = await fetch(
+		`https://ufit12.herokuapp.com/matchHistory/ratingUpdate`,
+		{
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				user: userMap["user" + i],
+				rating: newRating,
+			}),
+		}
+	);
 	const msg = await res.json();
 	location.reload();
 };
 
 const deleteUserListiner = (i) => async () => {
 	let user = "user" + document.getElementById("removeMatch" + i).value;
-	const res = await fetch(`${process.env.URL}/matchHistory/deleteEntry`, {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify({ user: userMap[user] }),
-	});
+	const res = await fetch(
+		`https://ufit12.herokuapp.com/matchHistory/deleteEntry`,
+		{
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ user: userMap[user] }),
+		}
+	);
 	const msg = await res.json();
 	location.reload();
 };

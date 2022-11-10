@@ -7,7 +7,7 @@ loginBtn.addEventListener("click", () => {
 });
 
 const logout = async () => {
-	const res = await fetch(`${process.env.URL}/auth/logout`, {
+	const res = await fetch(`https://ufit12.herokuapp.com/auth/logout`, {
 		method: "POST",
 		credentials: "include",
 		headers: { "Content-type": "application/json" },
@@ -26,8 +26,8 @@ const logout = async () => {
 
 const checkToken = async () => {
 	console.log("validating...");
-	console.log(`${process.env.URL}`);
-	const res = await fetch(`${process.env.URL}/auth/validateUser`, {
+	console.log(`https://ufit12.herokuapp.com/auth/validateUser`);
+	const res = await fetch(`https://ufit12.herokuapp.com/auth/validateUser`, {
 		method: "GET",
 		headers: {
 			"Content-Type": "application/json",

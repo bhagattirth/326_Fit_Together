@@ -86,7 +86,7 @@ initialize(user.getUserId());
 async function initialize(id) {
 	try {
 		const res = await fetch(
-			`${process.env.URL}/profile/${id}/information`,
+			`https://ufit12.herokuapp.com/profile/${id}/information`,
 			{
 				method: "GET",
 				credentials: "include",
@@ -108,10 +108,13 @@ async function initialize(id) {
 
 async function setProfilePicture(id) {
 	try {
-		const res = await fetch(`${process.env.URL}/profile/${id}/picture`, {
-			method: "GET",
-			credentials: "include",
-		});
+		const res = await fetch(
+			`https://ufit12.herokuapp.com/profile/${id}/picture`,
+			{
+				method: "GET",
+				credentials: "include",
+			}
+		);
 		const msg = await res.json();
 		profilePictureImage.src = msg["picture"];
 		if (!res.ok || res.status === 400) {
@@ -148,7 +151,7 @@ async function updateProfile(id) {
 	const jsonObject = generateJSON();
 	try {
 		const res = await fetch(
-			`${process.env.URL}/profile/${id}/information`,
+			`https://ufit12.herokuapp.com/profile/${id}/information`,
 			{
 				method: "PUT",
 				credentials: "include",
@@ -171,7 +174,7 @@ async function updateProfile(id) {
 	if (profilePicture !== null) {
 		try {
 			const res = await fetch(
-				`${process.env.URL}/profile/${id}/picture`,
+				`https://ufit12.herokuapp.com/profile/${id}/picture`,
 				{
 					method: "PUT",
 					credentials: "include",
@@ -231,7 +234,7 @@ async function deleteProfile(id) {
 		return;
 	}
 	try {
-		const res = await fetch(`${process.env.URL}/profile/${id}`, {
+		const res = await fetch(`https://ufit12.herokuapp.com/profile/${id}`, {
 			method: "DELETE",
 			credentials: "include",
 			headers: {

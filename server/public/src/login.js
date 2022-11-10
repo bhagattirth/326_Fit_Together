@@ -37,7 +37,7 @@ const loginUser = async (e) => {
 
 	// attempt to log user in
 	try {
-		const res = await fetch(`${process.env.URL}/auth/login`, {
+		const res = await fetch(`https://ufit12.herokuapp.com/auth/login`, {
 			method: "POST",
 			credentials: "include",
 			headers: {
@@ -80,7 +80,7 @@ const signupUser = async (e) => {
 
 	// attempt to sign user up
 	try {
-		const res = await fetch(`${process.env.URL}/auth/signup`, {
+		const res = await fetch(`https://ufit12.herokuapp.com/auth/signup`, {
 			method: "POST",
 			credentials: "include",
 			headers: {
