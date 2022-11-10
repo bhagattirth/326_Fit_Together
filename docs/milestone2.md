@@ -202,16 +202,17 @@ run"],["11/24/2025","Arms","Triceps","Biceps","curls", "Pushups", "Crunches", "W
 
 Example Images:
 
+
+![wireframe of the login](https://github.com/bhagattirth/326_Fit_Together/blob/main/docs/raw_images/CREATEOperation.png)
 CREATE Operation (Sign Up)
-
+![wireframe of the login](https://github.com/bhagattirth/326_Fit_Together/blob/main/docs/raw_images/READOperation.png)
 READ Operation (populating text fields and getting profile picture)
-
+![wireframe of the login](https://github.com/bhagattirth/326_Fit_Together/blob/main/docs/raw_images/UPDATEOperation.png)
 UPDATE Operation (Updating user profile information)
-
+![wireframe of the login](https://github.com/bhagattirth/326_Fit_Together/blob/main/docs/raw_images/DELETEOperation.png)
 DELETE Operation (Deleting user profile)
-
+![wireframe of the login](https://github.com/bhagattirth/326_Fit_Together/blob/main/docs/raw_images/login.jpg)
 The giant plus sign allows you to add a workout to the carousel and in the json file
-
 CRUD Operations
 
 homepage.js
