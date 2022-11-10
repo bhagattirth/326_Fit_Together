@@ -1,0 +1,22 @@
+{
+  "name": "326_fit_together",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bhagattirth/326_Fit_Together.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bhagattirth/326_Fit_Together/issues"
+  },
+  "homepage": "https://github.com/bhagattirth/326_Fit_Together#readme"
+}
