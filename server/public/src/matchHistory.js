@@ -18,6 +18,7 @@ const startup = async ()=> {
        createCarousel(json[i].pastWorkout, count);
        showRating(json[i], count);
        i++;
+       count++;
     }
     activateListeners();
 }
