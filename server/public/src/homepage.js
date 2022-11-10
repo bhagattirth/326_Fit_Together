@@ -69,7 +69,7 @@ const checkToken = async () => {
 
 	const profileBtn = document.getElementById("profile");
 	profileBtn.addEventListener("click", () => {
-		location.href = "profilePage.html";
+		location.href = "profile.html";
 	});
 
 	const logoutBtn = document.getElementById("logout");

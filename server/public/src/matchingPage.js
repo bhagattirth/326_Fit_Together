@@ -8,6 +8,7 @@ const prevButtonIcon = document.getElementById("prevButtonIcon");
 const maxPotentialMatchesAtOnce = 10;
 let curPotentialMatches = 0;
 logoutButton.addEventListener("click", logout);
+const profilePictureImage = document.getElementById("profilePicture");
 
 // Placehold values
 initialize(user.getUserId());
@@ -63,6 +64,25 @@ async function initialize(id) {
 		const profileImage = potentialMatches[potentialMatchID].profileImage;
 		generateCarouselItem(otherID, profile, profileImage, firstIteration);
 		firstIteration = false;
+	}
+	setProfilePicture(id);
+}
+
+async function setProfilePicture(id) {
+	try {
+		const res = await fetch(`http://localhost:5000/profile/${id}/picture`, {
+			method: "GET",
+			credentials: "include",
+		});
+		const msg = await res.json();
+		console.log(msg);
+		profilePictureImage.src = msg["picture"];
+		if (!res.ok) {
+			throw new Error("Something went wrong please try again later");
+		}
+	} catch (err) {
+		alert("Profile Picture could not be retrieved");
+		return;
 	}
 }
 

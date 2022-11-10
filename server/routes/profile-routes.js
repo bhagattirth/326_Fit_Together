@@ -19,9 +19,11 @@ router.delete("/:id", (req, res) => {
 router
 	.route("/:id/information")
 	.get((req, res) => {
+		// Get information associated with ID
 		res.send(dummyProfileData);
 	})
 	.put((req, res) => {
+		// Set information associated with ID
 		const newProfileData = req.body;
 		res.send(newProfileData);
 	});
@@ -29,9 +31,15 @@ router
 router
 	.route("/:id/picture")
 	.get((req, res) => {
-		res.send("DUMMYURL");
+		// Send back profile picture of ID
+		console.log("here");
+		res.send({
+			picture:
+				"https://penntoday.upenn.edu/sites/default/files/2021-11/Taylor%20Swift-Main.jpg",
+		});
 	})
 	.put((req, res) => {
+		// Update profile picture of ID
 		const image = req.body;
 	});
 
