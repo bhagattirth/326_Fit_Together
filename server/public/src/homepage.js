@@ -1,4 +1,3 @@
-import { urlToHttpOptions } from "url";
 import user from "./user.js";
 const loginBtn = document.getElementById("login-btn");
 
