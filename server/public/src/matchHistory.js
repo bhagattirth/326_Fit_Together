@@ -5,7 +5,7 @@ let jsonSize = 0;
 
 
 const startup = async ()=> {
-    const res = await fetch("http://localhost:5000/getPast");
+    const res = await fetch("http://localhost:5000/matchHistory/getPast");
     const json = await res.json();
 
     jsonSize = json.length;
@@ -18,7 +18,6 @@ const startup = async ()=> {
        createCarousel(json[i].pastWorkout, count);
        showRating(json[i], count);
        i++;
-       count++;
     }
     activateListeners();
 }
@@ -197,7 +196,7 @@ const addWorkoutListner = (i)=> async () => {
         alert("Please Fill in the Fields Correctly");
    }
    else{
-        const res = await fetch("http://localhost:5000/addWorkout", {
+        const res = await fetch("http://localhost:5000/matchHistory/addWorkout", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -214,7 +213,7 @@ const addWorkoutListner = (i)=> async () => {
 
 const updateRatingListiner = (i)=> async () => {
     let newRating = document.getElementById("selectRating"+i).value;
-    const res = await fetch("http://localhost:5000/ratingUpdate", {
+    const res = await fetch("http://localhost:5000/matchHistory/ratingUpdate", {
              method: "POST",
              headers: {
                  "Content-Type": "application/json",
@@ -228,7 +227,7 @@ const updateRatingListiner = (i)=> async () => {
  const deleteUserListiner = (i)=> async () => {
     
     let  user= "user"+ document.getElementById("removeMatch"+i).value;
-    const res = await fetch("http://localhost:5000/deleteEntry", {
+    const res = await fetch("http://localhost:5000/matchHistory/deleteEntry", {
              method: "POST",
              headers: {
                  "Content-Type": "application/json",

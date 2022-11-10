@@ -20,7 +20,7 @@ app.use(express.static('./public'));
 app.use(express.urlencoded({extended:false}));
 
 
-app.use("/", matchHistoryRouter);
+app.use("/matchHistory", matchHistoryRouter);
 
 
 app.listen(5000, (req, res) => {
