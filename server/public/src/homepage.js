@@ -1,4 +1,5 @@
-import user from "./shared";
+import { urlToHttpOptions } from "url";
+import user from "./user.js";
 const loginBtn = document.getElementById("login-btn");
 
 // redirect user to login page when clicking on login btn
@@ -39,7 +40,7 @@ const checkToken = async () => {
 	const msg = await res.json();
 	console.log(msg);
 	// update user id here, subject to change
-
+	user.setUserId(1);
 	// change page
 	const html = `<div id='profile-dropdown' class="dropdown">
 			<img
