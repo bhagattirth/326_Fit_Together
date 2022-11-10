@@ -1,10 +1,16 @@
 const carouselDiv = document.getElementById("carouselDiv");
 const logoutButton = document.getElementById("logoutOption");
+const nextButton = document.getElementById("nextButton");
+const nextButtonIcon = document.getElementById("nextButtonIcon");
+const prevButton = document.getElementById("prevButton");
+const prevButtonIcon = document.getElementById("prevButtonIcon");
+const maxPotentialMatchesAtOnce = 10;
+let curPotentialMatches = 0;
 logoutButton.addEventListener("click", logout);
+import user from "./shared.js";
 
 // Placehold values
-const id = 12;
-initialize(12);
+initialize(user.getUserId());
 // Replace from shared once set up
 async function logout() {
 	const res = await fetch("http://localhost:5000/auth/logout", {
@@ -36,36 +42,40 @@ async function initialize(id) {
 		if (!res.ok) {
 			throw new Error("Something went wrong please try again later");
 		}
-		let firstIteration = true;
-		for (const potentialMatchID of Object.keys(msg)) {
-			const otherID = potentialMatchID;
-			const profile = msg[potentialMatchID].profile;
-			const profileImage = msg[potentialMatchID].profileImage;
-			generateCarouselItem(
-				otherID,
-				profile,
-				profileImage,
-				firstIteration
-			);
-			firstIteration = false;
-		}
+		user.setPotentialMatches(msg);
 	} catch (err) {
 		alert("Potential Match Information could not be found");
 		return;
 	}
+	const potentialMatches = user.getPotentialMatches(
+		maxPotentialMatchesAtOnce
+	);
+	const potentialMatchesKeys = Object.keys(potentialMatches);
+	curPotentialMatches = potentialMatchesKeys.length;
+	if (curPotentialMatches === 0) {
+		alert("No more potential matches remaining. Please come back later.");
+	}
+	let firstIteration = true;
+	carouselDiv.innerHTML = "";
+	for (const potentialMatchID of potentialMatchesKeys) {
+		const otherID = potentialMatchID;
+		const profile = potentialMatches[potentialMatchID].profile;
+		const profileImage = potentialMatches[potentialMatchID].profileImage;
+		generateCarouselItem(otherID, profile, profileImage, firstIteration);
+		firstIteration = false;
+	}
 }
+
 async function acceptMatch(otherID) {
 	try {
 		const res = await fetch(
-			`http://localhost:5000/matches/${id}/potential/${otherID}`,
+			`http://localhost:5000/matches/${user.getUserId()}/potential/${otherID}`,
 			{
 				method: "PUT",
 				credentials: "include",
 			}
 		);
 		const msg = await res.json();
-		// removeFromCarousel(otherID);
-
 		if (!res.ok) {
 			throw new Error("Something went wrong please try again later");
 		}
@@ -73,15 +83,56 @@ async function acceptMatch(otherID) {
 		alert("Unable to Accept Match");
 		return;
 	}
+	removeFromCarousel(otherID);
+	addPotentialToCarousel();
+}
+
+function addPotentialToCarousel() {
+	const potentialMatch = user.getPotentialMatches(1);
+	const keys = Object.keys(potentialMatch);
+	if (keys.length === 1) {
+		curPotentialMatches++;
+		generateCarouselItem(
+			keys[0],
+			potentialMatch[keys].profile,
+			potentialMatch[keys].profileImage
+		);
+	}
 }
 
 function removeFromCarousel(id) {
 	// Change selected (store map of otherIDs when reading in, remove from map, select random from map and set that as active)
 	// If empty, hide carousel and display text stating no potential matches remain. Come back later.
-	// document.getElementById("carouselItem" + otherID).remove();
+	//
+	curPotentialMatches--;
+	if (curPotentialMatches === 0) {
+		alert("No more potential matches remaining. Please come back later.");
+		carouselDiv.innerHTML = `<h1>No More Matches :(<h1>
+			</br>
+			<h2>Try again later!<h2>`;
+	}
+	nextButton.click();
+	document.getElementById("carouselItem" + id).remove();
 }
 async function denyMatch(otherID) {
-	console.log("deny" + otherID);
+	try {
+		const res = await fetch(
+			`http://localhost:5000/matches/${user.getUserId()}/potential/${otherID}`,
+			{
+				method: "delete",
+				credentials: "include",
+			}
+		);
+		const msg = await res.json();
+		if (!res.ok) {
+			throw new Error("Something went wrong please try again later");
+		}
+	} catch (err) {
+		alert("Unable to Deny Match");
+		return;
+	}
+	removeFromCarousel(otherID);
+	addPotentialToCarousel();
 }
 
 function generateCarouselItem(id, profile, profileImage, active = false) {

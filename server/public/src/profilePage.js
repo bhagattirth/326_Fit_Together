@@ -1,4 +1,4 @@
-//import { logout } from "/shared.js";
+import user from "./shared.js";
 
 const editProfileButton = document.getElementById("editProfile");
 const updateProfileButton = document.getElementById("updateProfile");
@@ -50,25 +50,10 @@ deleteProfileButton.addEventListener("click", deleteProfile);
 matchesOption.addEventListener("click", () => {
 	location.href = "matchHistory.html";
 });
-logoutOption.addEventListener("click", logout);
-
-// Replace from shared once set up
-async function logout() {
-	const res = await fetch("http://localhost:5000/auth/logout", {
-		method: "POST",
-		credentials: "include",
-		headers: { "Content-type": "application/json" },
-		body: null,
-	});
-
-	const msg = await res.json();
-
-	if (res.ok) {
-		location.href = "index.html";
-	} else {
-		alert("failed to logout");
-	}
-}
+logoutOption.addEventListener("click", () => {
+	user.logout();
+	window.location.replace("index.html");
+});
 
 function callFilePicker() {
 	hiddenFilepicker.click();
@@ -94,8 +79,7 @@ function readImage() {
 	});
 }
 
-const id = 12; // Will be gotten from Database once backend is setup
-initialize(id);
+initialize(user.getUserId());
 
 async function initialize(id) {
 	// TODO: Update profile picture
@@ -239,7 +223,8 @@ async function deleteProfile() {
 		if (!res.ok) {
 			throw new Error("Something went wrong please try again later");
 		}
-		logout();
+		user.logout();
+		window.location.replace("http://localhost:5000/public/index.html");
 	} catch (err) {
 		alert("Issue deleting profile. Please try again later.");
 		return;
