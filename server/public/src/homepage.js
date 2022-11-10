@@ -26,6 +26,7 @@ const logout = async () => {
 
 const checkToken = async () => {
 	console.log("validating...");
+	console.log(`${process.env.URL}`);
 	const res = await fetch(`${process.env.URL}/auth/validateUser`, {
 		method: "GET",
 		headers: {
