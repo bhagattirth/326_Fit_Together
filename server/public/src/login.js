@@ -46,6 +46,7 @@ const loginUser = async (e) => {
 			body: JSON.stringify({ email: email.value, password: pass.value }),
 		});
 		const msg = await res.json();
+		console.log(msg);
 		// update User with userId returned
 		user.setUserId(1);
 		if (!res.ok) {
@@ -89,6 +90,7 @@ const signupUser = async (e) => {
 			body: JSON.stringify({ email: email.value, password: pass.value }),
 		});
 		const msg = await res.json();
+		console.log(msg);
 		// Update user with userId returned, subject to change
 		user.setUserId(1);
 		if (!res.ok) {

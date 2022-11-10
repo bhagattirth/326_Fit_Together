@@ -1,8 +1,11 @@
 "use strict";
 import express from "express";
-import { addWorkoutToUser, updateRating, deleteEntry, getPastUser } from "../controllers/matchHistory-controller.js";
-
-
+import {
+	addWorkoutToUser,
+	updateRating,
+	deleteEntry,
+	getPastUser,
+} from "../controllers/matchHistory-controller.js";
 
 let router = express.Router();
 
@@ -14,7 +17,4 @@ router.post("/ratingUpdate", updateRating);
 
 router.post("/deleteEntry", deleteEntry);
 
-
-
-
-export{router as matchHistoryRouter};
+export { router as matchHistoryRouter };
