@@ -7,7 +7,7 @@ loginBtn.addEventListener("click", () => {
 });
 
 const logout = async () => {
-	const res = await fetch("http://localhost:5000/auth/logout", {
+	const res = await fetch(`${process.env.URL}/auth/logout`, {
 		method: "POST",
 		credentials: "include",
 		headers: { "Content-type": "application/json" },
@@ -26,7 +26,7 @@ const logout = async () => {
 
 const checkToken = async () => {
 	console.log("validating...");
-	const res = await fetch("http://localhost:5000/auth/validateUser", {
+	const res = await fetch(`${process.env.URL}/auth/validateUser`, {
 		method: "GET",
 		headers: {
 			"Content-Type": "application/json",

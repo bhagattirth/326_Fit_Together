@@ -37,7 +37,7 @@ const loginUser = async (e) => {
 
 	// attempt to log user in
 	try {
-		const res = await fetch("http://localhost:5000/auth/login", {
+		const res = await fetch(`${process.env.URL}/auth/login`, {
 			method: "POST",
 			credentials: "include",
 			headers: {
@@ -80,7 +80,7 @@ const signupUser = async (e) => {
 
 	// attempt to sign user up
 	try {
-		const res = await fetch("http://localhost:5000/auth/signup", {
+		const res = await fetch(`${process.env.URL}/auth/signup`, {
 			method: "POST",
 			credentials: "include",
 			headers: {
