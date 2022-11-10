@@ -42,9 +42,13 @@ const textBoxes = [
 
 hiddenFilepicker.onchange = updateProfilePicture;
 editProfileButton.addEventListener("click", editProfile);
-updateProfileButton.addEventListener("click", updateProfile);
+updateProfileButton.addEventListener("click", async () => {
+	await updateProfile(user.getUserId());
+});
 selectProfilePictureButton.addEventListener("click", callFilePicker);
-deleteProfileButton.addEventListener("click", deleteProfile);
+deleteProfileButton.addEventListener("click", async () => {
+	await deleteProfile(user.getUserId());
+});
 matchesOption.addEventListener("click", () => {
 	location.href = "matchHistory.html";
 });
@@ -109,7 +113,6 @@ async function setProfilePicture(id) {
 			credentials: "include",
 		});
 		const msg = await res.json();
-		console.log(msg);
 		profilePictureImage.src = msg["picture"];
 		if (!res.ok) {
 			throw new Error("Something went wrong please try again later");
@@ -132,7 +135,7 @@ function editProfile() {
 	deleteProfileButton.disabled = false;
 }
 
-async function updateProfile() {
+async function updateProfile(id) {
 	deleteProfileButton.disabled = true;
 	editProfileButton.disabled = false;
 	updateProfileButton.disabled = true;
@@ -186,6 +189,7 @@ async function updateProfile() {
 			return;
 		}
 		setProfilePicture(user.getUserId());
+		profilePicture = null;
 	}
 }
 
@@ -220,7 +224,7 @@ function generateJSON() {
 	return json;
 }
 
-async function deleteProfile() {
+async function deleteProfile(id) {
 	const deleteProfile = confirm(
 		"Are you sure to delete your profile? This action cannot be reverted."
 	);
@@ -235,7 +239,6 @@ async function deleteProfile() {
 				"Content-Type": "application/json",
 			},
 		});
-		const msg = await res.json();
 		if (!res.ok) {
 			throw new Error("Something went wrong please try again later");
 		}
