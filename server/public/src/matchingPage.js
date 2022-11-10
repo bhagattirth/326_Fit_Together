@@ -14,7 +14,7 @@ const profilePictureImage = document.getElementById("profilePicture");
 initialize(user.getUserId());
 // Replace from shared once set up
 async function logout() {
-	const res = await fetch("http://localhost:5000/auth/logout", {
+	const res = await fetch(`${process.env.URL}/auth/logout`, {
 		method: "POST",
 		credentials: "include",
 		headers: { "Content-type": "application/json" },
@@ -32,13 +32,10 @@ async function logout() {
 
 async function initialize(id) {
 	try {
-		const res = await fetch(
-			`http://localhost:5000/matches/${id}/potential`,
-			{
-				method: "GET",
-				credentials: "include",
-			}
-		);
+		const res = await fetch(`${process.env.URL}/matches/${id}/potential`, {
+			method: "GET",
+			credentials: "include",
+		});
 		const msg = await res.json();
 		if (!res.ok) {
 			throw new Error("Something went wrong please try again later");
@@ -70,7 +67,7 @@ async function initialize(id) {
 
 async function setProfilePicture(id) {
 	try {
-		const res = await fetch(`http://localhost:5000/profile/${id}/picture`, {
+		const res = await fetch(`${process.env.URL}/profile/${id}/picture`, {
 			method: "GET",
 			credentials: "include",
 		});
@@ -89,7 +86,9 @@ async function setProfilePicture(id) {
 async function acceptMatch(otherID) {
 	try {
 		const res = await fetch(
-			`http://localhost:5000/matches/${user.getUserId()}/potential/${otherID}`,
+			`${
+				process.env.URL
+			}/matches/${user.getUserId()}/potential/${otherID}`,
 			{
 				method: "PUT",
 				credentials: "include",
@@ -136,7 +135,9 @@ function removeFromCarousel(id) {
 async function denyMatch(otherID) {
 	try {
 		const res = await fetch(
-			`http://localhost:5000/matches/${user.getUserId()}/potential/${otherID}`,
+			`${
+				process.env.URL
+			}/matches/${user.getUserId()}/potential/${otherID}`,
 			{
 				method: "delete",
 				credentials: "include",
