@@ -123,11 +123,12 @@ body {
 
 /* Login */
 
-body#login {
+body#background {
 	background-image: url("https://nypost.com/wp-content/uploads/sites/2/2018/01/012018_gym_buddies.jpg?quality=75&strip=all");
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-color: navy;
+	height: 100vh;
 }
 
 #rectangleBox {
@@ -137,6 +138,14 @@ body#login {
 	border: 5px solid green;
 	text-align: center;
 	margin: auto;
+}
+
+#signupToggle{
+	background:none;
+    border:none;
+    margin:0;
+    padding:0;
+    cursor: pointer;
 }
 
 #error-text {
