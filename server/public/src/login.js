@@ -84,7 +84,9 @@ const signupUser = async (e) => {
 
 	// password validation
 	if (!validatePassword(newPass.value)) {
-		alert("invalid password");
+		alert(
+			"invalid password, must contain 8 characters, 1 uppercase, 1 lowercase, and 1 special or number"
+		);
 		return;
 	}
 

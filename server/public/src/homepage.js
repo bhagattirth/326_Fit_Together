@@ -7,6 +7,7 @@ loginBtn.addEventListener("click", () => {
 });
 
 const checkToken = async () => {
+	// check if token is valid
 	const res = await fetch("http://localhost:5000/auth/validateUser", {
 		method: "GET",
 		headers: {
@@ -14,19 +15,37 @@ const checkToken = async () => {
 		},
 	});
 
+	// if not valid, return
 	if (!res.ok) {
 		return;
 	}
 	const msg = await res.json();
-	// update user id here, subject to change
+	// update user id here
 	user.setUserId(msg.id);
+
+	// fetch image link for user
+	const imgRes = await fetch(
+		`http://localhost:5000/profile/${user.id}/picture`,
+		{
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+			},
+		}
+	);
+	const imageLink = await imgRes.json();
+
+	// if res is not ok, alert user that image failed to load
+	if (!res.ok) {
+		alert("failed to load profile image");
+	}
 
 	// change page
 	const html = `<div id='profile-dropdown' class="dropdown">
 			<img
 				class="user-icon dropdown-toggle"
 				data-bs-toggle="dropdown"
-				src="https://penntoday.upenn.edu/sites/default/files/2021-11/Taylor%20Swift-Main.jpg"
+				src=${imageLink.picture}
 				alt="user icon"
 			/>
 			<ul class="dropdown-menu">
