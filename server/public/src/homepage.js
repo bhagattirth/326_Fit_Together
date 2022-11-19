@@ -7,7 +7,6 @@ loginBtn.addEventListener("click", () => {
 });
 
 const checkToken = async () => {
-	console.log("validating...");
 	const res = await fetch("http://localhost:5000/auth/validateUser", {
 		method: "GET",
 		headers: {
@@ -19,9 +18,9 @@ const checkToken = async () => {
 		return;
 	}
 	const msg = await res.json();
-	console.log(msg);
 	// update user id here, subject to change
-	user.setUserId(1);
+	user.setUserId(msg.id);
+
 	// change page
 	const html = `<div id='profile-dropdown' class="dropdown">
 			<img

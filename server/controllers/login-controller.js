@@ -31,6 +31,11 @@ export const loginUser = (req, res, next) => {
 			res.cookie("accessToken", token, {
 				maxAge: 60 * 60 * 24 * 30 * 1000,
 			});
+
+			res.cookie("userId", user.id, {
+				maxAge: 60 * 60 * 24 * 30 * 1000,
+			});
+
 			// send message back to server letting client know user is logged in
 			res.status(200).send({ id: user.id });
 		}
@@ -67,6 +72,11 @@ export const signupUser = async (req, res, next) => {
 			res.cookie("accessToken", token, {
 				maxAge: 60 * 60 * 24 * 30 * 1000,
 			});
+
+			res.cookie("userId", newUser.id, {
+				maxAge: 60 * 60 * 24 * 30 * 1000,
+			});
+
 			// respond to server
 			res.status(200).send({ id: newUser.id });
 		}
@@ -75,7 +85,7 @@ export const signupUser = async (req, res, next) => {
 
 export const validateUser = (req, res, next) => {
 	if (req.authenticated) {
-		res.status(200).send({ message: "valid token" });
+		res.status(200).send({ id: req.cookies["userId"] });
 	} else {
 		res.status(400).send({ message: "Not valid" });
 	}
