@@ -6,26 +6,8 @@ loginBtn.addEventListener("click", () => {
 	location.href = "login.html";
 });
 
-const logout = async () => {
-	const res = await fetch("http://localhost:5000/auth/logout", {
-		method: "POST",
-		credentials: "include",
-		headers: { "Content-type": "application/json" },
-		body: null,
-	});
-
-	const msg = await res.json();
-
-	if (res.ok) {
-		user.logout();
-		location.href = "index.html";
-	} else {
-		alert("failed to logout");
-	}
-};
-
 const checkToken = async () => {
-	console.log("validating...");
+	// check if token is valid
 	const res = await fetch("http://localhost:5000/auth/validateUser", {
 		method: "GET",
 		headers: {
@@ -33,19 +15,37 @@ const checkToken = async () => {
 		},
 	});
 
+	// if not valid, return
 	if (!res.ok) {
 		return;
 	}
 	const msg = await res.json();
-	console.log(msg);
-	// update user id here, subject to change
-	user.setUserId(1);
+	// update user id here
+	user.setUserId(msg.id);
+
+	// fetch image link for user
+	const imgRes = await fetch(
+		`http://localhost:5000/profile/${user.id}/picture`,
+		{
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+			},
+		}
+	);
+	const imageLink = await imgRes.json();
+
+	// if res is not ok, alert user that image failed to load
+	if (!res.ok) {
+		alert("failed to load profile image");
+	}
+
 	// change page
 	const html = `<div id='profile-dropdown' class="dropdown">
 			<img
 				class="user-icon dropdown-toggle"
 				data-bs-toggle="dropdown"
-				src="https://penntoday.upenn.edu/sites/default/files/2021-11/Taylor%20Swift-Main.jpg"
+				src=${imageLink.picture}
 				alt="user icon"
 			/>
 			<ul class="dropdown-menu">
@@ -73,7 +73,7 @@ const checkToken = async () => {
 	});
 
 	const logoutBtn = document.getElementById("logout");
-	logoutBtn.addEventListener("click", logout);
+	logoutBtn.addEventListener("click", user.logout);
 };
 
 checkToken();
