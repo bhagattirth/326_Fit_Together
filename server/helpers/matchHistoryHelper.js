@@ -123,8 +123,9 @@ const dummyArr = `[
 ]
 `;
 export function getPastData() {
-	//const raw = fs.readFileSync("./public/dummyEntries.json");
-	const json = JSON.parse(dummyArr);
+	const raw = fs.readFileSync("./public/dummyEntries.json");
+	const json = JSON.parse(raw);
+	// const json = JSON.parse(dummyArr);
 	return json;
 }
 
