@@ -10,9 +10,11 @@ import { profileRoutes } from "./routes/profile-routes.js";
 import { matchRoutes } from "./routes/match-routes.js";
 import { matchHistoryRouter } from "./routes/matchHistory-routes.js";
 import mongoose from "mongoose";
+import dotenv from "dotenv";
+dotenv.config();
 
 mongoose.connect(
-	`mongodb+srv://psi:psi@cluster0.k8otxuo.mongodb.net/?retryWrites=true&w=majority`
+	`mongodb+srv://psi:${process.env.PASSWORD}@cluster0.k8otxuo.mongodb.net/?retryWrites=true&w=majority`
 );
 
 const userSchema = new mongoose.Schema({
