@@ -6,24 +6,6 @@ loginBtn.addEventListener("click", () => {
 	location.href = "login.html";
 });
 
-const logout = async () => {
-	const res = await fetch("http://localhost:5000/auth/logout", {
-		method: "POST",
-		credentials: "include",
-		headers: { "Content-type": "application/json" },
-		body: null,
-	});
-
-	const msg = await res.json();
-
-	if (res.ok) {
-		user.logout();
-		location.href = "index.html";
-	} else {
-		alert("failed to logout");
-	}
-};
-
 const checkToken = async () => {
 	console.log("validating...");
 	const res = await fetch("http://localhost:5000/auth/validateUser", {
@@ -73,7 +55,7 @@ const checkToken = async () => {
 	});
 
 	const logoutBtn = document.getElementById("logout");
-	logoutBtn.addEventListener("click", logout);
+	logoutBtn.addEventListener("click", user.logout);
 };
 
 checkToken();
