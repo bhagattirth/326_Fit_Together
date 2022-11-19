@@ -23,14 +23,18 @@ const userSchema = new mongoose.Schema({
 	password: String,
 	fName: String,
 	lName: String,
-	profilePic: String,
-	phoneNumber: String,
-	workoutStyle: String,
-	workoutsPerWeek: Number,
-	avgWorkoutLength: Number,
-	startTime: String,
-	endTime: String,
-	prefDays: String,
+	profilePic: {
+		type: String,
+		default:
+			"https://penntoday.upenn.edu/sites/default/files/2021-11/Taylor%20Swift-Main.jpg",
+	},
+	phoneNumber: { type: String, default: "000-000-0000" },
+	workoutStyle: { type: String, default: "None" },
+	workoutsPerWeek: { type: Number, default: 0 },
+	avgWorkoutLength: { type: Number, default: 0 },
+	startTime: { type: String, default: "00:00AM" },
+	endTime: { type: String, default: "00:00AM" },
+	prefDays: { type: String, default: "0000000" },
 	pastWorkouts: [
 		{
 			id: String,
@@ -39,8 +43,8 @@ const userSchema = new mongoose.Schema({
 			workout: [String],
 		},
 	],
-	rating: Number,
-	numberOfRatings: Number,
+	rating: { type: Number, default: 0 },
+	numberOfRatings: { type: Number, default: 0 },
 	matches: [String],
 	blocked: [String],
 });

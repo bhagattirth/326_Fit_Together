@@ -4,8 +4,22 @@ class User {
 		this.pm = {}; // Potential Matches
 	}
 
-	logout() {
-		this.userId = null;
+	async logout() {
+		const res = await fetch("http://localhost:5000/auth/logout", {
+			method: "POST",
+			credentials: "include",
+			headers: { "Content-type": "application/json" },
+			body: null,
+		});
+
+		const msg = await res.json();
+
+		if (res.ok) {
+			this.userId = null;
+			location.href = "index.html";
+		} else {
+			alert("failed to logout");
+		}
 	}
 
 	getUserId() {
