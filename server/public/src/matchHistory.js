@@ -6,25 +6,43 @@ let lastEntryOnPage = 2;
 let jsonSize = 0;
 
 
-setProfilePicture(user.getUserId);
+await validateUser()
+async function validateUser() {
+	const res = await fetch(`http://localhost:5000/auth/validateUser`, {
+		method: "GET",
+		headers: {
+			"Content-Type": "application/json",
+		},
+	});
 
-async function setProfilePicture(id) {
-	try {
-		const res = await fetch(`http://localhost:5000/profile/${id}/picture`, {
-			method: "GET",
-			credentials: "include",
-		});
-		const msg = await res.json();
-
-		document.getElementById("profilePicture").src = msg["picture"];
-		if (!res.ok) {
-			throw new Error("Something went wrong please try again later");
-		}
-	} catch (err) {
-		alert("Profile Picture could not be retrieved");
-		return;
+	// if not valid, return
+	if (!res.ok) {
+		alert("Issue finding profile information");
 	}
+	const msg = await res.json();
+	// update user id here
+	user.setUserId(msg.id);
 }
+
+// setProfilePicture(user.getUserId);
+
+// async function setProfilePicture(id) {
+// 	try {
+// 		const res = await fetch(`http://localhost:5000/profile/${id}/picture`, {
+// 			method: "GET",
+// 			credentials: "include",
+// 		});
+// 		const msg = await res.json();
+
+// 		document.getElementById("profilePicture").src = msg["picture"];
+// 		if (!res.ok) {
+// 			throw new Error("Something went wrong please try again later");
+// 		}
+// 	} catch (err) {
+// 		alert("Profile Picture could not be retrieved");
+// 		return;
+// 	}
+// }
 
 const loadUsers = async (id)=> {
 
