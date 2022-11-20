@@ -32,9 +32,10 @@ const userSchema = new mongoose.Schema({
 	pastWorkouts: [
 		{
 			id: String,
-			date: String,
-			workoutTitle: String,
-			workout: [String],
+			date: [String],
+			workoutTitle: [String],
+			workout: [[String]],
+			rating: String
 		},
 	],
 	rating: Number,
@@ -44,6 +45,7 @@ const userSchema = new mongoose.Schema({
 });
 
 export const User = new mongoose.model("User", userSchema);
+
 
 const app = express();
 app.use(express.json());

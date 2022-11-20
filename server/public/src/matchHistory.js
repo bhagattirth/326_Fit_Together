@@ -252,7 +252,7 @@ const updateRatingListiner = (i)=> async () => {
     console.log(userMap[user]);
     console.log(i);
     const res = await fetch("http://localhost:5000/matchHistory/deleteEntry", {
-             method: "POST",
+             method: "DELETE",
              headers: {
                  "Content-Type": "application/json",
              },
