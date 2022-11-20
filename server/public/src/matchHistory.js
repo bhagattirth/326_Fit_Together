@@ -26,20 +26,36 @@ async function setProfilePicture(id) {
 	}
 }
 
-const loadUsers = async ()=> {
-    const res = await fetch("http://localhost:5000/matchHistory/getPast");
-    const json = await res.json();
+const loadUsers = async (id)=> {
 
+    let json = null;
+    try {
+		const res = await fetch(`http://localhost:5000/matchHistory/${id}/getPast`, {
+			method: "GET",
+			credentials: "include",
+		});
+		json = await res.json();
+
+		if (!res.ok) {
+			throw new Error("Something went wrong please try again later");
+		}
+	} catch (err) {
+		alert("Past users could not be retrieved");
+		return;
+	}
 
     userMap = {"user1": null, "user2": null, "user3": null};
+
     jsonSize = json.length;
     
     let count = 1;
     let i = firstEntryOnPage;
     while(i<=lastEntryOnPage && i<json.length){
-       userMap["user"+ count] = json[i].name;
-       addProfileInfo(json[i], count);
-       createCarousel(json[i].pastWorkout, count);
+       const userInfo = await getUserInfo(json[i].id);
+
+       userMap["user"+ count] = json[i].id;
+       addProfileInfo(userInfo, count);
+       createCarousel(json[i], count);
        showRating(json[i], count);
        i++;
        count++;
@@ -48,6 +64,23 @@ const loadUsers = async ()=> {
     displayUser();
 }
 
+async function getUserInfo(id){
+    try {
+		const res = await fetch(`http://localhost:5000/matchHistory/${id}/getProfileInfo`, {
+			method: "GET",
+			credentials: "include",
+		});
+		const msg = await res.json();
+
+		if (!res.ok) {
+			throw new Error("Cannot retrieve Profile");
+		}else{
+            return msg;
+        }
+	} catch (err) {
+		return null;
+	}
+}
 
 function addProfileInfo(userData, i){
     
@@ -62,20 +95,25 @@ function addProfileInfo(userData, i){
     profileInfo.innerHTML = "";
     profileInfo.appendChild(name);
     profileInfo.innerHTML+= "</br>"
-    profileInfo.innerHTML+= "Last Workout On: " + userData.lastWorkout;
+    // profileInfo.innerHTML+= "Last Workout On: " + userData.lastWorkout;
     profileInfo.innerHTML+= "</br>";
-    profileInfo.innerHTML+="Contact: "+ userData.contact;
+    profileInfo.innerHTML+="Contact: "+ userData.email;
     profilePic.src = userData.imgURL;
 
     prefDate.innerText = "";
-    for(let days of userData.preference){
-        prefDate.innerText+= days + " ";
-    }
-    
+    prefDate.innerText = userData.preference;
+
+    // for(let days of userData.preference){
+    //     prefDate.innerText+= days + " ";
+    // }
 }
 
 
-function createCarousel(workouts, i){
+function createCarousel(pastWorkouts, i){
+
+    const workouts = pastWorkouts.workout;
+    const workoutTitles = pastWorkouts.workoutTitle;
+    const workoutDates = pastWorkouts.date;
 
     let carousel = document.getElementById("carousel"+i);
     carousel.innerHTML = "";
@@ -83,10 +121,11 @@ function createCarousel(workouts, i){
     carouselBody.classList.add("carousel-inner", "border-2");
 
     let isFirst = true;
-    workouts.forEach(function(e){
-        createWorkoutCard(e, carouselBody, isFirst);
+
+    for(let i in workouts){
+        createWorkoutCard(workouts[i], workoutTitles[i], workoutDates[i], carouselBody, isFirst);
         isFirst = false;
-    });
+    }
 
     //Buttons
     let leftButton = document.createElement("button");
@@ -145,10 +184,8 @@ function getNextPage(){
     
  }
 
+function createWorkoutCard(exercises, title, date, cBody, isFirst){
 
-
-function createWorkoutCard(exercises, cBody, isFirst){
-    
     let carouselItem = document.createElement("div");
     isFirst? carouselItem.classList.add("carousel-item", "active") : carouselItem.classList.add("carousel-item");
     
@@ -161,18 +198,19 @@ function createWorkoutCard(exercises, cBody, isFirst){
  
     let cardTitle = document.createElement("h3");
     cardTitle.classList.add("card-title");
-    cardTitle.innerHTML=exercises[0];
+    cardTitle.innerHTML= date;
     cardBody.appendChild(cardTitle);
 
 
     let boldText = document.createElement("strong");
-    boldText.innerHTML = exercises[1] + ":";
+    boldText.innerHTML = title + ":";
     cardBody.appendChild(boldText);
     
+
     let exerciseText = document.createElement("p");
     exerciseText.classList.add("card-text");
 
-    for(let i = 2; i<exercises.length; i++){
+    for(let i = 0; i<exercises.length; i++){
         exerciseText.innerHTML += exercises[i] + "</br>"
     }
 
@@ -193,7 +231,7 @@ function showRating(userData, i){
         option.setAttribute("value", e.substring(0,1));
         option.innerText = e;
 
-        if(e.substring(0,1) === userData.ratings){
+        if(e.substring(0,1) === userData.rating){
             option.selected = true;
         }
 
@@ -208,7 +246,7 @@ function setAttributes(el, attrs) {
 }
 
 
-const addWorkoutListner = (i)=> async () => {
+const addWorkoutListner = (i) => async () => {
     
    let workouts = document.getElementById("workout"+i).value;
    let date = document.getElementById("date"+i).value;
@@ -225,11 +263,16 @@ const addWorkoutListner = (i)=> async () => {
                 "Content-Type": "application/json",
             },
 
-            body: JSON.stringify({ user: userMap["user"+i], workout: workouts, dates: date, type: wType }),
+            body: JSON.stringify({ user:user.getUserId, member: userMap["user"+i], workout: workouts, dates: date, type: wType }),
 
             });
             const msg = await res.json();
-            loadUsers()
+
+            if(!res.ok){
+                alert("Failed to Add Workout");
+            }else{
+                loadUsers();
+            }    
    }      
 }
 
@@ -241,25 +284,33 @@ const updateRatingListiner = (i)=> async () => {
              headers: {
                  "Content-Type": "application/json",
              },
-             body: JSON.stringify({ user: userMap["user"+i], rating: newRating}),
+             body: JSON.stringify({user:user.getUserId, member: userMap["user"+i], user: userMap["user"+i], rating: newRating}),
          });
      const msg = await res.json();
+     
+     if(!res.ok){
+        alert("Failed to Update Rating. Please Try Again Later");
+     }
  }
 
  const deleteUserListiner = (i)=> async () => {
     
     let  user= "user"+ i;
-    console.log(userMap[user]);
-    console.log(i);
+  
     const res = await fetch("http://localhost:5000/matchHistory/deleteEntry", {
-             method: "POST",
+             method: "DELETE",
              headers: {
                  "Content-Type": "application/json",
              },
-             body: JSON.stringify({ user: userMap[user]}),
+             body: JSON.stringify({ user:user.getUserId, member: userMap[user]}),
          });
      const msg = await res.json();
-     loadUsers();
+
+     if(!res.ok){
+        alert("Failed to Delete Member Info");
+     }else{
+        loadUsers();
+     }
  }
 
 function displayUser(){
