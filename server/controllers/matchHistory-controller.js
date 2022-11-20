@@ -9,9 +9,9 @@ export const getPastUser = (req, res, next)=>{
 		if(err){
             res.status(404).send({ message: err });
         }else if(!foundItem){
-            res.status(400).send({ message: "User doesn't exist" })
+            res.status(400).send({ message: "User doesn't exist" });
         }else{
-            res.status(200).send(JSON.stringify(foundItem.pastWorkouts))
+            res.status(200).send(JSON.stringify(foundItem.pastWorkouts));
         }
 	});
 };
@@ -23,13 +23,13 @@ export const getProfileInfo = (req, res, next)=>{
 		if(err){
             res.status(404).send({ message: err });
         }else if(!foundItem){
-            res.status(400).send({ message: "User doesn't exist" })
+            res.status(400).send({ message: "User doesn't exist" });
         }else{
             const info = {
                 imgURL:foundItem.profilePic, name:foundItem.fName + " " + foundItem.lName,
                 preference:foundItem.prefDays, email:foundItem.email
             };
-            res.status(200).send(JSON.stringify(info))
+            res.status(200).send(JSON.stringify(info));
         }
 	});
 };
@@ -47,7 +47,7 @@ export const addWorkoutToUser = (req, res, next) =>{
         if(err){
             res.status(404).send(err);
         }else if(!foundItem){
-            res.status(400).send({ message: "Member doesn't exist" })
+            res.status(400).send({ message: "Member doesn't exist" });
         }else{
             res.status(200).send({message:"Workouts has been been updated"});
         }
@@ -64,7 +64,7 @@ export const updateRating = (req, res, next) =>{
         if(err){
             res.status(404).send(err);
         }else if(!foundItem){
-            res.status(400).send({ message: "Member doesn't exist" })
+            res.status(400).send({ message: "Member doesn't exist" });
         }else{
             res.status(200).send({message:"Rating has been been updated"});
         }
@@ -82,7 +82,7 @@ export const deleteEntry = (req, res, next)=>{
         if(err){
             res.status(404).send(err);
         }else if(!foundItem){
-            res.status(400).send({ message: "Member doesn't exist" })
+            res.status(400).send({ message: "Member doesn't exist" });
         }else{
             res.status(200).send({message:" Member has been Deleted"});
         }
