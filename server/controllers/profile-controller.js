@@ -1,4 +1,5 @@
 import { User } from "../app.js";
+import user from "../public/src/user.js";
 
 // const dummyProfileData = {
 // 	firstName: "John",
@@ -117,34 +118,55 @@ export const deleteProfile = (req, res, next) => {
 	const id = req.params.id;
 	User.findOne({ id: id }, (err, user) => {
 		if (err) {
-			res.status(400).send();
+			res.status(400).send(err);
 		} else {
 			// Remove (to be) deleted user's id from all of its corresponding twoWayMatches' twoWayMatches list
-			for (const otherID of user.twoWayMatches) {
-				removeFromTwoWayMatch(otherID, id);
-			}
+			removeFromTwoWayMatch(user.twoWayMatches, id);
+			removeOneWayMatches(id);
 		}
 	});
 	// Delete the user
 	User.deleteOne({ id: id }).then((result) => {
 		if (result) {
-			res.status(200).send(id);
+			res.status(200).send(JSON.stringify({ userID: id }));
 		} else {
-			res.status(400).send();
+			res.status(400).send("Error deleting profile");
 		}
 	});
 };
 
-function removeFromTwoWayMatch(otherID, idToRemove) {
-	User.findOne({ id: otherID }, async (err, user) => {
+function removeOneWayMatches(idToRemove) {
+	User.find({ oneWayMatches: idToRemove }, async (err, usersArr) => {
 		if (err) {
 			return;
 		} else {
-			// Remove idToRemove from twoSidedMatches array and save changes if it exists
-			const index = user.twoWayMatches.indexOf(idToRemove);
-			if (index > -1) {
-				user.twoWayMatches.splice(index, 1);
-				await user.save();
+			for (const curUser of usersArr) {
+				const index = curUser.oneWayMatches.indexOf(idToRemove);
+				curUser.oneWayMatches.splice(index, 1);
+				await curUser.save();
+			}
+		}
+	});
+}
+
+function removeFromTwoWayMatch(otherIDs, idToRemove) {
+	User.find({ id: { $in: otherIDs } }, async (err, usersArr) => {
+		if (err) {
+			return;
+		} else {
+			for (const curUser of usersArr) {
+				// Remove idToRemove from twoSidedMatches array and save changes if it exists
+				const index = curUser.twoWayMatches.indexOf(idToRemove);
+				if (index > -1) {
+					curUser.twoWayMatches.splice(index, 1);
+				}
+				for (let i = 0; i < curUser.pastWorkouts.length; i++) {
+					if (curUser.pastWorkouts[i].id === idToRemove) {
+						curUser.pastWorkouts.splice(i, 1);
+						break;
+					}
+				}
+				await curUser.save();
 			}
 		}
 	});

@@ -39,7 +39,6 @@ const checkToken = async () => {
 	}
 	const resJSON = await imgRes.json();
 	const imageLink = resJSON.profilePic;
-	console.log(imageLink);
 
 	// change page
 	const html = `<div id='profile-dropdown' class="dropdown">

@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema({
 	profilePic: {
 		type: String,
 		default:
-			"https://www.nicepng.com/ourpic/u2q8r5t4i1r5a9w7_open-default-profile-picture-png/",
+			"https://www.nicepng.com/png/detail/73-730154_open-default-profile-picture-png.png",
 	},
 	phoneNumber: { type: String, default: "000-000-0000" },
 	workoutStyle: { type: String, default: "None" },

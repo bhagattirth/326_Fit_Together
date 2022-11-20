@@ -23,7 +23,6 @@ export const findPotentialMatches = (req, res, next) => {
 						res.status(400).send({ message: err });
 					}
 					for (const curUser of usersArr) {
-						console.log(curUser.fName);
 						potentialMatches[curUser.id] = {
 							profileImage: curUser.profilePic,
 							profile: {
@@ -85,6 +84,13 @@ export const addMatch = (req, res, next) => {
 						user.twoWayMatches.push(otherID);
 						otherUser.pastWorkouts.push({
 							id: id,
+							date: [],
+							workoutTitle: [],
+							workout: [],
+							rating: "0",
+						});
+						user.pastWorkouts.push({
+							id: otherID,
 							date: [],
 							workoutTitle: [],
 							workout: [],
