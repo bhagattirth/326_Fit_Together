@@ -50,8 +50,13 @@ const checkToken = async () => {
 			/>
 			<ul class="dropdown-menu">
 				<li>
-					<a id="profile" class="dropdown-item" href="#">
+					<a id="profile" class="dropdown-item" href="profile.html">
 						Profile
+					</a>
+				</li>
+				<li>
+					<a id="findFit" class="dropdown-item" href="matchingPage.html">
+						Find a Fit!
 					</a>
 				</li>
 				<li>
@@ -66,11 +71,6 @@ const checkToken = async () => {
 
 	loginBtn.parentNode.insertBefore(wrapper, loginBtn);
 	loginBtn.remove();
-
-	const profileBtn = document.getElementById("profile");
-	profileBtn.addEventListener("click", () => {
-		location.href = "profile.html";
-	});
 
 	const logoutBtn = document.getElementById("logout");
 	logoutBtn.addEventListener("click", user.logout);
