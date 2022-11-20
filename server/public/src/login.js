@@ -68,7 +68,7 @@ const loginUser = async (e) => {
 	}
 
 	// redirect back to homepage here
-	location.href = "index.html";
+	location.href = "profile.html";
 };
 
 // sign up user
@@ -144,7 +144,7 @@ const signupUser = async (e) => {
 	}
 
 	//redirect user back to homepage here
-	location.href = "index.html";
+	location.href = "profile.html";
 };
 
 signupBtn.addEventListener("click", signupUser);
