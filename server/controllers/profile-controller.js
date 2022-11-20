@@ -55,8 +55,7 @@ export const updateProfileInformation = (req, res, next) => {
 			user.endTime = newProfileData.endTime;
 			user.prefDays = newProfileData.preferredDays;
 			await user.save();
-			res.status(200);
-			res.send(id);
+			res.status(200).send(JSON.stringify({ userID: id }));
 		}
 	});
 };
@@ -80,8 +79,7 @@ export const getProfileInformation = (req, res, next) => {
 			output.startTime = user.startTime;
 			output.endTime = user.endTime;
 			output.preferredDays = user.prefDays;
-			res.status(200);
-			res.send(output);
+			res.status(200).send(JSON.stringify(output));
 		}
 	});
 };
