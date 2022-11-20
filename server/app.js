@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema({
 	avgWorkoutLength: Number,
 	startTime: String,
 	endTime: String,
-	prefDays: String,
+	prefDays: [String],
 	pastWorkouts: [
 		{
 			id: String,
@@ -39,7 +39,8 @@ const userSchema = new mongoose.Schema({
 	],
 	rating: Number,
 	numberOfRatings: Number,
-	matches: [String],
+	oneWayMatches: [String],
+	twoWayMatches: [String],
 	blocked: [String],
 });
 

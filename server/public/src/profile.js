@@ -13,7 +13,8 @@ const phoneNumber = document.getElementById("inputPhoneNumber");
 const workoutStyle = document.getElementById("inputWorkoutStyle");
 const workoutsPerWeek = document.getElementById("inputWorkoutFrequency");
 const workoutLength = document.getElementById("inputWorkoutLength");
-const preferredTime = document.getElementById("inputTimePreference");
+const startTime = document.getElementById("startTime");
+const endTime = document.getElementById("endTime");
 const dayCheckboxes = {
 	monday: document.getElementById("mondayCheckbox"),
 	tuesday: document.getElementById("tuesdayCheckbox"),
@@ -37,7 +38,6 @@ const textBoxes = [
 	phoneNumber,
 	workoutStyle,
 	workoutLength,
-	preferredTime,
 ];
 
 hiddenFilepicker.onchange = updateProfilePicture;
@@ -127,6 +127,8 @@ function editProfile() {
 	editProfileButton.disabled = true;
 	updateProfileButton.disabled = false;
 	selectProfilePictureButton.disabled = false;
+	startTime.disabled = false;
+	endTime.disabled = false;
 	textBoxes.forEach((cur) => (cur.readOnly = false));
 	workoutsPerWeek.disabled = false;
 	for (const box of Object.keys(dayCheckboxes)) {
@@ -139,6 +141,8 @@ async function updateProfile(id) {
 	deleteProfileButton.disabled = true;
 	editProfileButton.disabled = false;
 	updateProfileButton.disabled = true;
+	startTime.disabled = true;
+	endTime.disabled = true;
 	selectProfilePictureButton.disabled = true;
 	textBoxes.forEach((cur) => (cur.readOnly = "readonly"));
 	workoutsPerWeek.disabled = true;
@@ -199,7 +203,8 @@ function populateProfile(profileObject) {
 	workoutStyle.value = profileObject["workoutStyle"];
 	workoutsPerWeek.value = profileObject["workoutsPerWeek"];
 	workoutLength.value = profileObject["averageWorkoutLength"];
-	preferredTime.value = profileObject["preferredTime"];
+	startTime.value = profileObject["startTime"];
+	endTime.value = profileObject["endTime"];
 	for (const day of profileObject["preferredDays"]) {
 		dayCheckboxes[day].checked = true;
 	}
@@ -213,7 +218,8 @@ function generateJSON() {
 	json["workoutStyle"] = workoutStyle.value;
 	json["workoutsPerWeek"] = workoutsPerWeek.value;
 	json["averageWorkoutLength"] = workoutLength.value;
-	json["preferredTime"] = preferredTime.value;
+	json["startTime"] = startTime.value;
+	json["endTime"] = startTime.value;
 	json["preferredDays"] = [];
 	for (const dayKey of Object.keys(dayCheckboxes)) {
 		if (dayCheckboxes[dayKey].checked === true) {
