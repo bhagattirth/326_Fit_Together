@@ -1,15 +1,39 @@
+import user from "./user.js";
+
 let userMap = {"user1": null, "user2": null, "user3": null};
 let firstEntryOnPage = 0;
 let lastEntryOnPage = 2;
 let jsonSize = 0;
 
 
-const startup = async ()=> {
+setProfilePicture(user.getUserId);
+
+async function setProfilePicture(id) {
+	try {
+		const res = await fetch(`http://localhost:5000/profile/${id}/picture`, {
+			method: "GET",
+			credentials: "include",
+		});
+		const msg = await res.json();
+
+		document.getElementById("profilePicture").src = msg["picture"];
+		if (!res.ok) {
+			throw new Error("Something went wrong please try again later");
+		}
+	} catch (err) {
+		alert("Profile Picture could not be retrieved");
+		return;
+	}
+}
+
+const loadUsers = async ()=> {
     const res = await fetch("http://localhost:5000/matchHistory/getPast");
     const json = await res.json();
 
+
+    userMap = {"user1": null, "user2": null, "user3": null};
     jsonSize = json.length;
-    checkLocalStorage();
+    
     let count = 1;
     let i = firstEntryOnPage;
     while(i<=lastEntryOnPage && i<json.length){
@@ -20,17 +44,10 @@ const startup = async ()=> {
        i++;
        count++;
     }
-    activateListeners();
+    console.log(userMap);
+    displayUser();
 }
 
-function checkLocalStorage(){
-    const storage = window.localStorage;
-    const first = storage.getItem("firstEntryOnPage");
-    const last = storage.getItem("lastEntryOnPage");
-
-    firstEntryOnPage = first === null? 0: JSON.parse(first);
-    lastEntryOnPage = last === null? 2: JSON.parse(last);
-}
 
 function addProfileInfo(userData, i){
     
@@ -41,13 +58,16 @@ function addProfileInfo(userData, i){
 
     name.classList.add("prev-matches-name");
     name.innerHTML = userData.name;
+
+    profileInfo.innerHTML = "";
     profileInfo.appendChild(name);
     profileInfo.innerHTML+= "</br>"
     profileInfo.innerHTML+= "Last Workout On: " + userData.lastWorkout;
     profileInfo.innerHTML+= "</br>";
     profileInfo.innerHTML+="Contact: "+ userData.contact;
-    profilePic.src= userData.imgURL;
+    profilePic.src = userData.imgURL;
 
+    prefDate.innerText = "";
     for(let days of userData.preference){
         prefDate.innerText+= days + " ";
     }
@@ -58,6 +78,7 @@ function addProfileInfo(userData, i){
 function createCarousel(workouts, i){
 
     let carousel = document.getElementById("carousel"+i);
+    carousel.innerHTML = "";
     let carouselBody = document.createElement("div");
     carouselBody.classList.add("carousel-inner", "border-2");
 
@@ -106,21 +127,20 @@ function createCarousel(workouts, i){
 }
 
 function getNextPage(){
-    const storage = window.localStorage;
+
     if(lastEntryOnPage+1<jsonSize){
-        storage.setItem("firstEntryOnPage", (firstEntryOnPage+3).toString());
-        storage.setItem("lastEntryOnPage", (lastEntryOnPage+3).toString());
-        location.reload();
+        firstEntryOnPage = firstEntryOnPage + 3;
+        lastEntryOnPage = lastEntryOnPage + 3;
+        loadUsers();
     }
      
  }
 
  function prevPage(){
-    const storage = window.localStorage;
     if(0<lastEntryOnPage-3){
-        storage.setItem("firstEntryOnPage", (firstEntryOnPage-3).toString());
-        storage.setItem("lastEntryOnPage", (lastEntryOnPage-3).toString());
-        location.reload(); 
+        firstEntryOnPage = firstEntryOnPage - 3;
+        lastEntryOnPage = lastEntryOnPage - 3;
+        loadUsers();
     }
     
  }
@@ -166,6 +186,8 @@ function createWorkoutCard(exercises, cBody, isFirst){
 function showRating(userData, i){
 
     let dropDown = document.getElementById("selectRating"+i);
+    dropDown.innerHTML = "";
+
     ["1/5","2/5","3/5","4/5","5/5"].forEach(function(e){
         let option = document.createElement("option");
         option.setAttribute("value", e.substring(0,1));
@@ -207,7 +229,7 @@ const addWorkoutListner = (i)=> async () => {
 
             });
             const msg = await res.json();
-            location.reload();
+            loadUsers()
    }      
 }
 
@@ -222,12 +244,13 @@ const updateRatingListiner = (i)=> async () => {
              body: JSON.stringify({ user: userMap["user"+i], rating: newRating}),
          });
      const msg = await res.json();
-     location.reload();
  }
 
  const deleteUserListiner = (i)=> async () => {
     
-    let  user= "user"+ document.getElementById("removeMatch"+i).value;
+    let  user= "user"+ i;
+    console.log(userMap[user]);
+    console.log(i);
     const res = await fetch("http://localhost:5000/matchHistory/deleteEntry", {
              method: "POST",
              headers: {
@@ -236,43 +259,42 @@ const updateRatingListiner = (i)=> async () => {
              body: JSON.stringify({ user: userMap[user]}),
          });
      const msg = await res.json();
-     location.reload();
+     loadUsers();
  }
 
-
- 
-
-
-function activateListeners(){
+function displayUser(){
     if(userMap["user1"] !== null){
         document.getElementById("previousMatchesOne").style.display = "";
-        document.getElementById("updateRating1").addEventListener("click", updateRatingListiner(1));
-        document.getElementById("add1").addEventListener("click", addWorkoutListner(1));
-        document.getElementById("removeMatch1").addEventListener("click", deleteUserListiner(1));
     }else{
         document.getElementById("previousMatchesOne").style.display = "none";
     }
 
     if(userMap["user2"] !== null){
         document.getElementById("previousMatchesTwo").style.display = "";
-        document.getElementById("updateRating2").addEventListener("click", updateRatingListiner(2));
-        document.getElementById("add2").addEventListener("click", addWorkoutListner(2));
-        document.getElementById("removeMatch2").addEventListener("click", deleteUserListiner(2));
     }else{
         document.getElementById("previousMatchesTwo").style.display = "none";
     }
 
     if(userMap["user3"] !== null){
         document.getElementById("previousMatchesThree").style.display = "";
-        document.getElementById("updateRating3").addEventListener("click", updateRatingListiner(3));
-        document.getElementById("add3").addEventListener("click", addWorkoutListner(3));
-        document.getElementById("removeMatch3").addEventListener("click", deleteUserListiner(3));
     }else{
         document.getElementById("previousMatchesThree").style.display = "none";
     }
 }   
 
-window.onload = startup();
+loadUsers();
+
+document.getElementById("updateRating1").addEventListener("click", updateRatingListiner(1));
+document.getElementById("add1").addEventListener("click", addWorkoutListner(1));
+document.getElementById("removeMatch1").addEventListener("click", deleteUserListiner(1));
+
+document.getElementById("updateRating2").addEventListener("click", updateRatingListiner(2));
+document.getElementById("add2").addEventListener("click", addWorkoutListner(2));
+document.getElementById("removeMatch2").addEventListener("click", deleteUserListiner(2));
+
+document.getElementById("updateRating3").addEventListener("click", updateRatingListiner(3));
+document.getElementById("add3").addEventListener("click", addWorkoutListner(3));
+document.getElementById("removeMatch3").addEventListener("click", deleteUserListiner(3));
 
 document.getElementById("next").addEventListener("click", getNextPage);
 document.getElementById("back").addEventListener("click",prevPage);
