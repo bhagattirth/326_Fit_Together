@@ -1,4 +1,5 @@
 import user from "./user.js";
+const urlBase = "http://localhost:5000";
 const carouselDiv = document.getElementById("carouselDiv");
 const logoutButton = document.getElementById("logoutOption");
 const nextButton = document.getElementById("nextButton");
@@ -10,8 +11,27 @@ let curPotentialMatches = 0;
 logoutButton.addEventListener("click", logout);
 const profilePictureImage = document.getElementById("profilePicture");
 
-// Placehold values
-initialize(user.getUserId());
+await validateUser();
+console.log(user.getUserId());
+await initialize(user.getUserId());
+
+async function validateUser() {
+	const res = await fetch(`${urlBase}/auth/validateUser`, {
+		method: "GET",
+		headers: {
+			"Content-Type": "application/json",
+		},
+	});
+
+	// if not valid, return
+	if (!res.ok) {
+		alert("Issue finding profile information");
+	}
+	const msg = await res.json();
+	// update user id here
+	user.setUserId(msg.id);
+}
+
 // Replace from shared once set up
 async function logout() {
 	const res = await fetch("http://localhost:5000/auth/logout", {
@@ -31,6 +51,7 @@ async function logout() {
 }
 
 async function initialize(id) {
+	console.log(id);
 	try {
 		const res = await fetch(
 			`http://localhost:5000/matches/${id}/potential`,
@@ -54,17 +75,25 @@ async function initialize(id) {
 	const potentialMatchesKeys = Object.keys(potentialMatches);
 	curPotentialMatches = potentialMatchesKeys.length;
 	if (curPotentialMatches === 0) {
-		alert("No more potential matches remaining. Please come back later.");
+		alertNoMoreMatches();
+	} else {
+		let firstIteration = true;
+		carouselDiv.innerHTML = "";
+		for (const potentialMatchID of potentialMatchesKeys) {
+			const otherID = potentialMatchID;
+			const profile = potentialMatches[potentialMatchID].profile;
+			const profileImage =
+				potentialMatches[potentialMatchID].profileImage;
+			generateCarouselItem(
+				otherID,
+				profile,
+				profileImage,
+				firstIteration
+			);
+			firstIteration = false;
+		}
 	}
-	let firstIteration = true;
-	carouselDiv.innerHTML = "";
-	for (const potentialMatchID of potentialMatchesKeys) {
-		const otherID = potentialMatchID;
-		const profile = potentialMatches[potentialMatchID].profile;
-		const profileImage = potentialMatches[potentialMatchID].profileImage;
-		generateCarouselItem(otherID, profile, profileImage, firstIteration);
-		firstIteration = false;
-	}
+
 	setProfilePicture(id);
 }
 
@@ -74,11 +103,11 @@ async function setProfilePicture(id) {
 			method: "GET",
 			credentials: "include",
 		});
-		const msg = await res.json();
-		profilePictureImage.src = msg.profilePic;
-		if (!res.ok) {
+		if (!res.ok || res.status === 400) {
 			throw new Error("Something went wrong please try again later");
 		}
+		const msg = await res.json();
+		profilePictureImage.src = msg.profilePic;
 	} catch (err) {
 		alert("Profile Picture could not be retrieved");
 		return;
@@ -119,19 +148,22 @@ function addPotentialToCarousel() {
 }
 
 function removeFromCarousel(id) {
-	// Change selected (store map of otherIDs when reading in, remove from map, select random from map and set that as active)
-	// If empty, hide carousel and display text stating no potential matches remain. Come back later.
-	//
 	curPotentialMatches--;
 	if (curPotentialMatches === 0) {
-		alert("No more potential matches remaining. Please come back later.");
-		carouselDiv.innerHTML = `<h1>No More Matches :(<h1>
-			</br>
-			<h2>Try again later!<h2>`;
+		alertNoMoreMatches();
 	}
 	nextButton.click();
 	document.getElementById("carouselItem" + id).remove();
 }
+
+function alertNoMoreMatches() {
+	alert("No more potential matches remaining. Please come back later.");
+	carouselDiv.innerHTML = `<h1>No More Matches :(<h1>
+			</br>
+			<h2>Try again later!<h2>`;
+	carouselDiv;
+}
+
 async function denyMatch(otherID) {
 	try {
 		const res = await fetch(
@@ -153,6 +185,7 @@ async function denyMatch(otherID) {
 }
 
 function generateCarouselItem(id, profile, profileImage, active = false) {
+	console.log(profile);
 	const upperCaseDays = [];
 	for (const day of profile["preferredDays"]) {
 		upperCaseDays.push(day.charAt(0).toUpperCase() + day.slice(1));

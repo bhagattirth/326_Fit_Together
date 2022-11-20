@@ -65,7 +65,7 @@ export const getProfileInformation = (req, res, next) => {
 	console.log(id);
 	User.findOne({ id: id }, (err, user) => {
 		if (err) {
-			res.status(400).send({ message: err });
+			res.status(400).send({});
 		} else if (!user) {
 			res.status(400).send({ message: "Could not find profile" });
 		} else {
