@@ -114,7 +114,7 @@ export const logoutUser = (req, res, next) => {
 			maxAge: 0,
 		});
 
-		if (res.cookies["userId"]) {
+		if (req.cookies["userId"]) {
 			res.cookie("userId", "", {
 				secure: true,
 				httpOnly: true,
