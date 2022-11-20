@@ -213,11 +213,9 @@ function generateCarouselItem(id, profile, profileImage, active = false) {
 								profile["averageWorkoutLength"]
 							}
 							</br>
-                            Workouts Per Week:      ${
-								profile["workoutsPerWeek"]
-							}
+                            Start Time:      ${profile["startTime"]}
 							</br>
-                            Preferred Time:         ${profile["preferredTime"]}
+                            End Time:         ${profile["endTime"]}
 							</br>
                             Preferred Days:         ${upperCaseDays.join(", ")}
                         </div>

@@ -30,8 +30,8 @@ export const findPotentialMatches = (req, res, next) => {
 								lastName: curUser.lName,
 								phoneNumber: curUser.phoneNumber,
 								workoutStyle: curUser.workoutStyle,
-								averageWorkoutLength:
-									curUser.averageWorkoutLength,
+								averageWorkoutLength: curUser.avgWorkoutLength,
+								workoutsPerWeek: curUser.workoutsPerWeek,
 								startTime: curUser.startTime,
 								endTime: curUser.endTime,
 								preferredDays: curUser.prefDays,
