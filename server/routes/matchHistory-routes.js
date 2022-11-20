@@ -11,9 +11,9 @@ let router = express.Router();
 
 router.get("/:id/getPast", getPastUser);
 
-router.post("/:id/:member/addWorkout", addWorkoutToUser);
+router.post("/addWorkout", addWorkoutToUser);
 
-router.post("/:id/:member/ratingUpdate", updateRating);
+router.post("/ratingUpdate", updateRating);
 
 router.delete("/deleteEntry", deleteEntry);
 
