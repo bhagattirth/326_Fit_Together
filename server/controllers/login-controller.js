@@ -2,6 +2,10 @@ import bcrypt from "bcrypt";
 import { createToken } from "../helpers/JWT.js";
 import { User } from "../app.js";
 import uniqid from "uniqid";
+import {
+	validateEmail,
+	validatePassword,
+} from "../helpers/validationHelpers.js";
 
 export const loginUser = (req, res, next) => {
 	// email and password user entered
@@ -49,6 +53,15 @@ export const signupUser = async (req, res, next) => {
 		`email: ${email}, pass: ${password}, fName: ${fName}, lName: ${lName}`
 	);
 	// verify they are valid
+	if (
+		!validateEmail(email) ||
+		!validatePassword(password) ||
+		fName.trim().length === 0 ||
+		lName.trinm().length === 0
+	) {
+		res.status(400).send({ id: "Invalid credentials" });
+		return;
+	}
 
 	// hash password
 	const hashedPassword = await bcrypt.hash(password, 10);
@@ -65,6 +78,7 @@ export const signupUser = async (req, res, next) => {
 	newUser.save((err) => {
 		if (err) {
 			// do somethign
+			res.status(404).send({ id: "Something went wrong!" });
 		} else {
 			// create user here
 			const token = createToken(newUser.id);
@@ -99,6 +113,16 @@ export const logoutUser = (req, res, next) => {
 			sameSite: "none",
 			maxAge: 0,
 		});
+
+		if (req.cookies["userId"]) {
+			res.cookie("userId", "", {
+				secure: true,
+				httpOnly: true,
+				sameSite: "none",
+				maxAge: 0,
+			});
+		}
+
 		res.status(200).json({ message: "cookie destroyed" });
 	} else {
 		res.status(400).json({ message: "No cookie found" });
