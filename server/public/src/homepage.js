@@ -22,10 +22,10 @@ const checkToken = async () => {
 	const msg = await res.json();
 	// update user id here
 	user.setUserId(msg.id);
-
+	console.log(user.getUserId());
 	// fetch image link for user
 	const imgRes = await fetch(
-		`http://localhost:5000/profile/${user.id}/picture`,
+		`http://localhost:5000/profile/${user.getUserId()}/picture`,
 		{
 			method: "GET",
 			headers: {
@@ -33,19 +33,20 @@ const checkToken = async () => {
 			},
 		}
 	);
-	const imageLink = await imgRes.json();
-
 	// if res is not ok, alert user that image failed to load
 	if (!res.ok) {
 		alert("failed to load profile image");
 	}
+	const resJSON = await imgRes.json();
+	const imageLink = resJSON.profilePic;
+	console.log(imageLink);
 
 	// change page
 	const html = `<div id='profile-dropdown' class="dropdown">
 			<img
 				class="user-icon dropdown-toggle"
 				data-bs-toggle="dropdown"
-				src=${imageLink.picture}
+				src="${imageLink}"
 				alt="user icon"
 			/>
 			<ul class="dropdown-menu">

@@ -1,4 +1,4 @@
-import User from "../app.js";
+import { User } from "../app.js";
 
 export const findPotentialMatches = (req, res, next) => {
 	const id = req.params.id;

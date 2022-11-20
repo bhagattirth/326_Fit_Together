@@ -75,8 +75,7 @@ async function setProfilePicture(id) {
 			credentials: "include",
 		});
 		const msg = await res.json();
-		console.log(msg);
-		profilePictureImage.src = msg["picture"];
+		profilePictureImage.src = msg.profilePic;
 		if (!res.ok) {
 			throw new Error("Something went wrong please try again later");
 		}

@@ -1,5 +1,4 @@
 import express from "express";
-import cors from "cors";
 import cookieParser from "cookie-parser";
 import { authRoutes } from "./routes/auth-routes.js";
 import path from "path";
@@ -26,15 +25,15 @@ const userSchema = new mongoose.Schema({
 	profilePic: {
 		type: String,
 		default:
-			"https://penntoday.upenn.edu/sites/default/files/2021-11/Taylor%20Swift-Main.jpg",
+			"https://www.nicepng.com/ourpic/u2q8r5t4i1r5a9w7_open-default-profile-picture-png/",
 	},
 	phoneNumber: { type: String, default: "000-000-0000" },
 	workoutStyle: { type: String, default: "None" },
 	workoutsPerWeek: { type: Number, default: 0 },
 	avgWorkoutLength: { type: Number, default: 0 },
-	startTime: { type: String, default: "00:00AM" },
-	endTime: { type: String, default: "00:00AM" },
-	prefDays: { type: String, default: "0000000" },
+	startTime: { type: String, default: "00:00" },
+	endTime: { type: String, default: "00:00" },
+	prefDays: { type: [String], default: [] },
 	pastWorkouts: [
 		{
 			id: String,

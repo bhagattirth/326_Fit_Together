@@ -1,12 +1,13 @@
 import user from "./user.js";
-
+const urlBase = "http://localhost:5000";
 const editProfileButton = document.getElementById("editProfile");
 const updateProfileButton = document.getElementById("updateProfile");
 const selectProfilePictureButton = document.getElementById(
 	"selectProfilePicture"
 );
+const imageURL = document.getElementById("imageURL");
+const selectURLButton = document.getElementById("selectURL");
 const deleteProfileButton = document.getElementById("deleteProfile");
-const hiddenFilepicker = document.getElementById("hiddenFilepicker");
 const firstName = document.getElementById("inputFirstName");
 const lastName = document.getElementById("inputLastName");
 const phoneNumber = document.getElementById("inputPhoneNumber");
@@ -40,12 +41,11 @@ const textBoxes = [
 	workoutLength,
 ];
 
-hiddenFilepicker.onchange = updateProfilePicture;
+selectURLButton.addEventListener("click", updateProfilePicture);
 editProfileButton.addEventListener("click", editProfile);
 updateProfileButton.addEventListener("click", async () => {
 	await updateProfile(user.getUserId());
 });
-selectProfilePictureButton.addEventListener("click", callFilePicker);
 deleteProfileButton.addEventListener("click", async () => {
 	await deleteProfile(user.getUserId());
 });
@@ -57,33 +57,44 @@ logoutOption.addEventListener("click", () => {
 	window.location.replace("index.html");
 });
 
-function callFilePicker() {
-	hiddenFilepicker.click();
-}
-
 async function updateProfilePicture() {
-	if (hiddenFilepicker.files[0]) {
-		profilePicture = await readImage();
-		selectedImageText.innerHTML = `Selected Image: ${hiddenFilepicker.files[0].name}`;
-		profilePicturePreview.src = profilePicture;
+	var image = new Image();
+	image.onload = function () {
+		if (this.width > 0) {
+			console.log("image exists");
+		}
+		profilePicturePreview.src = imageURL.value;
 		profilePicturePreview.hidden = false;
-	}
+		profilePicture = imageURL.value;
+	};
+	image.onerror = function () {
+		alert("Invalid Image URL");
+	};
+	image.src = imageURL.value;
 }
 
-function readImage() {
-	return new Promise((resolve, reject) => {
-		let reader = new FileReader();
-		reader.onload = () => {
-			resolve(reader.result);
-		};
-		reader.onerror = reject;
-		reader.readAsDataURL(hiddenFilepicker.files[0]);
+await validateUser();
+await initialize(user.getUserId());
+
+async function validateUser() {
+	const res = await fetch(`${urlBase}/auth/validateUser`, {
+		method: "GET",
+		headers: {
+			"Content-Type": "application/json",
+		},
 	});
-}
 
-initialize(user.getUserId());
+	// if not valid, return
+	if (!res.ok) {
+		alert("Issue finding profile information");
+	}
+	const msg = await res.json();
+	// update user id here
+	user.setUserId(msg.id);
+}
 
 async function initialize(id) {
+	console.log(id);
 	try {
 		const res = await fetch(
 			`http://localhost:5000/profile/${id}/information`,
@@ -112,11 +123,11 @@ async function setProfilePicture(id) {
 			method: "GET",
 			credentials: "include",
 		});
-		const msg = await res.json();
-		profilePictureImage.src = msg["picture"];
 		if (!res.ok || res.status === 400) {
 			throw new Error("Something went wrong please try again later");
 		}
+		const msg = await res.json();
+		profilePictureImage.src = msg.profilePic;
 	} catch (err) {
 		alert("Profile Picture could not be retrieved");
 		return;
@@ -180,7 +191,7 @@ async function updateProfile(id) {
 					method: "PUT",
 					credentials: "include",
 					headers: { "Content-type": "application/json" },
-					body: JSON.stringify({ dataURL: profilePicture }),
+					body: JSON.stringify({ imageURL: profilePicture }),
 				}
 			);
 			const msg = await res.json();
@@ -188,6 +199,7 @@ async function updateProfile(id) {
 				throw new Error("Something went wrong please try again later");
 			}
 		} catch (err) {
+			console.log(err);
 			alert("Profile Image changes could not be saved");
 			return;
 		}

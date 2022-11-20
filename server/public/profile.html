@@ -89,20 +89,55 @@
 				</div>
 				<div class="row align-items-center mt-3">
 					<div class="col text-center">
-						<input
-							type="file"
-							class="file hidden-file-picker"
-							id="hiddenFilepicker"
-							accept="image/png, image/gif, image/jpeg"
-						/>
 						<button
 							class="btn btn-outline-secondary"
 							type="button"
 							id="selectProfilePicture"
+							data-bs-toggle="modal"
+							data-bs-target="#selectURLForm"
 							disabled
 						>
 							Select Profile Picture
 						</button>
+
+						<div class="modal" id="selectURLForm">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h4 class="modal-title">Sign Up</h4>
+										<button
+											type="button"
+											class="close"
+											data-bs-dismiss="modal"
+										>
+											&times;
+										</button>
+									</div>
+									<div class="modal-body">
+										<div class="form-group">
+											<label
+												for="imageURL"
+												class="form-label"
+												>URL of Profile Picture:</label
+											>
+											<input
+												type="text"
+												id="imageURL"
+												class="form-control"
+												placeholder="URL"
+											/><br />
+										</div>
+										<button
+											class="btn btn-success"
+											data-bs-dismiss="modal"
+											id="selectURL"
+										>
+											Select URL
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 				<div class="row align-items-center mt-3">

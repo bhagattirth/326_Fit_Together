@@ -1,4 +1,4 @@
-import User from "../app.js";
+import { User } from "../app.js";
 
 // const dummyProfileData = {
 // 	firstName: "John",
@@ -48,6 +48,7 @@ export const updateProfileInformation = (req, res, next) => {
 			user.lName = newProfileData.lastName;
 			user.phoneNumber = newProfileData.phoneNumber;
 			user.workoutStyle = newProfileData.workoutStyle;
+			user.workoutsPerWeek = newProfileData.workoutsPerWeek;
 			user.avgWorkoutLength = newProfileData.averageWorkoutLength;
 			user.startTime = newProfileData.startTime;
 			user.endTime = newProfileData.endTime;
@@ -61,15 +62,19 @@ export const updateProfileInformation = (req, res, next) => {
 
 export const getProfileInformation = (req, res, next) => {
 	const id = req.params.id;
+	console.log(id);
 	User.findOne({ id: id }, (err, user) => {
 		if (err) {
-			res.status(400).send();
+			res.status(400).send({ message: err });
+		} else if (!user) {
+			res.status(400).send({ message: "Could not find profile" });
 		} else {
 			const output = {};
 			output.firstName = user.fName;
 			output.lastName = user.lName;
 			output.phoneNumber = user.phoneNumber;
 			output.workoutStyle = user.workoutStyle;
+			output.workoutsPerWeek = user.workoutsPerWeek;
 			output.averageWorkoutLength = user.avgWorkoutLength;
 			output.startTime = user.startTime;
 			output.endTime = user.endTime;
@@ -87,8 +92,10 @@ export const updateProfilePicture = (req, res, next) => {
 		if (err) {
 			res.status(400).send();
 		} else {
-			user.profilePic = profilePic;
-			res.status(200).send(id);
+			console.log(profilePic.imageURL);
+			user.profilePic = profilePic.imageURL;
+			user.save();
+			res.status(200).send(JSON.stringify({ userID: id }));
 		}
 	});
 };
@@ -99,7 +106,9 @@ export const getProfilePicture = (req, res, next) => {
 		if (err) {
 			res.status(400).send();
 		} else {
-			res.status(200).send(user.profilePic);
+			res.status(200).send(
+				JSON.stringify({ profilePic: user.profilePic })
+			);
 		}
 	});
 };
