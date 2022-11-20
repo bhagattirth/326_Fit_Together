@@ -40,7 +40,7 @@ const userSchema = new mongoose.Schema({
 			date: [String],
 			workoutTitle: [String],
 			workout: [[String]],
-			rating: String
+			rating: String,
 		},
 	],
 	rating: Number,
@@ -53,7 +53,6 @@ const userSchema = new mongoose.Schema({
 });
 
 export const User = new mongoose.model("User", userSchema);
-
 
 const app = express();
 app.use(express.json());
