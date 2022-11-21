@@ -14,37 +14,18 @@ findAFitBtn.addEventListener("click", () => {
 });
 
 const checkToken = async () => {
-	// check if token is valid
-	const res = await fetch(`${urlBase}/auth/validateUser`, {
-		method: "GET",
-		headers: {
-			"Content-Type": "application/json",
-		},
-	});
+	const id = await user.checkToken();
 
-	// if not valid, return
-	if (!res.ok) {
+	if (!id) {
 		return;
 	}
-	const msg = await res.json();
-	// update user id here
-	user.setUserId(msg.id);
-	// fetch image link for user
-	const imgRes = await fetch(
-		`${urlBase}/profile/${user.getUserId()}/picture`,
-		{
-			method: "GET",
-			headers: {
-				"Content-Type": "application/json",
-			},
-		}
-	);
-	// if res is not ok, alert user that image failed to load
-	if (!res.ok) {
-		alert("failed to load profile image");
+	user.setUserId(id);
+
+	const imageLink = await user.getProfilePicture();
+
+	if (!imageLink) {
+		alert("failed to load profile picture");
 	}
-	const resJSON = await imgRes.json();
-	const imageLink = resJSON.profilePic;
 
 	// change page
 	const html = `<div id='profile-dropdown' class="dropdown">
