@@ -67,6 +67,11 @@ const checkToken = async () => {
 					</a>
 				</li>
 				<li>
+					<a id="Matches" class="dropdown-item" href="matchHistory.html">
+						Matches
+					</a>
+				</li>
+				<li>
 					<a id="logout" class="dropdown-item" href="#">
 						Log out
 					</a>
