@@ -15,6 +15,7 @@ body {
 .user-icon {
 	width: 80px;
 	height: 75px;
+	margin-right: 5.5em;
 	border-radius: 50%;
 	object-fit: cover;
 	cursor: pointer;

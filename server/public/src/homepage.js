@@ -74,6 +74,7 @@ const checkToken = async () => {
 			</ul>
 		</div>`;
 	const wrapper = document.createElement("div");
+	wrapper.classList.add("dropdown");
 	wrapper.innerHTML = html;
 
 	loginBtn.parentNode.insertBefore(wrapper, loginBtn);
