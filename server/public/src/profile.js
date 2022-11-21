@@ -96,13 +96,10 @@ async function validateUser() {
 async function initialize(id) {
 	console.log(id);
 	try {
-		const res = await fetch(
-			`http://localhost:5000/profile/${id}/information`,
-			{
-				method: "GET",
-				credentials: "include",
-			}
-		);
+		const res = await fetch(`${urlBase}/profile/${id}/information`, {
+			method: "GET",
+			credentials: "include",
+		});
 		const msg = await res.json();
 		if (!res.ok || res.status === 400) {
 			throw new Error("Something went wrong please try again later");
@@ -119,7 +116,7 @@ async function initialize(id) {
 
 async function setProfilePicture(id) {
 	try {
-		const res = await fetch(`http://localhost:5000/profile/${id}/picture`, {
+		const res = await fetch(`${urlBase}/profile/${id}/picture`, {
 			method: "GET",
 			credentials: "include",
 		});
@@ -162,15 +159,12 @@ async function updateProfile(id) {
 	}
 	const jsonObject = generateJSON();
 	try {
-		const res = await fetch(
-			`http://localhost:5000/profile/${id}/information`,
-			{
-				method: "PUT",
-				credentials: "include",
-				headers: { "Content-type": "application/json" },
-				body: JSON.stringify(jsonObject),
-			}
-		);
+		const res = await fetch(`${urlBase}/profile/${id}/information`, {
+			method: "PUT",
+			credentials: "include",
+			headers: { "Content-type": "application/json" },
+			body: JSON.stringify(jsonObject),
+		});
 		if (!res.ok || res.status === 400) {
 			throw new Error("Something went wrong please try again later");
 		}
@@ -185,15 +179,12 @@ async function updateProfile(id) {
 	profilePicturePreview.hidden = true;
 	if (profilePicture !== null) {
 		try {
-			const res = await fetch(
-				`http://localhost:5000/profile/${id}/picture`,
-				{
-					method: "PUT",
-					credentials: "include",
-					headers: { "Content-type": "application/json" },
-					body: JSON.stringify({ imageURL: profilePicture }),
-				}
-			);
+			const res = await fetch(`${urlBase}/profile/${id}/picture`, {
+				method: "PUT",
+				credentials: "include",
+				headers: { "Content-type": "application/json" },
+				body: JSON.stringify({ imageURL: profilePicture }),
+			});
 			const msg = await res.json();
 			if (!res.ok || res.status === 400) {
 				throw new Error("Something went wrong please try again later");
@@ -249,7 +240,7 @@ async function deleteProfile(id) {
 		return;
 	}
 	try {
-		const res = await fetch(`http://localhost:5000/profile/${id}`, {
+		const res = await fetch(`${urlBase}/profile/${id}`, {
 			method: "DELETE",
 			credentials: "include",
 			headers: {
@@ -260,7 +251,7 @@ async function deleteProfile(id) {
 			throw new Error("Something went wrong please try again later");
 		}
 		user.logout();
-		window.location.replace("http://localhost:5000/public/index.html");
+		location.href = "index.html";
 	} catch (err) {
 		alert("Issue deleting profile. Please try again later.");
 		return;

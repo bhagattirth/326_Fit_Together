@@ -1,5 +1,5 @@
 import user from "./user.js";
-
+const urlBase = "http://localhost:5000";
 let userMap = { user1: null, user2: null, user3: null };
 let firstEntryOnPage = 0;
 let lastEntryOnPage = 2;
@@ -9,7 +9,7 @@ const profilePictureImage = document.getElementById("profilePicture");
 await validateUser();
 
 async function validateUser() {
-	const res = await fetch(`http://localhost:5000/auth/validateUser`, {
+	const res = await fetch(`${urlBase}/auth/validateUser`, {
 		method: "GET",
 		headers: {
 			"Content-Type": "application/json",
@@ -30,7 +30,7 @@ setProfilePicture(user.getUserId());
 
 async function setProfilePicture(id) {
 	try {
-		const res = await fetch(`http://localhost:5000/profile/${id}/picture`, {
+		const res = await fetch(`${urlBase}/profile/${id}/picture`, {
 			method: "GET",
 			credentials: "include",
 		});
@@ -48,13 +48,10 @@ async function setProfilePicture(id) {
 const loadUsers = async (id) => {
 	let json = null;
 	try {
-		const res = await fetch(
-			`http://localhost:5000/matchHistory/${id}/getPast`,
-			{
-				method: "GET",
-				credentials: "include",
-			}
-		);
+		const res = await fetch(`${urlBase}/matchHistory/${id}/getPast`, {
+			method: "GET",
+			credentials: "include",
+		});
 		json = await res.json();
 
 		if (!res.ok) {
@@ -88,7 +85,7 @@ const loadUsers = async (id) => {
 async function getUserInfo(id) {
 	try {
 		const res = await fetch(
-			`http://localhost:5000/matchHistory/${id}/getProfileInfo`,
+			`${urlBase}/matchHistory/${id}/getProfileInfo`,
 			{
 				method: "GET",
 				credentials: "include",
@@ -284,23 +281,20 @@ const addWorkoutListner = (i) => async () => {
 	) {
 		alert("Please Fill in the Fields Correctly");
 	} else {
-		const res = await fetch(
-			"http://localhost:5000/matchHistory/addWorkout",
-			{
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
+		const res = await fetch(`${urlBase}/matchHistory/addWorkout`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
 
-				body: JSON.stringify({
-					user: user.getUserId(),
-					member: userMap["user" + i],
-					workout: workouts,
-					dates: date,
-					type: wType,
-				}),
-			}
-		);
+			body: JSON.stringify({
+				user: user.getUserId(),
+				member: userMap["user" + i],
+				workout: workouts,
+				dates: date,
+				type: wType,
+			}),
+		});
 		const msg = await res.json();
 
 		if (!res.ok) {
@@ -313,7 +307,7 @@ const addWorkoutListner = (i) => async () => {
 
 const updateRatingListiner = (i) => async () => {
 	let newRating = document.getElementById("selectRating" + i).value;
-	const res = await fetch("http://localhost:5000/matchHistory/ratingUpdate", {
+	const res = await fetch(`${urlBase}/matchHistory/ratingUpdate`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
@@ -334,7 +328,7 @@ const updateRatingListiner = (i) => async () => {
 const deleteUserListiner = (i) => async () => {
 	let userI = "user" + i;
 
-	const res = await fetch("http://localhost:5000/matchHistory/deleteEntry", {
+	const res = await fetch(`${urlBase}/matchHistory/deleteEntry`, {
 		method: "DELETE",
 		headers: {
 			"Content-Type": "application/json",
