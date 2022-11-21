@@ -34,7 +34,7 @@ async function validateUser() {
 
 // Replace from shared once set up
 async function logout() {
-	const res = await fetch("http://localhost:5000/auth/logout", {
+	const res = await fetch(`${urlBase}/auth/logout`, {
 		method: "POST",
 		credentials: "include",
 		headers: { "Content-type": "application/json" },
@@ -53,13 +53,10 @@ async function logout() {
 async function initialize(id) {
 	console.log(id);
 	try {
-		const res = await fetch(
-			`http://localhost:5000/matches/${id}/potential`,
-			{
-				method: "GET",
-				credentials: "include",
-			}
-		);
+		const res = await fetch(`${urlBase}/matches/${id}/potential`, {
+			method: "GET",
+			credentials: "include",
+		});
 		const msg = await res.json();
 		if (!res.ok) {
 			throw new Error("Something went wrong please try again later");
@@ -99,7 +96,7 @@ async function initialize(id) {
 
 async function setProfilePicture(id) {
 	try {
-		const res = await fetch(`http://localhost:5000/profile/${id}/picture`, {
+		const res = await fetch(`${urlBase}/profile/${id}/picture`, {
 			method: "GET",
 			credentials: "include",
 		});
@@ -117,7 +114,7 @@ async function setProfilePicture(id) {
 async function acceptMatch(otherID) {
 	try {
 		const res = await fetch(
-			`http://localhost:5000/matches/${user.getUserId()}/potential/${otherID}`,
+			`${urlBase}/matches/${user.getUserId()}/potential/${otherID}`,
 			{
 				method: "PUT",
 				credentials: "include",
@@ -167,7 +164,7 @@ function alertNoMoreMatches() {
 async function denyMatch(otherID) {
 	try {
 		const res = await fetch(
-			`http://localhost:5000/matches/${user.getUserId()}/potential/${otherID}`,
+			`${urlBase}/matches/${user.getUserId()}/potential/${otherID}`,
 			{
 				method: "delete",
 				credentials: "include",

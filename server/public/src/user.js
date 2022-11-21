@@ -1,3 +1,4 @@
+const urlBase = "http://localhost:5000";
 class User {
 	constructor() {
 		this.userId = null;
@@ -5,7 +6,7 @@ class User {
 	}
 
 	async logout() {
-		const res = await fetch("http://localhost:5000/auth/logout", {
+		const res = await fetch(`${urlBase}/auth/logout`, {
 			method: "POST",
 			credentials: "include",
 			headers: { "Content-type": "application/json" },

@@ -1,4 +1,5 @@
 import user from "./user.js";
+const urlBase = "http://localhost:5000";
 const loginBtn = document.getElementById("login-btn");
 const findAFitBtn = document.getElementById("findAFitLargeButton");
 
@@ -14,7 +15,7 @@ findAFitBtn.addEventListener("click", () => {
 
 const checkToken = async () => {
 	// check if token is valid
-	const res = await fetch("http://localhost:5000/auth/validateUser", {
+	const res = await fetch(`${urlBase}/auth/validateUser`, {
 		method: "GET",
 		headers: {
 			"Content-Type": "application/json",
@@ -31,7 +32,7 @@ const checkToken = async () => {
 	console.log(user.getUserId());
 	// fetch image link for user
 	const imgRes = await fetch(
-		`http://localhost:5000/profile/${user.getUserId()}/picture`,
+		`${urlBase}/profile/${user.getUserId()}/picture`,
 		{
 			method: "GET",
 			headers: {

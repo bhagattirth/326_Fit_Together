@@ -1,3 +1,4 @@
+const urlBase = "http://localhost:5000";
 const email = document.getElementById("email");
 const pass = document.getElementById("password");
 
@@ -45,7 +46,7 @@ const loginUser = async (e) => {
 
 	// attempt to log user in
 	try {
-		const res = await fetch("http://localhost:5000/auth/login", {
+		const res = await fetch(`${urlBase}/auth/login`, {
 			method: "POST",
 			credentials: "include",
 			headers: {
@@ -116,7 +117,7 @@ const signupUser = async (e) => {
 
 	// attempt to sign user up
 	try {
-		const res = await fetch("http://localhost:5000/auth/signup", {
+		const res = await fetch(`${urlBase}/auth/signup`, {
 			method: "POST",
 			credentials: "include",
 			headers: {
