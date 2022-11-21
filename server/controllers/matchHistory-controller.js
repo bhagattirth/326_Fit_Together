@@ -5,7 +5,7 @@ import {User} from "../app.js";
 export const getPastUser = (req, res, next)=>{
     const userId = req.params.id;
     
-    User.findOne({id:"wqrlajf"}, (err, foundItem) =>{
+    User.findOne({id: userId}, (err, foundItem) =>{
 		if(err){
             res.status(404).send({ message: err });
         }else if(!foundItem){
@@ -19,7 +19,7 @@ export const getPastUser = (req, res, next)=>{
 export const getProfileInfo = (req, res, next)=>{
     const userId = req.params.id;
     
-    User.findOne({id:"wqrlajf"}, (err, foundItem) =>{
+    User.findOne({id:userId}, (err, foundItem) =>{
 		if(err){
             res.status(404).send({ message: err });
         }else if(!foundItem){
@@ -38,9 +38,10 @@ export const getProfileInfo = (req, res, next)=>{
 export const addWorkoutToUser = (req, res, next) =>{
 
     const {user, member, dates, type} = req.body;
+    console.log(user, member);
     let workout = req.body.workout;
     const list = workout.replace(/ /g, " ").split(",");
-    const filter = {"$and": [{"id": "wqrlajf"}, {'pastWorkouts.id': "dsafag"}]};
+    const filter = {"$and": [{"id": user.toString()}, {'pastWorkouts.id': member.toString()}]};
     const update = {"$push": {"pastWorkouts.$.workout":list, "pastWorkouts.$.workoutTitle":type, "pastWorkouts.$.date":dates}};
     
     User.findOneAndUpdate(filter, update, (err, foundItem) => { 
@@ -57,7 +58,7 @@ export const addWorkoutToUser = (req, res, next) =>{
 export const updateRating = (req, res, next) =>{
 
     const {user, member, rating} = req.body;
-    const filter = {"$and": [{"id": "wqrlajf"}, {'pastWorkouts.id': "dsafag"}]};
+    const filter = {"$and": [{"id": user.toString()}, {'pastWorkouts.id': member.toString()}]};
     const update = {"$set": {"pastWorkouts.$.rating": rating}};
 
     User.findOneAndUpdate(filter, update, (err, foundItem) => { 
@@ -75,8 +76,8 @@ export const updateRating = (req, res, next) =>{
 export const deleteEntry = (req, res, next)=>{
     
     const {user, member} = req.body;
-    const filter = {"$and": [{"id": "wqjf"}, {'pastWorkouts.id': "dsafag"}]};
-    const update = {"$pull": {"pastWorkouts":{id:"dsafag"}}};
+    const filter = {"$and": [{"id": user.toString()}, {'pastWorkouts.id': member.toString()}]};
+    const update = {"$pull": {"pastWorkouts":{id:member.toString()}}};
 
     User.findOneAndUpdate(filter, update, (err, foundItem) => { 
         if(err){
