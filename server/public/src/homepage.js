@@ -1,9 +1,15 @@
 import user from "./user.js";
 const loginBtn = document.getElementById("login-btn");
+const findAFitBtn = document.getElementById("findAFitLargeButton");
 
 // redirect user to login page when clicking on login btn
 loginBtn.addEventListener("click", () => {
 	location.href = "login.html";
+});
+
+// redirect user to "Find a Fit" when button selected
+findAFitBtn.addEventListener("click", () => {
+	location.href = "matchingPage.html";
 });
 
 const checkToken = async () => {
@@ -72,6 +78,7 @@ const checkToken = async () => {
 	loginBtn.parentNode.insertBefore(wrapper, loginBtn);
 	loginBtn.remove();
 
+	findAFitBtn.disabled = false;
 	const logoutBtn = document.getElementById("logout");
 	logoutBtn.addEventListener("click", user.logout);
 };
