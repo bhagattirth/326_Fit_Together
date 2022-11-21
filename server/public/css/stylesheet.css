@@ -63,15 +63,30 @@ body {
 /* MATCHING PAGE */
 
 .title {
+	background-color: #dbd4d3;
 	font-size: 3rem;
 	text-align: center;
+	margin-bottom: 0;
 }
 
 /* MAIN SECTION */
 
 .slider {
 	text-align: center;
-	background-color: lightgrey;
+	background-color: #dbd4d3;
+}
+
+.footer {
+	background-color: #393e46;
+	height: 13em;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.copyright-text {
+	color: #eeeeee;
+	opacity: 0.3;
 }
 
 .name {
@@ -79,22 +94,88 @@ body {
 }
 
 .caro-img {
-	width: 500px;
-	height: 500px;
+	width: 250px;
+	height: 250px;
 	object-fit: cover;
+	border-radius: 100%;
+	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .carousel-item {
-	height: 750px;
+	height: 700px;
+	width: 500px;
+	margin: auto;
+	margin-top: 3em;
+	margin-bottom: 5em;
+	padding: 1.5em;
+	border-radius: 10px;
+	background-color: #757780;
+	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+#carouselDiv {
+	display: flex;
+}
+
+.name {
+	color: #061826;
+	font-size: 1.5rem;
+}
+
+.workout-split {
+	color: #061826;
+	font-size: 1.25rem;
+}
+
+.info-sec {
+	color: #061826;
+	font-size: 1.1rem;
+	margin: 0.3em;
+}
+
+.show-info {
+	font-size: 1.5rem;
+	color: white;
+}
+.show-info:hover {
+	animation: effect 0.4s;
+}
+
+@keyframes effect {
+	0% {
+		transform: translateX(0px) rotate(0deg);
+	}
+
+	20% {
+		transform: translateX(-4px) rotate(-4deg);
+	}
+
+	40% {
+		transform: translateX(-2px) rotate(-2deg);
+	}
+
+	60% {
+		transform: translateX(4px) rotate(4deg);
+	}
+
+	80% {
+		transform: translateX(2px) rotate(2deg);
+	}
+
+	100% {
+		transform: translateX(0px) rotate(0deg);
+	}
 }
 
 .selection {
+	margin-top: 0;
 	padding: 1em;
 }
 
 .yes {
 	font-size: 4.2em;
-	color: green;
+	color: #061826;
+	opacity: 0.6;
 	padding: 0.25em;
 	transform: scale(1);
 	transition: transform 250ms;
@@ -102,7 +183,8 @@ body {
 
 .no {
 	font-size: 3.4em;
-	color: red;
+	color: #061826;
+	opacity: 0.6;
 	padding: 0.25em;
 	padding-bottom: 0.5em;
 	transform: scale(1);

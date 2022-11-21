@@ -12,20 +12,62 @@ await validateUser();
 await initialize(user.getUserId());
 
 async function validateUser() {
-	const res = await fetch(`${urlBase}/auth/validateUser`, {
-		method: "GET",
-		headers: {
-			"Content-Type": "application/json",
-		},
-	});
+	// validate accessToken
+	const id = await user.checkToken();
 
 	// if not valid, return
-	if (!res.ok) {
-		alert("Issue finding profile information");
+	if (!id) {
+		location.href = "homepage.html";
+		return;
 	}
-	const msg = await res.json();
 	// update user id here
-	user.setUserId(msg.id);
+	user.setUserId(id);
+
+	// get image link
+	const imageLink = await user.getProfilePicture();
+
+	// create dropdown
+	const html = `<div id='profile-dropdown' class="dropdown">
+			<img
+				class="user-icon dropdown-toggle"
+				data-bs-toggle="dropdown"
+				src="${imageLink}"
+				alt="user icon"
+			/>
+			<ul class="dropdown-menu">
+				<li>
+					<a id="profile" class="dropdown-item" href="profile.html">
+						Profile
+					</a>
+				</li>
+				<li>
+					<a id="findFit" class="dropdown-item" href="matchingPage.html">
+						Find a Fit!
+					</a>
+				</li>
+				<li>
+					<a id="Matches" class="dropdown-item" href="matchHistory.html">
+						Matches
+					</a>
+				</li>
+				<li>
+					<a id="logout" class="dropdown-item" href="#">
+						Log out
+					</a>
+				</li>
+			</ul>
+		</div>`;
+	const wrapper = document.createElement("div");
+	wrapper.classList.add("dropdown");
+	wrapper.innerHTML = html;
+
+	// insert element into page
+	const dropdown = document.getElementById("dropdown");
+	dropdown.insertAdjacentElement("afterend", wrapper);
+
+	// logout button functionality
+	const logoutBtn = document.getElementById("logout");
+	logoutBtn.addEventListener("click", user.logout);
 }
 
 // Replace from shared once set up
@@ -188,27 +230,33 @@ function generateCarouselItem(id, profile, profileImage, active = false) {
 						/>
 						<p class="name">${profile["firstName"]} ${profile["lastName"]}</p>
 						<div>
-							<p>Workout Split: ${profile["workoutStyle"]}</p>
+							<p class="workout-split">Workout Split: ${profile["workoutStyle"]}</p>
 						</div>
 						<div>
-							<button class="btn btn-secondary" type="button" id=${"moreInfoButton" + id}>
+							<button class="btn btn-dark show-info" type="button" id=${
+								"moreInfoButton" + id
+							}>
 								More info
 							</button>
 						</div>
-                        <div id = ${"moreInfoDiv" + id} hidden = "true">
-                            Workouts Per Week:      ${
+                        <div class="moreInfo" id = ${
+							"moreInfoDiv" + id
+						} hidden = "true">
+                            <p class="info-sec">Workouts Per Week:      ${
 								profile["workoutsPerWeek"]
-							}
-							</br>
+							}</p>
+							<p class="info-sec">
                             Average Workout Length: ${
 								profile["averageWorkoutLength"]
-							}
-							</br>
-                            Start Time:      ${profile["startTime"]}
-							</br>
-                            End Time:         ${profile["endTime"]}
-							</br>
-                            Preferred Days:         ${upperCaseDays.join(", ")}
+							}</p>
+							<p class="info-sec">
+                            Start Time:      ${profile["startTime"]}</p>
+							<p class="info-sec">
+                            End Time:         ${profile["endTime"]}</p>
+							<p class="info-sec">
+                            Preferred Days:         ${upperCaseDays.join(
+								", "
+							)}</p>
                         </div>
 						<div class="selection">
 					<button class="select-btn" id=${"acceptMatchButton" + id}>
