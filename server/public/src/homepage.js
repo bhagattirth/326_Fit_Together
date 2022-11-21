@@ -1,58 +1,69 @@
 import user from "./user.js";
+const urlBase = "https://ufit12.herokuapp.com";
 const loginBtn = document.getElementById("login-btn");
+const findAFitBtn = document.getElementById("findAFitLargeButton");
 
 // redirect user to login page when clicking on login btn
 loginBtn.addEventListener("click", () => {
 	location.href = "login.html";
 });
 
-const logout = async () => {
-	const res = await fetch(`https://ufit12.herokuapp.com/auth/logout`, {
-		method: "POST",
-		credentials: "include",
-		headers: { "Content-type": "application/json" },
-		body: null,
-	});
-
-	const msg = await res.json();
-
-	if (res.ok) {
-		user.logout();
-		location.href = "index.html";
-	} else {
-		alert("failed to logout");
-	}
-};
+// redirect user to "Find a Fit" when button selected
+findAFitBtn.addEventListener("click", () => {
+	location.href = "matchingPage.html";
+});
 
 const checkToken = async () => {
-	console.log("validating...");
-	console.log(`https://ufit12.herokuapp.com/auth/validateUser`);
-	const res = await fetch(`https://ufit12.herokuapp.com/auth/validateUser`, {
+	// check if token is valid
+	const res = await fetch(`${urlBase}/auth/validateUser`, {
 		method: "GET",
 		headers: {
 			"Content-Type": "application/json",
 		},
 	});
 
+	// if not valid, return
 	if (!res.ok) {
 		return;
 	}
 	const msg = await res.json();
-	console.log(msg);
-	// update user id here, subject to change
-	user.setUserId(1);
+	// update user id here
+	user.setUserId(msg.id);
+	console.log(user.getUserId());
+	// fetch image link for user
+	const imgRes = await fetch(
+		`${urlBase}/profile/${user.getUserId()}/picture`,
+		{
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+			},
+		}
+	);
+	// if res is not ok, alert user that image failed to load
+	if (!res.ok) {
+		alert("failed to load profile image");
+	}
+	const resJSON = await imgRes.json();
+	const imageLink = resJSON.profilePic;
+
 	// change page
 	const html = `<div id='profile-dropdown' class="dropdown">
 			<img
 				class="user-icon dropdown-toggle"
 				data-bs-toggle="dropdown"
-				src="https://penntoday.upenn.edu/sites/default/files/2021-11/Taylor%20Swift-Main.jpg"
+				src="${imageLink}"
 				alt="user icon"
 			/>
 			<ul class="dropdown-menu">
 				<li>
-					<a id="profile" class="dropdown-item" href="#">
+					<a id="profile" class="dropdown-item" href="profile.html">
 						Profile
+					</a>
+				</li>
+				<li>
+					<a id="findFit" class="dropdown-item" href="matchingPage.html">
+						Find a Fit!
 					</a>
 				</li>
 				<li>
@@ -68,13 +79,9 @@ const checkToken = async () => {
 	loginBtn.parentNode.insertBefore(wrapper, loginBtn);
 	loginBtn.remove();
 
-	const profileBtn = document.getElementById("profile");
-	profileBtn.addEventListener("click", () => {
-		location.href = "profile.html";
-	});
-
+	findAFitBtn.disabled = false;
 	const logoutBtn = document.getElementById("logout");
-	logoutBtn.addEventListener("click", logout);
+	logoutBtn.addEventListener("click", user.logout);
 };
 
 checkToken();

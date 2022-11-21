@@ -1,5 +1,14 @@
+const urlBase = "https://ufit12.herokuapp.com";
 const email = document.getElementById("email");
 const pass = document.getElementById("password");
+
+const newEmail = document.getElementById("newEmail");
+const confirmEmail = document.getElementById("confirmEmail");
+const newPass = document.getElementById("newPassword");
+const confirmPass = document.getElementById("confirmPassword");
+const fName = document.getElementById("firstName");
+const lName = document.getElementById("lastName");
+
 const loginBtn = document.getElementById("login");
 const signupBtn = document.getElementById("signup");
 import user from "./user.js";
@@ -37,7 +46,7 @@ const loginUser = async (e) => {
 
 	// attempt to log user in
 	try {
-		const res = await fetch(`https://ufit12.herokuapp.com/auth/login`, {
+		const res = await fetch(`${urlBase}/auth/login`, {
 			method: "POST",
 			credentials: "include",
 			headers: {
@@ -46,11 +55,13 @@ const loginUser = async (e) => {
 			body: JSON.stringify({ email: email.value, password: pass.value }),
 		});
 		const msg = await res.json();
-		// update User with userId returned
-		user.setUserId(1);
+
 		if (!res.ok) {
 			throw new Error("Invalid email/password combination");
 		}
+
+		// update User with userId returned
+		user.setUserId(msg.id);
 	} catch (err) {
 		const text = document.getElementById("error-text");
 		text.hidden = false;
@@ -58,7 +69,7 @@ const loginUser = async (e) => {
 	}
 
 	// redirect back to homepage here
-	location.href = "index.html";
+	location.href = "profile.html";
 };
 
 // sign up user
@@ -67,40 +78,74 @@ const signupUser = async (e) => {
 	e.stopPropagation();
 
 	// email validation
-	if (!validateEmail(email.value)) {
+	if (!validateEmail(newEmail.value)) {
 		alert("invalid email");
 		return;
 	}
 
 	// password validation
-	if (!validatePassword(pass.value)) {
-		alert("invalid password");
+	if (!validatePassword(newPass.value)) {
+		alert(
+			"invalid password, must contain 8 characters, 1 uppercase, 1 lowercase, and 1 special or number"
+		);
+		return;
+	}
+
+	// check user entered a first name
+	if (fName.value.trim().length === 0) {
+		alert("Please enter you're first name");
+		return;
+	}
+
+	// check user entered last name
+	if (lName.value.trim().length === 0) {
+		alert("Please enter you're last name");
+		return;
+	}
+
+	// check users emails match
+	if (newEmail.value !== confirmEmail.value) {
+		alert("Emails don't match");
+		return;
+	}
+
+	// check users passwords match
+	if (newPass.value !== confirmPass.value) {
+		alert("Passwords don't match");
 		return;
 	}
 
 	// attempt to sign user up
 	try {
-		const res = await fetch(`https://ufit12.herokuapp.com/auth/signup`, {
+		const res = await fetch(`${urlBase}/auth/signup`, {
 			method: "POST",
 			credentials: "include",
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ email: email.value, password: pass.value }),
+			body: JSON.stringify({
+				email: newEmail.value,
+				password: newPass.value,
+				fName: fName.value,
+				lName: lName.value,
+			}),
 		});
 		const msg = await res.json();
-		// Update user with userId returned, subject to change
-		user.setUserId(1);
+
 		if (!res.ok) {
 			throw new Error("Something went wrong please try again later");
 		}
+
+		// Update user with userId returned, subject to change
+		user.setUserId(msg.id);
 	} catch (err) {
 		//display dropdown
+		alert("Failed to sign up");
 		return;
 	}
 
 	//redirect user back to homepage here
-	location.href = "index.html";
+	location.href = "profile.html";
 };
 
 signupBtn.addEventListener("click", signupUser);

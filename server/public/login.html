@@ -14,7 +14,7 @@
 		<link href="./css/stylesheet.css" rel="stylesheet" />
 	</head>
 
-	<body id="login">
+	<body id="background">
 		<div id="rectangleBox">
 			<h2>Login</h2>
 			<form>
@@ -36,13 +36,101 @@
 			<p id="error-text" hidden="true">
 				Invalid email/password combination
 			</p>
-			<p>Forgot Password?</p>
 			<button type="button" class="btn btn-primary" id="login">
 				Login
 			</button>
-			<button type="button" class="btn btn-primary" id="signup">
-				Sign Up
+			<br />
+			<br />
+			<button
+				type="button"
+				class="text-primary"
+				id="signupToggle"
+				data-bs-toggle="modal"
+				data-bs-target="#signupForm"
+			>
+				Don't Have an Account? Make One!
 			</button>
+			<div class="modal" id="signupForm">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title">Sign Up</h4>
+							<button
+								type="button"
+								class="close"
+								data-bs-dismiss="modal"
+							>
+								&times;
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="form-group">
+								<label for="firstName" class="form-label"
+									>First Name:</label
+								>
+								<input
+									type="text"
+									id="firstName"
+									class="form-control"
+									placeholder="Name"
+								/><br />
+								<label for="lastName" class="form-label"
+									>Last Name:</label
+								>
+								<input
+									type="text"
+									id="lastName"
+									class="form-control"
+									placeholder="Last Name"
+								/><br />
+								<label for="newEmail" class="form-label"
+									>Enter Email:</label
+								>
+								<input
+									type="email"
+									id="newEmail"
+									class="form-control"
+									placeholder="my@email.com"
+								/><br />
+								<label for="confirmEmail" class="form-label"
+									>Confirm Email:</label
+								>
+								<input
+									type="email"
+									id="confirmEmail"
+									class="form-control"
+									placeholder="my@email.com"
+								/><br />
+								<label for="newPassword" class="form-label"
+									>Enter New Password:</label
+								>
+								<input
+									type="password"
+									id="newPassword"
+									class="form-control"
+									placeholder="Password"
+								/><br />
+								<label for="confirmPassword" class="form-label"
+									>Confirm Password:</label
+								>
+								<input
+									type="password"
+									id="confirmPassword"
+									class="form-control"
+									placeholder="Password"
+								/><br />
+							</div>
+							<button
+								class="btn btn-success"
+								data-bs-dismiss="modal"
+								id="signup"
+							>
+								Sign Up
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 
 		<script

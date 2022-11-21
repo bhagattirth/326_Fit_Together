@@ -30,7 +30,7 @@ body {
 .homepage {
 	height: 50vh;
 	width: 100%;
-	background-image: url("https://www.umass.edu/cp/sites/default/files/2017_07_13_03_Recreation%20Center_Southeast%20Exterior%20Perspective_Night.jpg");
+	background-image: url("https://www.umass.edu/campusrec/sites/default/files/styles/slideshow_image/public/images/slideshow/rec-center-image.jpg?itok=cKIO2kIF");
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
@@ -123,20 +123,28 @@ body {
 
 /* Login */
 
-body#login {
+body#background {
 	background-image: url("https://nypost.com/wp-content/uploads/sites/2/2018/01/012018_gym_buddies.jpg?quality=75&strip=all");
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-color: navy;
+	height: 100vh;
 }
 
 #rectangleBox {
 	width: 300px;
-	height: 350px;
 	background-color: rgba(181, 186, 186, 0.925);
 	border: 5px solid green;
 	text-align: center;
 	margin: auto;
+}
+
+#signupToggle {
+	background: none;
+	border: none;
+	margin: 0;
+	padding: 0;
+	cursor: pointer;
 }
 
 #error-text {
