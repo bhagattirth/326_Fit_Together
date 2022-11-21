@@ -61,11 +61,10 @@ async function updateProfilePicture() {
 	var image = new Image();
 	image.onload = function () {
 		if (this.width > 0) {
-			console.log("image exists");
+			profilePicturePreview.src = imageURL.value;
+			profilePicturePreview.hidden = false;
+			profilePicture = imageURL.value;
 		}
-		profilePicturePreview.src = imageURL.value;
-		profilePicturePreview.hidden = false;
-		profilePicture = imageURL.value;
 	};
 	image.onerror = function () {
 		alert("Invalid Image URL");
@@ -94,7 +93,6 @@ async function validateUser() {
 }
 
 async function initialize(id) {
-	console.log(id);
 	try {
 		const res = await fetch(`${urlBase}/profile/${id}/information`, {
 			method: "GET",
@@ -190,7 +188,6 @@ async function updateProfile(id) {
 				throw new Error("Something went wrong please try again later");
 			}
 		} catch (err) {
-			console.log(err);
 			alert("Profile Image changes could not be saved");
 			return;
 		}

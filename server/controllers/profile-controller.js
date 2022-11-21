@@ -1,42 +1,4 @@
 import { User } from "../app.js";
-import user from "../public/src/user.js";
-
-// const dummyProfileData = {
-// 	firstName: "John",
-// 	lastName: "Swift",
-// 	phoneNumber: "978-8677-309",
-// 	workoutStyle: "Push-Pull-Leg Split",
-// 	workoutsPerWeek: 3,
-// 	averageWorkoutLength: "2 Hours",
-// 	preferredTime: "10 AM - 12 PM",
-// 	preferredDays: ["monday", "tuesday"],
-// };
-
-// id: String,
-// email: String,
-// password: String,
-// fName: String,
-// lName: String,
-// profilePic: String,
-// phoneNumber: String,
-// workoutStyle: String,
-// workoutsPerWeek: Number,
-// avgWorkoutLength: Number,
-// startTime: String,
-// endTime: String,
-// prefDays: String,
-// pastWorkouts: [
-// 	{
-// 		id: String,
-// 		date: String,
-// 		workoutTitle: String,
-// 		workout: [String],
-// 	},
-// ],
-// rating: Number,
-// numberOfRatings: Number,
-// matches: [String],
-// blocked: [String],
 
 export const updateProfileInformation = (req, res, next) => {
 	const id = req.params.id;

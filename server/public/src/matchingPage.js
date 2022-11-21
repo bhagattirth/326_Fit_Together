@@ -3,16 +3,12 @@ const urlBase = "https://ufit12.herokuapp.com";
 const carouselDiv = document.getElementById("carouselDiv");
 const logoutButton = document.getElementById("logoutOption");
 const nextButton = document.getElementById("nextButton");
-const nextButtonIcon = document.getElementById("nextButtonIcon");
-const prevButton = document.getElementById("prevButton");
-const prevButtonIcon = document.getElementById("prevButtonIcon");
 const maxPotentialMatchesAtOnce = 10;
 let curPotentialMatches = 0;
 logoutButton.addEventListener("click", logout);
 const profilePictureImage = document.getElementById("profilePicture");
 
 await validateUser();
-console.log(user.getUserId());
 await initialize(user.getUserId());
 
 async function validateUser() {
@@ -51,7 +47,6 @@ async function logout() {
 }
 
 async function initialize(id) {
-	console.log(id);
 	try {
 		const res = await fetch(`${urlBase}/matches/${id}/potential`, {
 			method: "GET",
@@ -182,7 +177,6 @@ async function denyMatch(otherID) {
 }
 
 function generateCarouselItem(id, profile, profileImage, active = false) {
-	console.log(profile);
 	const upperCaseDays = [];
 	for (const day of profile["preferredDays"]) {
 		upperCaseDays.push(day.charAt(0).toUpperCase() + day.slice(1));

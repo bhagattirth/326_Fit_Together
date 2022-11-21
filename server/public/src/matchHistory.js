@@ -7,6 +7,7 @@ let jsonSize = 0;
 const profilePictureImage = document.getElementById("profilePicture");
 
 await validateUser();
+setProfilePicture(user.getUserId());
 
 async function validateUser() {
 	const res = await fetch(`${urlBase}/auth/validateUser`, {
@@ -24,9 +25,6 @@ async function validateUser() {
 	// update user id here
 	user.setUserId(msg.id);
 }
-console.log(user.getUserId());
-
-setProfilePicture(user.getUserId());
 
 async function setProfilePicture(id) {
 	try {
@@ -42,6 +40,23 @@ async function setProfilePicture(id) {
 	} catch (err) {
 		alert("Profile Picture could not be retrieved");
 		return;
+	}
+}
+
+async function logout() {
+	const res = await fetch(`${urlBase}/auth/logout`, {
+		method: "POST",
+		credentials: "include",
+		headers: { "Content-type": "application/json" },
+		body: null,
+	});
+
+	const msg = await res.json();
+
+	if (res.ok) {
+		location.href = "index.html";
+	} else {
+		alert("failed to logout");
 	}
 }
 
@@ -78,7 +93,6 @@ const loadUsers = async (id) => {
 		i++;
 		count++;
 	}
-	console.log(userMap);
 	displayUser();
 };
 
@@ -121,11 +135,18 @@ function addProfileInfo(userData, i) {
 	profilePic.src = userData.imgURL;
 
 	prefDate.innerText = "";
-	prefDate.innerText = userData.preference;
 
-	// for(let days of userData.preference){
-	//     prefDate.innerText+= days + " ";
-	// }
+	if (userData.preference.length > 0) {
+		for (let i = 0; i < userData.preference.length; i++) {
+			if (userData.preference.length - 1 === i) {
+				prefDate.innerText += userData.preference[i];
+			} else {
+				prefDate.innerText += userData.preference[i] + ", ";
+			}
+		}
+	} else {
+		prefDate.innerText = "The Member Hasn't Set Preferred Days";
+	}
 }
 
 function createCarousel(pastWorkouts, i) {
@@ -156,6 +177,7 @@ function createCarousel(pastWorkouts, i) {
 	leftButton.classList.add("carousel-control-prev", "carousel-arrow-color");
 	setAttributes(leftButton, {
 		type: "button",
+		id: "carouselLeftButton" + i,
 		"data-bs-target": "#carousel" + i,
 		"data-bs-slide": "prev",
 	});
@@ -175,6 +197,7 @@ function createCarousel(pastWorkouts, i) {
 	rightButton.classList.add("carousel-control-next");
 	setAttributes(rightButton, {
 		type: "button",
+		id: "carouselRightButton" + i,
 		"data-bs-target": "#carousel" + i,
 		"data-bs-slide": "next",
 	});
@@ -193,6 +216,16 @@ function createCarousel(pastWorkouts, i) {
 	carouselBody.appendChild(leftButton);
 	carouselBody.appendChild(rightButton);
 	carousel.appendChild(carouselBody);
+
+	if (workouts.length === 0) {
+		document.getElementById("carouselRightButton" + i).style.display =
+			"none";
+		document.getElementById("carouselLeftButton" + i).style.display =
+			"none";
+	} else {
+		document.getElementById("carouselRightButton" + i).style.display = "";
+		document.getElementById("carouselLeftButton" + i).style.display = "";
+	}
 }
 
 function getNextPage() {
@@ -283,6 +316,7 @@ const addWorkoutListner = (i) => async () => {
 	} else {
 		const res = await fetch(`${urlBase}/matchHistory/addWorkout`, {
 			method: "POST",
+			credentials: "include",
 			headers: {
 				"Content-Type": "application/json",
 			},
@@ -309,6 +343,7 @@ const updateRatingListiner = (i) => async () => {
 	let newRating = document.getElementById("selectRating" + i).value;
 	const res = await fetch(`${urlBase}/matchHistory/ratingUpdate`, {
 		method: "POST",
+		credentials: "include",
 		headers: {
 			"Content-Type": "application/json",
 		},
@@ -330,6 +365,7 @@ const deleteUserListiner = (i) => async () => {
 
 	const res = await fetch(`${urlBase}/matchHistory/deleteEntry`, {
 		method: "DELETE",
+		credentials: "include",
 		headers: {
 			"Content-Type": "application/json",
 		},
@@ -395,3 +431,5 @@ document
 
 document.getElementById("next").addEventListener("click", getNextPage);
 document.getElementById("back").addEventListener("click", prevPage);
+
+document.getElementById("logoutOption").addEventListener("click", logout);
