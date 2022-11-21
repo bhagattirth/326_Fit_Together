@@ -4,9 +4,10 @@ let userMap = {"user1": null, "user2": null, "user3": null};
 let firstEntryOnPage = 0;
 let lastEntryOnPage = 2;
 let jsonSize = 0;
+const profilePictureImage = document.getElementById("profilePicture");
 
+await validateUser();
 
-await validateUser()
 async function validateUser() {
 	const res = await fetch(`http://localhost:5000/auth/validateUser`, {
 		method: "GET",
@@ -23,8 +24,9 @@ async function validateUser() {
 	// update user id here
 	user.setUserId(msg.id);
 }
+console.log(user.getUserId());
 
-// setProfilePicture(user.getUserId);
+// setProfilePicture(user.getUserId());
 
 // async function setProfilePicture(id) {
 // 	try {
@@ -32,12 +34,11 @@ async function validateUser() {
 // 			method: "GET",
 // 			credentials: "include",
 // 		});
-// 		const msg = await res.json();
-
-// 		document.getElementById("profilePicture").src = msg["picture"];
-// 		if (!res.ok) {
+// 		if (!res.ok || res.status === 400) {
 // 			throw new Error("Something went wrong please try again later");
 // 		}
+// 		const msg = await res.json();
+// 		profilePictureImage.src = msg.profilePic;
 // 	} catch (err) {
 // 		alert("Profile Picture could not be retrieved");
 // 		return;
@@ -188,7 +189,7 @@ function getNextPage(){
     if(lastEntryOnPage+1<jsonSize){
         firstEntryOnPage = firstEntryOnPage + 3;
         lastEntryOnPage = lastEntryOnPage + 3;
-        loadUsers();
+        loadUsers(user.getUserId());
     }
      
  }
@@ -197,7 +198,7 @@ function getNextPage(){
     if(0<lastEntryOnPage-3){
         firstEntryOnPage = firstEntryOnPage - 3;
         lastEntryOnPage = lastEntryOnPage - 3;
-        loadUsers();
+        loadUsers(user.getUserId());
     }
     
  }
@@ -281,7 +282,7 @@ const addWorkoutListner = (i) => async () => {
                 "Content-Type": "application/json",
             },
 
-            body: JSON.stringify({ user:user.getUserId, member: userMap["user"+i], workout: workouts, dates: date, type: wType }),
+            body: JSON.stringify({ user:user.getUserId(), member: userMap["user"+i], workout: workouts, dates: date, type: wType }),
 
             });
             const msg = await res.json();
@@ -289,7 +290,7 @@ const addWorkoutListner = (i) => async () => {
             if(!res.ok){
                 alert("Failed to Add Workout");
             }else{
-                loadUsers();
+                loadUsers(user.getUserId());
             }    
    }      
 }
@@ -302,7 +303,7 @@ const updateRatingListiner = (i)=> async () => {
              headers: {
                  "Content-Type": "application/json",
              },
-             body: JSON.stringify({user:user.getUserId, member: userMap["user"+i], user: userMap["user"+i], rating: newRating}),
+             body: JSON.stringify({user:user.getUserId(), member: userMap["user"+i], rating: newRating}),
          });
      const msg = await res.json();
      
@@ -313,21 +314,21 @@ const updateRatingListiner = (i)=> async () => {
 
  const deleteUserListiner = (i)=> async () => {
     
-    let  user= "user"+ i;
+    let  userI= "user"+ i;
   
     const res = await fetch("http://localhost:5000/matchHistory/deleteEntry", {
              method: "DELETE",
              headers: {
                  "Content-Type": "application/json",
              },
-             body: JSON.stringify({ user:user.getUserId, member: userMap[user]}),
+             body: JSON.stringify({ user:user.getUserId(), member: userMap[userI]}),
          });
      const msg = await res.json();
 
      if(!res.ok){
         alert("Failed to Delete Member Info");
      }else{
-        loadUsers();
+        loadUsers(user.getUserId());
      }
  }
 
@@ -351,7 +352,7 @@ function displayUser(){
     }
 }   
 
-loadUsers();
+loadUsers(user.getUserId());
 
 document.getElementById("updateRating1").addEventListener("click", updateRatingListiner(1));
 document.getElementById("add1").addEventListener("click", addWorkoutListner(1));
