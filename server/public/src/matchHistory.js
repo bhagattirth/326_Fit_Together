@@ -1,5 +1,5 @@
 import user from "./user.js";
-const urlBase = "http://localhost:5000";
+const urlBase = "https://ufit12.herokuapp.com";
 let userMap = { user1: null, user2: null, user3: null };
 let firstEntryOnPage = 0;
 let lastEntryOnPage = 2;

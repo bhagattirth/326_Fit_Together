@@ -1,4 +1,4 @@
-const urlBase = "http://localhost:5000";
+const urlBase = "https://ufit12.herokuapp.com";
 const email = document.getElementById("email");
 const pass = document.getElementById("password");
 

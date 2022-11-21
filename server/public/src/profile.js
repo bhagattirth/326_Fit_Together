@@ -1,5 +1,5 @@
 import user from "./user.js";
-const urlBase = "http://localhost:5000";
+const urlBase = "https://ufit12.herokuapp.com";
 const editProfileButton = document.getElementById("editProfile");
 const updateProfileButton = document.getElementById("updateProfile");
 const selectProfilePictureButton = document.getElementById(

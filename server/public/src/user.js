@@ -1,4 +1,4 @@
-const urlBase = "http://localhost:5000";
+const urlBase = "https://ufit12.herokuapp.com";
 class User {
 	constructor() {
 		this.userId = null;

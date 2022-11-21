@@ -1,5 +1,5 @@
 import user from "./user.js";
-const urlBase = "http://localhost:5000";
+const urlBase = "https://ufit12.herokuapp.com";
 const carouselDiv = document.getElementById("carouselDiv");
 const logoutButton = document.getElementById("logoutOption");
 const nextButton = document.getElementById("nextButton");
