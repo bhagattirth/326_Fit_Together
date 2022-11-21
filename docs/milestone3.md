@@ -33,7 +33,7 @@
 -   blocked: [String], &emsp; **List of blocked users ids**
 
 ## Testing the Site
-Use the link https://ufit12.herokuapp.com/public/ to use website. You may create your own login or use our sample login (username: bhagat@gmail.com, password: Test12345$).
+Use the link https://ufit12.herokuapp.com/public/ to use website. You may create your own login or use our sample login (username: bhagat@gmail.com, password: Test12345$). Signing up/Logining will show you our authentication system. Once you are logged in, you may check out the profile page first; this page will allow the user to edit their information that other users can see (by changing user information in the database). The match page allows the user to find a match with another member (which is stored in the database); they can check out the other users profile to make their decision and select the accept or reject button. Once, the user get a match with another user, the event stored in th database and is displayed on the match history page. On this page, user can view all past workouts with members with a active account and do other various things.
 
 ## Division of Labor
 
