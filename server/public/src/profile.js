@@ -231,7 +231,7 @@ function generateJSON() {
 	json["workoutsPerWeek"] = workoutsPerWeek.value;
 	json["averageWorkoutLength"] = workoutLength.value;
 	json["startTime"] = startTime.value;
-	json["endTime"] = startTime.value;
+	json["endTime"] = endTime.value;
 	json["preferredDays"] = [];
 	for (const dayKey of Object.keys(dayCheckboxes)) {
 		if (dayCheckboxes[dayKey].checked === true) {
