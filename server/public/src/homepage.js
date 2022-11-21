@@ -29,7 +29,6 @@ const checkToken = async () => {
 	const msg = await res.json();
 	// update user id here
 	user.setUserId(msg.id);
-	console.log(user.getUserId());
 	// fetch image link for user
 	const imgRes = await fetch(
 		`${urlBase}/profile/${user.getUserId()}/picture`,
