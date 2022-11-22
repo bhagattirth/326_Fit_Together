@@ -17,26 +17,41 @@
 	<body id="background">
 		<div id="rectangleBox">
 			<h2>Login</h2>
-			<form>
-				<label for="email" class="form-label">Email:</label>
-				<input
-					type="email"
-					id="email"
-					class="form-control"
-					placeholder="my@email.com"
-				/><br />
-				<label for="password" class="form-label">Password:</label>
-				<input
-					type="password"
-					id="password"
-					class="form-control"
-					placeholder="Password"
-				/><br />
+			<form class="login-form">
+				<div class="field field_v1 login-creds">
+					<label class="form-label ha-screen-reader" for="email"
+						>Email</label
+					>
+					<input
+						type="email"
+						id="email"
+						class="form-control field__input"
+						placeholder="my@email.com"
+					/>
+					<span class="field__label-wrap" aria-hidden="true">
+						<span class="field__label">Email</span>
+					</span>
+				</div>
+
+				<div class="field field_v1 login-creds">
+					<label for="password" class="ha-screen-reader form-label"
+						>Password</label
+					>
+					<input
+						type="password"
+						id="password"
+						class="form-control field__input"
+						placeholder="Password"
+					/>
+					<span class="field__label-wrap" aria-hidden="true">
+						<span class="field__label">Password</span>
+					</span>
+				</div>
 			</form>
 			<p id="error-text" hidden="true">
 				Invalid email/password combination
 			</p>
-			<button type="button" class="btn btn-primary" id="login">
+			<button type="button" class="button-17 login-btn" id="login">
 				Login
 			</button>
 			<br />
@@ -58,6 +73,7 @@
 							<button
 								type="button"
 								class="close"
+								id="close"
 								data-bs-dismiss="modal"
 							>
 								&times;
@@ -65,63 +81,116 @@
 						</div>
 						<div class="modal-body">
 							<div class="form-group">
-								<label for="firstName" class="form-label"
-									>First Name:</label
-								>
-								<input
-									type="text"
-									id="firstName"
-									class="form-control"
-									placeholder="Name"
-								/><br />
-								<label for="lastName" class="form-label"
-									>Last Name:</label
-								>
-								<input
-									type="text"
-									id="lastName"
-									class="form-control"
-									placeholder="Last Name"
-								/><br />
-								<label for="newEmail" class="form-label"
-									>Enter Email:</label
-								>
-								<input
-									type="email"
-									id="newEmail"
-									class="form-control"
-									placeholder="my@email.com"
-								/><br />
-								<label for="confirmEmail" class="form-label"
-									>Confirm Email:</label
-								>
-								<input
-									type="email"
-									id="confirmEmail"
-									class="form-control"
-									placeholder="my@email.com"
-								/><br />
-								<label for="newPassword" class="form-label"
-									>Enter New Password:</label
-								>
-								<input
-									type="password"
-									id="newPassword"
-									class="form-control"
-									placeholder="Password"
-								/><br />
-								<label for="confirmPassword" class="form-label"
-									>Confirm Password:</label
-								>
-								<input
-									type="password"
-									id="confirmPassword"
-									class="form-control"
-									placeholder="Password"
-								/><br />
+								<div class="signup-input field field_v1">
+									<label
+										for="firstName"
+										class="form-label ha-screen-reader"
+										>First Name</label
+									>
+									<input
+										type="text"
+										id="firstName"
+										class="form-control field__input"
+										placeholder="Name"
+									/>
+									<span
+										class="field__label-wrap"
+										aria-hidden="true"
+									>
+										<span class="field__label"
+											>First Name</span
+										>
+									</span>
+								</div>
+
+								<div class="signup-input field field_v1">
+									<label
+										for="lastName"
+										class="form-label ha-screen-reader"
+										>Last Name</label
+									>
+									<input
+										type="text"
+										id="lastName"
+										class="form-control field__input"
+										placeholder="Last Name"
+									/>
+									<span
+										class="field__label-wrap"
+										aria-hidden="true"
+									>
+										<span class="field__label"
+											>Last Name</span
+										>
+									</span>
+								</div>
+
+								<div class="signup-input field field_v1">
+									<label
+										for="newEmail"
+										class="form-label ha-screen-reader"
+										>Email</label
+									>
+									<input
+										type="email"
+										id="newEmail"
+										class="form-control field__input"
+										placeholder="my@email.com"
+									/>
+									<span
+										class="field__label-wrap"
+										aria-hidden="true"
+									>
+										<span class="field__label">Email</span>
+									</span>
+								</div>
+
+								<div class="signup-input field field_v1">
+									<label
+										for="newPassword"
+										class="form-label ha-screen-reader"
+										>Password</label
+									>
+									<input
+										type="password"
+										id="newPassword"
+										class="form-control field__input"
+										placeholder="Password"
+									/>
+									<span
+										class="field__label-wrap"
+										aria-hidden="true"
+									>
+										<span class="field__label"
+											>Password</span
+										>
+									</span>
+								</div>
+
+								<div class="signup-input field field_v1">
+									<label
+										for="confirmPassword"
+										class="form-label ha-screen-reader"
+										>Confirm Password</label
+									>
+									<input
+										type="password"
+										id="confirmPassword"
+										class="form-control field__input"
+										placeholder="Password"
+									/>
+									<span
+										class="field__label-wrap"
+										aria-hidden="true"
+									>
+										<span class="field__label"
+											>Confirm Password</span
+										>
+									</span>
+								</div>
 							</div>
 							<button
-								class="btn btn-success"
+								class="button-17"
 								data-bs-dismiss="modal"
 								id="signup"
 							>
