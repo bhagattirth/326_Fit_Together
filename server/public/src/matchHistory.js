@@ -7,40 +7,64 @@ let jsonSize = 0;
 const profilePictureImage = document.getElementById("profilePicture");
 
 await validateUser();
-setProfilePicture(user.getUserId());
 
 async function validateUser() {
-	const res = await fetch(`${urlBase}/auth/validateUser`, {
-		method: "GET",
-		headers: {
-			"Content-Type": "application/json",
-		},
-	});
+	// validate accessToken
+	const id = await user.checkToken();
 
 	// if not valid, return
-	if (!res.ok) {
-		alert("Issue finding profile information");
-	}
-	const msg = await res.json();
-	// update user id here
-	user.setUserId(msg.id);
-}
-
-async function setProfilePicture(id) {
-	try {
-		const res = await fetch(`${urlBase}/profile/${id}/picture`, {
-			method: "GET",
-			credentials: "include",
-		});
-		if (!res.ok || res.status === 400) {
-			throw new Error("Something went wrong please try again later");
-		}
-		const msg = await res.json();
-		profilePictureImage.src = msg.profilePic;
-	} catch (err) {
-		alert("Profile Picture could not be retrieved");
+	if (!id) {
+		location.href = "homepage.html";
 		return;
 	}
+	// update user id here
+	user.setUserId(id);
+
+	// get image link
+	const imageLink = await user.getProfilePicture();
+
+	// create dropdown
+	const html = `<div id='profile-dropdown' class="dropdown">
+			<img
+				class="user-icon dropdown-toggle"
+				data-bs-toggle="dropdown"
+				src="${imageLink}"
+				alt="user icon"
+			/>
+			<ul class="dropdown-menu">
+				<li>
+					<a id="profile" class="dropdown-item" href="profile.html">
+						Profile
+					</a>
+				</li>
+				<li>
+					<a id="findFit" class="dropdown-item" href="matchingPage.html">
+						Find a Fit!
+					</a>
+				</li>
+				<li>
+					<a id="Matches" class="dropdown-item" href="matchHistory.html">
+						Matches
+					</a>
+				</li>
+				<li>
+					<a id="logout" class="dropdown-item" href="#">
+						Log out
+					</a>
+				</li>
+			</ul>
+		</div>`;
+	const wrapper = document.createElement("div");
+	wrapper.classList.add("dropdown");
+	wrapper.innerHTML = html;
+
+	// insert element into page
+	const dropdown = document.getElementById("logo");
+	dropdown.insertAdjacentElement("afterend", wrapper);
+
+	// logout button functionality
+	const logoutBtn = document.getElementById("logout");
+	logoutBtn.addEventListener("click", user.logout);
 }
 
 async function logout() {
@@ -431,5 +455,3 @@ document
 
 document.getElementById("next").addEventListener("click", getNextPage);
 document.getElementById("back").addEventListener("click", prevPage);
-
-document.getElementById("logoutOption").addEventListener("click", logout);

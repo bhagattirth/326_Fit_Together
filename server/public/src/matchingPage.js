@@ -5,7 +5,6 @@ const logoutButton = document.getElementById("logoutOption");
 const nextButton = document.getElementById("nextButton");
 const maxPotentialMatchesAtOnce = 10;
 let curPotentialMatches = 0;
-logoutButton.addEventListener("click", logout);
 const profilePictureImage = document.getElementById("profilePicture");
 
 await validateUser();
@@ -62,30 +61,12 @@ async function validateUser() {
 	wrapper.innerHTML = html;
 
 	// insert element into page
-	const dropdown = document.getElementById("dropdown");
+	const dropdown = document.getElementById("logo");
 	dropdown.insertAdjacentElement("afterend", wrapper);
 
 	// logout button functionality
 	const logoutBtn = document.getElementById("logout");
 	logoutBtn.addEventListener("click", user.logout);
-}
-
-// Replace from shared once set up
-async function logout() {
-	const res = await fetch(`${urlBase}/auth/logout`, {
-		method: "POST",
-		credentials: "include",
-		headers: { "Content-type": "application/json" },
-		body: null,
-	});
-
-	const msg = await res.json();
-
-	if (res.ok) {
-		location.href = "index.html";
-	} else {
-		alert("failed to logout");
-	}
 }
 
 async function initialize(id) {
@@ -143,7 +124,7 @@ async function setProfilePicture(id) {
 		const msg = await res.json();
 		profilePictureImage.src = msg.profilePic;
 	} catch (err) {
-		alert("Profile Picture could not be retrieved");
+		// alert("Profile Picture could not be retrieved");
 		return;
 	}
 }
@@ -233,9 +214,7 @@ function generateCarouselItem(id, profile, profileImage, active = false) {
 							<p class="workout-split">Workout Split: ${profile["workoutStyle"]}</p>
 						</div>
 						<div>
-							<button class="btn btn-dark show-info" type="button" id=${
-								"moreInfoButton" + id
-							}>
+							<button class="show-info" type="button" id=${"moreInfoButton" + id}>
 								More info
 							</button>
 						</div>

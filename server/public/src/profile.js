@@ -28,8 +28,6 @@ const dayCheckboxes = {
 const selectedImageText = document.getElementById("profilePictureSelectedDiv");
 const profilePicturePreview = document.getElementById("profilePicturePreview");
 const profilePictureImage = document.getElementById("profilePicture");
-const matchesOption = document.getElementById("matchesOption");
-const logoutOption = document.getElementById("logoutOption");
 
 let profilePicture = null;
 
@@ -48,13 +46,6 @@ updateProfileButton.addEventListener("click", async () => {
 });
 deleteProfileButton.addEventListener("click", async () => {
 	await deleteProfile(user.getUserId());
-});
-matchesOption.addEventListener("click", () => {
-	location.href = "matchHistory.html";
-});
-logoutOption.addEventListener("click", () => {
-	user.logout();
-	window.location.replace("index.html");
 });
 
 async function updateProfilePicture() {
@@ -76,20 +67,62 @@ await validateUser();
 await initialize(user.getUserId());
 
 async function validateUser() {
-	const res = await fetch(`${urlBase}/auth/validateUser`, {
-		method: "GET",
-		headers: {
-			"Content-Type": "application/json",
-		},
-	});
+	// validate accessToken
+	const id = await user.checkToken();
 
 	// if not valid, return
-	if (!res.ok) {
-		alert("Issue finding profile information");
+	if (!id) {
+		location.href = "homepage.html";
+		return;
 	}
-	const msg = await res.json();
 	// update user id here
-	user.setUserId(msg.id);
+	user.setUserId(id);
+
+	// get image link
+	const imageLink = await user.getProfilePicture();
+
+	// create dropdown
+	const html = `<div id='profile-dropdown' class="dropdown">
+			<img
+				class="user-icon dropdown-toggle"
+				data-bs-toggle="dropdown"
+				src="${imageLink}"
+				alt="user icon"
+			/>
+			<ul class="dropdown-menu">
+				<li>
+					<a id="profile" class="dropdown-item" href="profile.html">
+						Profile
+					</a>
+				</li>
+				<li>
+					<a id="findFit" class="dropdown-item" href="matchingPage.html">
+						Find a Fit!
+					</a>
+				</li>
+				<li>
+					<a id="Matches" class="dropdown-item" href="matchHistory.html">
+						Matches
+					</a>
+				</li>
+				<li>
+					<a id="logout" class="dropdown-item" href="#">
+						Log out
+					</a>
+				</li>
+			</ul>
+		</div>`;
+	const wrapper = document.createElement("div");
+	wrapper.classList.add("dropdown");
+	wrapper.innerHTML = html;
+
+	// insert element into page
+	const dropdown = document.getElementById("logo");
+	dropdown.insertAdjacentElement("afterend", wrapper);
+
+	// logout button functionality
+	const logoutBtn = document.getElementById("logout");
+	logoutBtn.addEventListener("click", user.logout);
 }
 
 async function initialize(id) {
