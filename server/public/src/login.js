@@ -22,9 +22,10 @@ const validateEmail = (email) => {
 
 // password validation
 const validatePassword = (password) => {
-	const re = /^(?=.*[0-9_\W]).+$/;
-	return re.test(password);
 	// 8 char long, lowercase, uppercase, special char or number
+	const re = /^(?=.*[0-9_\W]).+$/;
+
+	return re.test(password);
 };
 
 // login user

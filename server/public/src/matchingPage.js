@@ -176,7 +176,7 @@ function alertNoMoreMatches() {
 	carouselDiv.innerHTML = `<h1>No More Matches :(<h1>
 			</br>
 			<h2>Try again later!<h2>`;
-	carouselDiv;
+	carouselDiv.style.height = "80vh";
 }
 
 async function denyMatch(otherID) {

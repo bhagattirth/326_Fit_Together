@@ -109,7 +109,7 @@ body {
 	margin-bottom: 5em;
 	padding: 1.5em;
 	border-radius: 10px;
-	background-color: #757780;
+	background-color: #d6e4e5;
 	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
@@ -221,20 +221,83 @@ body {
 
 /* Login */
 
-body#background {
+#close {
+	overflow: hidden;
+	position: relative;
+	border: none;
+	padding: 0;
+	width: 2em;
+	height: 2em;
+	border-radius: 50%;
+	background: transparent;
+	color: black;
+	font: inherit;
+	text-indent: 100%;
+	cursor: pointer;
+}
+
+#close:focus {
+	outline: solid 0 transparent;
+	box-shadow: 0 0 0 2px black;
+}
+
+#close:hover {
+	background: #b6b6b6;
+}
+
+#close:before,
+#close:after {
+	position: absolute;
+	top: 15%;
+	left: calc(50% - 0.0625em);
+	width: 0.125em;
+	height: 70%;
+	border-radius: 0.125em;
+	transform: rotate(45deg);
+	background: currentcolor;
+	content: "";
+}
+
+#close:after {
+	transform: rotate(-45deg);
+}
+
+.form-group {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 350px;
+	padding: 1em;
+}
+
+.signup-input {
+	display: block;
+}
+
+.login-creds {
+	margin: 0.5em 0;
+}
+
+.login-form {
+	padding: 2em;
+}
+
+#background {
 	background-image: url("https://nypost.com/wp-content/uploads/sites/2/2018/01/012018_gym_buddies.jpg?quality=75&strip=all");
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-color: navy;
-	height: 100vh;
+	height: 90vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 #rectangleBox {
-	width: 300px;
-	background-color: rgba(181, 186, 186, 0.925);
-	border: 5px solid green;
+	width: 70%;
+	height: 400px;
+	padding: 1em;
 	text-align: center;
-	margin: auto;
 }
 
 #signupToggle {
@@ -928,20 +991,22 @@ effect 3
 }
 
 .main {
-	margin: 0 auto;
+	margin: 0 auto 6em auto;
 	width: 80%;
 	background-color: #dbd4d3;
 }
 
 .profile-inputs {
-	padding: 0.5em 0;
-	margin: 1em auto;
+	padding: 0.2em 0 3em 0;
+	margin: 2em auto;
 	width: 80%;
-	background-color: #757780;
+	background-color: #d6e4e5;
 	border-radius: 2%;
+	color: #061826;
 }
 
 .profile-btns {
+	font-size: 1.1rem;
 	width: 500px;
 	display: flex;
 	margin: 0 auto;
@@ -961,6 +1026,84 @@ effect 3
 	align-items: flex-start;
 }
 
-.profile-background {
-	background-color: #dbd4d3;
+.pfp-btn {
+	margin-bottom: 1em;
+}
+
+/* GOOGLE BTNS */
+.button-17 {
+	align-items: center;
+	appearance: none;
+	background-color: #fff;
+	border-radius: 24px;
+	border-style: none;
+	box-shadow: rgba(0, 0, 0, 0.2) 0 3px 5px -1px,
+		rgba(0, 0, 0, 0.14) 0 6px 10px 0, rgba(0, 0, 0, 0.12) 0 1px 18px 0;
+	box-sizing: border-box;
+	color: #3c4043;
+	cursor: pointer;
+	display: inline-flex;
+	fill: currentcolor;
+	font-family: "Google Sans", Roboto, Arial, sans-serif;
+	font-size: 14px;
+	font-weight: 500;
+	height: 48px;
+	justify-content: center;
+	letter-spacing: 0.25px;
+	line-height: normal;
+	max-width: 100%;
+	overflow: visible;
+	padding: 2px 24px;
+	position: relative;
+	text-align: center;
+	text-transform: none;
+	transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1),
+		opacity 15ms linear 30ms, transform 270ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+	user-select: none;
+	-webkit-user-select: none;
+	touch-action: manipulation;
+	width: auto;
+	will-change: transform, opacity;
+	z-index: 0;
+}
+
+.button-17:hover {
+	background: #f6f9fe;
+	color: #174ea6;
+}
+
+.button-17:active {
+	box-shadow: 0 4px 4px 0 rgb(60 64 67 / 30%),
+		0 8px 12px 6px rgb(60 64 67 / 15%);
+	outline: none;
+}
+
+.button-17:focus {
+	outline: none;
+	border: 2px solid #4285f4;
+}
+
+.button-17:not(:disabled) {
+	box-shadow: rgba(60, 64, 67, 0.3) 0 1px 3px 0,
+		rgba(60, 64, 67, 0.15) 0 4px 8px 3px;
+}
+
+.button-17:not(:disabled):hover {
+	box-shadow: rgba(60, 64, 67, 0.3) 0 2px 3px 0,
+		rgba(60, 64, 67, 0.15) 0 6px 10px 4px;
+}
+
+.button-17:not(:disabled):focus {
+	box-shadow: rgba(60, 64, 67, 0.3) 0 1px 3px 0,
+		rgba(60, 64, 67, 0.15) 0 4px 8px 3px;
+}
+
+.button-17:not(:disabled):active {
+	box-shadow: rgba(60, 64, 67, 0.3) 0 4px 4px 0,
+		rgba(60, 64, 67, 0.15) 0 8px 12px 6px;
+}
+
+.button-17:disabled {
+	box-shadow: rgba(60, 64, 67, 0.3) 0 1px 3px 0,
+		rgba(60, 64, 67, 0.15) 0 4px 8px 3px;
 }
