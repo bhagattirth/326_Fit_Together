@@ -29,9 +29,10 @@
 						placeholder="my@email.com"
 					/>
 					<span class="field__label-wrap" aria-hidden="true">
-						<span class="field__label">Email</span>
+						<span id="email-label" class="field__label">Email</span>
 					</span>
 				</div>
+				<p id="email-error-text" hidden="true">Invalid email</p>
 
 				<div class="field field_v1 login-creds">
 					<label for="password" class="ha-screen-reader form-label"
@@ -44,9 +45,15 @@
 						placeholder="Password"
 					/>
 					<span class="field__label-wrap" aria-hidden="true">
-						<span class="field__label">Password</span>
+						<span id="password-label" class="field__label"
+							>Password</span
+						>
 					</span>
 				</div>
+				<p id="password-error-text" hidden="true">
+					Password must be 8 characters long, 1 uppercase, 1
+					lowercase, and 1 special/number character
+				</p>
 			</form>
 			<p id="error-text" hidden="true">
 				Invalid email/password combination
@@ -97,12 +104,16 @@
 										class="field__label-wrap"
 										aria-hidden="true"
 									>
-										<span class="field__label"
+										<span
+											class="field__label"
+											id="first-name-text"
 											>First Name</span
 										>
 									</span>
 								</div>
-
+								<p id="first-name-error-text" hidden="true">
+									Please enter a first name
+								</p>
 								<div class="signup-input field field_v1">
 									<label
 										for="lastName"
@@ -119,12 +130,16 @@
 										class="field__label-wrap"
 										aria-hidden="true"
 									>
-										<span class="field__label"
+										<span
+											class="field__label"
+											id="last-name-text"
 											>Last Name</span
 										>
 									</span>
 								</div>
-
+								<p id="last-name-error-text" hidden="true">
+									Please enter a last name
+								</p>
 								<div class="signup-input field field_v1">
 									<label
 										for="newEmail"
@@ -141,10 +156,16 @@
 										class="field__label-wrap"
 										aria-hidden="true"
 									>
-										<span class="field__label">Email</span>
+										<span
+											class="field__label"
+											id="signup-email-text"
+											>Email</span
+										>
 									</span>
 								</div>
-
+								<p id="signup-email-error-text" hidden="true">
+									Invalid email
+								</p>
 								<div class="signup-input field field_v1">
 									<label
 										for="newPassword"
@@ -161,12 +182,19 @@
 										class="field__label-wrap"
 										aria-hidden="true"
 									>
-										<span class="field__label"
+										<span
+											class="field__label"
+											id="signup-password-text"
 											>Password</span
 										>
 									</span>
 								</div>
-
+								<p
+									id="signup-password-error-text"
+									hidden="true"
+								>
+									Invalid Password
+								</p>
 								<div class="signup-input field field_v1">
 									<label
 										for="confirmPassword"
@@ -183,17 +211,21 @@
 										class="field__label-wrap"
 										aria-hidden="true"
 									>
-										<span class="field__label"
+										<span
+											class="field__label"
+											id="confirm-password-text"
 											>Confirm Password</span
 										>
 									</span>
 								</div>
+								<p
+									id="confirm-password-error-text"
+									hidden="true"
+								>
+									Passwords dont match
+								</p>
 							</div>
-							<button
-								class="button-17"
-								data-bs-dismiss="modal"
-								id="signup"
-							>
+							<button class="button-17" id="signup">
 								Sign Up
 							</button>
 						</div>

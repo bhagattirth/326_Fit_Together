@@ -1,9 +1,11 @@
+import { modal } from "./htmlElements.js";
+import user from "./user.js";
+
 const urlBase = "http://localhost:5000";
 const email = document.getElementById("email");
 const pass = document.getElementById("password");
 
 const newEmail = document.getElementById("newEmail");
-const confirmEmail = document.getElementById("confirmEmail");
 const newPass = document.getElementById("newPassword");
 const confirmPass = document.getElementById("confirmPassword");
 const fName = document.getElementById("firstName");
@@ -11,7 +13,6 @@ const lName = document.getElementById("lastName");
 
 const loginBtn = document.getElementById("login");
 const signupBtn = document.getElementById("signup");
-import user from "./user.js";
 
 // email validation
 const validateEmail = (email) => {
@@ -33,17 +34,42 @@ const loginUser = async (e) => {
 	if (e.target.id !== "login") return;
 	e.stopPropagation();
 
+	let valid = true;
+
 	// email validation
 	if (!validateEmail(email.value)) {
-		alert("invalid email");
-		return;
+		const emailLabel = document.getElementById("email-label");
+		const text = document.getElementById("email-error-text");
+		text.hidden = false;
+		emailLabel.style.color = "red";
+		email.style.border = "1px solid red";
+		valid = false;
+	} else {
+		const emailLabel = document.getElementById("email-label");
+		const text = document.getElementById("email-error-text");
+		emailLabel.style.color = "black";
+		text.hidden = true;
+		email.style.border = "None";
 	}
 
 	// password validation
 	if (!validatePassword(pass.value)) {
-		alert("invalid password");
-		return;
+		const text = document.getElementById("password-error-text");
+		const passwordLabel = document.getElementById("password-label");
+		text.hidden = false;
+		passwordLabel.style.color = "red";
+		pass.style.border = "1px solid red";
+		valid = false;
+	} else {
+		const text = document.getElementById("password-error-text");
+		const passwordLabel = document.getElementById("password-label");
+		text.hidden = true;
+		passwordLabel.style.color = "black";
+		pass.style.border = "None";
 	}
+
+	// if either pass or email validation fails, exit function
+	if (!valid) return;
 
 	// attempt to log user in
 	try {
@@ -69,6 +95,9 @@ const loginUser = async (e) => {
 		return;
 	}
 
+	const text = document.getElementById("error-text");
+	text.hidden = false;
+
 	// redirect back to homepage here
 	location.href = "profile.html";
 };
@@ -78,43 +107,89 @@ const signupUser = async (e) => {
 	if (e.target.id !== "signup") return;
 	e.stopPropagation();
 
+	let valid = true;
+
 	// email validation
 	if (!validateEmail(newEmail.value)) {
-		alert("invalid email");
-		return;
+		const text = document.getElementById("signup-email-error-text");
+		const emailText = document.getElementById("signup-email-text");
+		text.hidden = false;
+		emailText.style.color = "red";
+		newEmail.style.border = "1px solid red";
+		valid = false;
+	} else {
+		const text = document.getElementById("signup-email-error-text");
+		const emailText = document.getElementById("signup-email-text");
+		text.hidden = true;
+		emailText.style.color = "black";
+		newEmail.style.border = "None";
 	}
 
 	// password validation
 	if (!validatePassword(newPass.value)) {
-		alert(
-			"invalid password, must contain 8 characters, 1 uppercase, 1 lowercase, and 1 special or number"
-		);
-		return;
+		const text = document.getElementById("signup-password-error-text");
+		const passText = document.getElementById("signup-password-text");
+		text.hidden = false;
+		passText.style.color = "red";
+		newPass.style.border = "1px solid red";
+		valid = false;
+	} else {
+		const text = document.getElementById("signup-password-error-text");
+		const passText = document.getElementById("signup-password-text");
+		text.hidden = true;
+		passText.style.color = "black";
+		newPass.style.border = "None";
 	}
 
 	// check user entered a first name
 	if (fName.value.trim().length === 0) {
-		alert("Please enter you're first name");
-		return;
+		const text = document.getElementById("first-name-error-text");
+		const fNameText = document.getElementById("first-name-text");
+		text.hidden = false;
+		fNameText.style.color = "red";
+		fName.style.border = "1px solid red";
+		valid = false;
+	} else {
+		const text = document.getElementById("first-name-error-text");
+		const fNameText = document.getElementById("first-name-text");
+		text.hidden = true;
+		fNameText.style.color = "black";
+		fName.style.border = "None";
 	}
 
 	// check user entered last name
 	if (lName.value.trim().length === 0) {
-		alert("Please enter you're last name");
-		return;
-	}
-
-	// check users emails match
-	if (newEmail.value !== confirmEmail.value) {
-		alert("Emails don't match");
-		return;
+		const text = document.getElementById("last-name-error-text");
+		const lNameText = document.getElementById("last-name-text");
+		text.hidden = false;
+		lNameText.style.color = "red";
+		lName.style.border = "1px solid red";
+		valid = false;
+	} else {
+		const text = document.getElementById("last-name-error-text");
+		const lNameText = document.getElementById("last-name-text");
+		text.hidden = true;
+		lNameText.style.color = "black";
+		lName.style.border = "None";
 	}
 
 	// check users passwords match
 	if (newPass.value !== confirmPass.value) {
-		alert("Passwords don't match");
-		return;
+		const text = document.getElementById("confirm-password-error-text");
+		const confPassText = document.getElementById("confirm-password-text");
+		confPassText.style.color = "red";
+		text.hidden = false;
+		confirmPass.style.border = "1px solid red";
+		valid = false;
+	} else {
+		const text = document.getElementById("confirm-password-error-text");
+		const confPassText = document.getElementById("confirm-password-text");
+		confirmPass.style.border = "None";
+		confPassText.style.color = "black";
+		text.hidden = true;
 	}
+
+	if (!valid) return;
 
 	// attempt to sign user up
 	try {
