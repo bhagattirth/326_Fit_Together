@@ -83,7 +83,10 @@ const loginUser = async (e) => {
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ email: email.value, password: pass.value }),
+			body: JSON.stringify({
+				email: email.value.toLowerCase(),
+				password: pass.value,
+			}),
 		});
 		const msg = await res.json();
 
@@ -214,7 +217,7 @@ const signupUser = async (e) => {
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({
-				email: newEmail.value,
+				email: newEmail.value.toLowerCase(),
 				password: newPass.value,
 				fName: fName.value,
 				lName: lName.value,
