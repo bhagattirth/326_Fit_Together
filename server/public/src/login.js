@@ -50,6 +50,8 @@ const loginUser = async (e) => {
 		emailLabel.style.color = "black";
 		text.hidden = true;
 		email.style.border = "None";
+		email.style.borderBottom =
+			"var(--uiFieldBorderWidth) solid var(--uiFieldBorderColorActive)";
 	}
 
 	// password validation
@@ -66,6 +68,8 @@ const loginUser = async (e) => {
 		text.hidden = true;
 		passwordLabel.style.color = "black";
 		pass.style.border = "None";
+		pass.style.borderBottom =
+			"var(--uiFieldBorderWidth) solid var(--uiFieldBorderColorActive)";
 	}
 
 	// if either pass or email validation fails, exit function
@@ -79,7 +83,10 @@ const loginUser = async (e) => {
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ email: email.value, password: pass.value }),
+			body: JSON.stringify({
+				email: email.value.toLowerCase(),
+				password: pass.value,
+			}),
 		});
 		const msg = await res.json();
 
@@ -123,6 +130,8 @@ const signupUser = async (e) => {
 		text.hidden = true;
 		emailText.style.color = "black";
 		newEmail.style.border = "None";
+		newEmail.style.borderBottom =
+			"var(--uiFieldBorderWidth) solid var(--uiFieldBorderColorActive)";
 	}
 
 	// password validation
@@ -139,6 +148,8 @@ const signupUser = async (e) => {
 		text.hidden = true;
 		passText.style.color = "black";
 		newPass.style.border = "None";
+		newPass.style.borderBottom =
+			"var(--uiFieldBorderWidth) solid var(--uiFieldBorderColorActive)";
 	}
 
 	// check user entered a first name
@@ -155,6 +166,8 @@ const signupUser = async (e) => {
 		text.hidden = true;
 		fNameText.style.color = "black";
 		fName.style.border = "None";
+		fName.style.borderBottom =
+			"var(--uiFieldBorderWidth) solid var(--uiFieldBorderColorActive)";
 	}
 
 	// check user entered last name
@@ -171,6 +184,8 @@ const signupUser = async (e) => {
 		text.hidden = true;
 		lNameText.style.color = "black";
 		lName.style.border = "None";
+		lName.style.borderBottom =
+			"var(--uiFieldBorderWidth) solid var(--uiFieldBorderColorActive)";
 	}
 
 	// check users passwords match
@@ -185,6 +200,8 @@ const signupUser = async (e) => {
 		const text = document.getElementById("confirm-password-error-text");
 		const confPassText = document.getElementById("confirm-password-text");
 		confirmPass.style.border = "None";
+		confirmPass.style.borderBottom =
+			"var(--uiFieldBorderWidth) solid var(--uiFieldBorderColorActive)";
 		confPassText.style.color = "black";
 		text.hidden = true;
 	}
@@ -200,7 +217,7 @@ const signupUser = async (e) => {
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({
-				email: newEmail.value,
+				email: newEmail.value.toLowerCase(),
 				password: newPass.value,
 				fName: fName.value,
 				lName: lName.value,
