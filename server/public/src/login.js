@@ -104,12 +104,6 @@ const signupUser = async (e) => {
 		return;
 	}
 
-	// check users emails match
-	if (newEmail.value !== confirmEmail.value) {
-		alert("Emails don't match");
-		return;
-	}
-
 	// check users passwords match
 	if (newPass.value !== confirmPass.value) {
 		alert("Passwords don't match");
