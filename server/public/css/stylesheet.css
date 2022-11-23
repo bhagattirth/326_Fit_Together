@@ -733,7 +733,13 @@ body#background {
 
 #error-text,
 #password-error-text,
-#email-error-text {
+#email-error-text,
+#signup-email-error-text,
+#signup-password-error-text,
+#first-name-error-text,
+#last-name-error-text,
+#signup-password--error-text,
+#confirm-password-error-text {
 	color: red;
 	margin: 0;
 	font-size: 0.75em;
