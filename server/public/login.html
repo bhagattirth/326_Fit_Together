@@ -29,9 +29,10 @@
 						placeholder="my@email.com"
 					/>
 					<span class="field__label-wrap" aria-hidden="true">
-						<span class="field__label">Email</span>
+						<span id="email-label" class="field__label">Email</span>
 					</span>
 				</div>
+				<p id="email-error-text" hidden="true">Invalid email</p>
 
 				<div class="field field_v1 login-creds">
 					<label for="password" class="ha-screen-reader form-label"
@@ -44,9 +45,15 @@
 						placeholder="Password"
 					/>
 					<span class="field__label-wrap" aria-hidden="true">
-						<span class="field__label">Password</span>
+						<span id="password-label" class="field__label"
+							>Password</span
+						>
 					</span>
 				</div>
+				<p id="password-error-text" hidden="true">
+					Password must be 8 characters long, 1 uppercase, 1
+					lowercase, and 1 special/number character
+				</p>
 			</form>
 			<p id="error-text" hidden="true">
 				Invalid email/password combination

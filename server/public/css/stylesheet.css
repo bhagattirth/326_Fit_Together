@@ -3,6 +3,12 @@ body {
 	margin: 0;
 }
 
+.custom-modal {
+	width: 400px;
+	height: 400px;
+	border-radius: 10px;
+}
+
 /* NAV SECTION */
 .nav-link {
 	color: white;
@@ -707,6 +713,7 @@ body#background {
 }
 
 #rectangleBox {
+	height: 425px;
 	padding: 1em;
 	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 	border-radius: 10px;
@@ -724,9 +731,13 @@ body#background {
 	cursor: pointer;
 }
 
-#error-text {
+#error-text,
+#password-error-text,
+#email-error-text {
 	color: red;
 	margin: 0;
+	font-size: 0.75em;
+	text-align: left;
 }
 
 /* MATCH HISTORY*/
