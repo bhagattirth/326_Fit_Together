@@ -27,7 +27,6 @@ const dayCheckboxes = {
 };
 const selectedImageText = document.getElementById("profilePictureSelectedDiv");
 const profilePicturePreview = document.getElementById("profilePicturePreview");
-const profilePictureImage = document.getElementById("profilePicture");
 
 let profilePicture = null;
 
@@ -139,25 +138,6 @@ async function initialize(id) {
 		populateProfile(msg);
 	} catch (err) {
 		alert("Profile information could not be found");
-		return;
-	}
-
-	await setProfilePicture(id);
-}
-
-async function setProfilePicture(id) {
-	try {
-		const res = await fetch(`${urlBase}/profile/${id}/picture`, {
-			method: "GET",
-			credentials: "include",
-		});
-		if (!res.ok || res.status === 400) {
-			throw new Error("Something went wrong please try again later");
-		}
-		const msg = await res.json();
-		profilePictureImage.src = msg.profilePic;
-	} catch (err) {
-		alert("Profile Picture could not be retrieved");
 		return;
 	}
 }
