@@ -15,6 +15,7 @@
 	</head>
 	<body>
 		<div>
+			<!-- Nav bar -->
 			<nav class="navbar navbar-dark navbar-expand-lg bg-dark">
 				<div class="container-fluid">
 					<a class="navbar-brand" href="index.html" id="logo"
@@ -29,6 +30,7 @@
 
 		<br />
 
+		<!-- Entry slot 1 -->
 		<div class="accordion w-75 mx-auto" id="previousMatchesOne">
 			<div class="accordion-item">
 				<h2 class="accordion-header" id="matchOne">
@@ -41,12 +43,14 @@
 						aria-controls="collapseOne"
 					>
 						<span class="prev-matches-header">
+							<!-- Profile Image of the Member - updated by matchHistory.js -->
 							<img
 								class="card-img-top prev-match-img"
 								id="profilePic1"
 								src="#"
-								alt="Buff Dude"
+								alt="Profile Image 1"
 							/>
+							<!-- Members name and contact info filled in by matchHistory.js -->
 							<span class="prev-matches-info" id="profile1">
 							</span>
 							<br />
@@ -65,6 +69,7 @@
 								<div class="col-2 text-center">
 									<div class="card-body">
 										<br /><br />
+										<!-- Remove Match Button 1 - brings a conformation modal -->
 										<button
 											class="btn btn-danger"
 											type="button"
@@ -74,7 +79,8 @@
 										>
 											Remove Match
 										</button>
-
+										
+										<!-- Delete Conformation Modal 1 -->
 										<div class="modal" id="delModal1">
 											<div class="modal-dialog">
 												<div class="modal-content">
@@ -112,38 +118,8 @@
 												</div>
 											</div>
 										</div>
-
-										<div class="modal" id="myModal">
-											<div class="modal-dialog">
-												<div class="modal-content">
-													<div class="modal-header">
-														<h4 class="modal-title">
-															Add Workout
-														</h4>
-														<button
-															type="button"
-															class="close"
-															data-bs-dismiss="modal"
-														>
-															&times;
-														</button>
-													</div>
-													<div class="modal-body">
-														Modal body..
-													</div>
-													<div class="modal-footer">
-														<button
-															type="button"
-															class="btn btn-danger"
-															data-bs-dismiss="modal"
-														>
-															Close
-														</button>
-													</div>
-												</div>
-											</div>
-										</div>
 										<br /><br />
+										<!-- preference button 1 - clicking brings preference modal-->
 										<button
 											value="1"
 											;
@@ -155,6 +131,8 @@
 										>
 											View Availability Preferences
 										</button>
+
+										<!-- Preference modal 1 displays members workout days prefered -->
 										<div class="modal" id="prefModal1">
 											<div class="modal-dialog">
 												<div class="modal-content">
@@ -172,6 +150,7 @@
 														</button>
 													</div>
 													<div class="modal-body">
+														<!-- Members prefered workout days - Filled in By matchHistory.js -->
 														<span
 															id="prefDate1"
 														></span>
@@ -180,6 +159,8 @@
 											</div>
 										</div>
 										<br /><br />
+
+										<!-- Member Rating Dropdown 1 created in matchHistory.js -->
 										<label for="selectRating1"
 											>Rate This Workout Partner:</label
 										>
@@ -190,6 +171,8 @@
 											id="selectRating1"
 										></select>
 										<br />
+
+										<!-- Update Rating Button 1 -->
 										<button
 											type="button"
 											id="updateRating1"
@@ -205,6 +188,7 @@
 										<h2>Past Workouts</h2>
 										<div class="row">
 											<div class="col-8">
+												<!-- Workout Carousel 1 - Filled in by matchHistory.js -->
 												<div
 													id="carousel1"
 													class="carousel slide"
@@ -212,6 +196,7 @@
 												></div>
 											</div>
 											<div class="col-4">
+												<!-- add workout button 1 - clicking will bring add workout modal -->
 												<div class="card">
 													<div class="card-body">
 														<h3 class="card-title">
@@ -228,6 +213,7 @@
 															data-bs-toggle="modal"
 															data-bs-target="#myModal1"
 														></button>
+														<!-- add workout modal 1 -->
 														<div
 															class="modal"
 															id="myModal1"
@@ -346,6 +332,7 @@
 			</div>
 		</div>
 
+		<!-- Entry Slot 2 -->
 		<div class="accordion w-75 mx-auto" id="previousMatchesTwo">
 			<div class="accordion-item">
 				<h2 class="accordion-header" id="matchTwo">
@@ -358,12 +345,14 @@
 						aria-controls="collapseTwo"
 					>
 						<span class="prev-matches-header">
+							<!-- Profile Image of the Member - updated by matchHistory.js -->
 							<img
 								class="card-img-top prev-match-img"
 								src="#"
-								alt="Buff Dude"
+								alt="Profile Image 2"
 								id="profilePic2"
 							/>
+							<!-- Members name and contact info filled in by matchHistory.js -->
 							<span class="prev-matches-info" id="profile2">
 							</span>
 							<br />
@@ -384,6 +373,8 @@
 								>
 									<div class="card-body">
 										<br /><br />
+
+										<!-- Remove Match Button 2 - brings a conformation modal -->
 										<button
 											class="btn btn-danger"
 											type="button"
@@ -393,6 +384,8 @@
 										>
 											Remove Match
 										</button>
+
+										<!-- Remove Confirmation Modal 2 -->
 										<div class="modal" id="delModal2">
 											<div class="modal-dialog">
 												<div class="modal-content">
@@ -432,6 +425,8 @@
 										</div>
 
 										<br /><br />
+
+										<!-- preference button 2 - clicking brings preference modal-->
 										<button
 											class="btn btn-success"
 											type="button"
@@ -442,6 +437,7 @@
 											View Availability Preferences
 										</button>
 
+										<!-- Preference modal 2 displays members workout days prefered -->
 										<div class="modal" id="prefModal2">
 											<div class="modal-dialog">
 												<div class="modal-content">
@@ -459,6 +455,7 @@
 														</button>
 													</div>
 													<div class="modal-body">
+														<!-- Members prefered workout days - Filled in By matchHistory.js -->
 														<span
 															id="prefDate2"
 														></span>
@@ -468,6 +465,7 @@
 										</div>
 
 										<br /><br />
+										<!-- Member Rating Dropdown 2 created in matchHistory.js -->
 										<label for="selectRating2"
 											>Rate This Workout Partner:</label
 										>
@@ -478,6 +476,7 @@
 											id="selectRating2"
 										></select>
 										<br />
+										<!-- Update Rating Button 2 -->
 										<button
 											type="button"
 											id="updateRating2"
@@ -493,6 +492,7 @@
 										<h2>Past Workouts</h2>
 										<div class="row">
 											<div class="col-8">
+												<!-- Workout Carousel 2 - Filled in by matchHistory.js -->
 												<div
 													id="carousel2"
 													class="carousel slide"
@@ -500,6 +500,7 @@
 												></div>
 											</div>
 											<div class="col-4">
+												<!-- add workout button 2 - clicking will bring add workout modal -->
 												<div class="card">
 													<div class="card-body">
 														<h3 class="card-title">
@@ -516,6 +517,7 @@
 															data-bs-toggle="modal"
 															data-bs-target="#myModal2"
 														></button>
+														<!-- add workout modal 2 -->
 														<div
 															class="modal"
 															id="myModal2"
@@ -636,6 +638,7 @@
 			</div>
 		</div>
 
+		<!-- Entry Slot 3 -->
 		<div class="accordion w-75 mx-auto" id="previousMatchesThree">
 			<div class="accordion-item">
 				<h2 class="accordion-header" id="matchThree">
@@ -648,12 +651,14 @@
 						aria-controls="collapseThree"
 					>
 						<span class="prev-matches-header">
+							<!-- Profile Image of the Member - updated by matchHistory.js -->
 							<img
 								class="card-img-top prev-match-img"
 								src="#"
-								alt="Buff Dude"
+								alt="Profile Image 3"
 								id="profilePic3"
 							/>
+							<!-- Members name and contact info filled in by matchHistory.js -->
 							<span class="prev-matches-info" id="profile3">
 							</span>
 							<br />
@@ -674,6 +679,7 @@
 								>
 									<div class="card-body">
 										<br /><br />
+										<!-- Remove member button 3 brings up remove confirmation modal -->
 										<button
 											class="btn btn-danger"
 											type="button"
@@ -683,6 +689,8 @@
 										>
 											Remove Match
 										</button>
+
+										<!-- Remove Confirmation modal 3 -->
 										<div class="modal" id="delModal3">
 											<div class="modal-dialog">
 												<div class="modal-content">
@@ -721,6 +729,8 @@
 											</div>
 										</div>
 										<br /><br />
+
+										<!-- preference button 3 - clicking brings preference modal-->
 										<button
 											class="btn btn-success"
 											type="button"
@@ -730,6 +740,8 @@
 										>
 											View Availability Preferences
 										</button>
+										<!-- Preference modal 3 displays members workout days prefered -->
+
 										<div class="modal" id="prefModal3">
 											<div class="modal-dialog">
 												<div class="modal-content">
@@ -747,6 +759,7 @@
 														</button>
 													</div>
 													<div class="modal-body">
+														<!-- Members prefered workout days - Filled in By matchHistory.js -->
 														<span
 															id="prefDate3"
 														></span>
@@ -756,6 +769,7 @@
 										</div>
 
 										<br /><br />
+										<!-- Member Rating Dropdown 3 created in matchHistory.js -->
 										<label for="selectRating3"
 											>Rate This Workout Partner:</label
 										>
@@ -766,6 +780,7 @@
 											id="selectRating3"
 										></select>
 										<br />
+										<!-- Update Rating Button 3 -->
 										<button
 											type="button"
 											id="updateRating3"
@@ -781,6 +796,7 @@
 										<h2>Past Workouts</h2>
 										<div class="row">
 											<div class="col-8">
+												<!-- Workout Carousel 3 - Filled in by matchHistory.js -->
 												<div
 													id="carousel3"
 													class="carousel slide"
@@ -788,6 +804,7 @@
 												></div>
 											</div>
 											<div class="col-4">
+												<!-- add workout button 3 - clicking will bring add workout modal -->
 												<div class="card">
 													<div class="card-body">
 														<h3 class="card-title">
@@ -804,6 +821,7 @@
 															data-bs-toggle="modal"
 															data-bs-target="#myModal3"
 														></button>
+														<!-- add workout modal 3 -->
 														<div
 															class="modal"
 															id="myModal3"
