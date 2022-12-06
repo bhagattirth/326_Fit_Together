@@ -69,6 +69,7 @@ async function validateUser() {
 	logoutBtn.addEventListener("click", user.logout);
 }
 
+// Initializes the find a fit page by pulling the potential matches of the user
 async function initialize(id) {
 	try {
 		const res = await fetch(`${urlBase}/matches/${id}/potential`, {
@@ -89,9 +90,12 @@ async function initialize(id) {
 	);
 	const potentialMatchesKeys = Object.keys(potentialMatches);
 	curPotentialMatches = potentialMatchesKeys.length;
+
+	// Checks if there are potential matches to scroll through
 	if (curPotentialMatches === 0) {
 		alertNoMoreMatches();
 	} else {
+		// Generates the potential match carousel items if they exist
 		let firstIteration = true;
 		carouselDiv.innerHTML = "";
 		for (const potentialMatchID of potentialMatchesKeys) {
@@ -108,27 +112,9 @@ async function initialize(id) {
 			firstIteration = false;
 		}
 	}
-
-	setProfilePicture(id);
 }
 
-async function setProfilePicture(id) {
-	try {
-		const res = await fetch(`${urlBase}/profile/${id}/picture`, {
-			method: "GET",
-			credentials: "include",
-		});
-		if (!res.ok || res.status === 400) {
-			throw new Error("Something went wrong please try again later");
-		}
-		const msg = await res.json();
-		profilePictureImage.src = msg.profilePic;
-	} catch (err) {
-		// alert("Profile Picture could not be retrieved");
-		return;
-	}
-}
-
+// Accepts a match when the accept button is pressed
 async function acceptMatch(otherID) {
 	try {
 		const res = await fetch(
@@ -145,10 +131,12 @@ async function acceptMatch(otherID) {
 		alert("Unable to Accept Match");
 		return;
 	}
+	// Removes the match from the list of options and adds another potential match if more exist that aren't shown
 	removeFromCarousel(otherID);
 	addPotentialToCarousel();
 }
 
+// Adds a potential match that was previously not shown to the list of potential matches that are shown
 function addPotentialToCarousel() {
 	const potentialMatch = user.getPotentialMatches(1);
 	const keys = Object.keys(potentialMatch);
@@ -162,6 +150,7 @@ function addPotentialToCarousel() {
 	}
 }
 
+// Removes a currently shown potential match from the list of potential matches that are shown
 function removeFromCarousel(id) {
 	curPotentialMatches--;
 	if (curPotentialMatches === 0) {
@@ -171,6 +160,7 @@ function removeFromCarousel(id) {
 	document.getElementById("carouselItem" + id).remove();
 }
 
+// Alerts the user that there are no more potential matches currently
 function alertNoMoreMatches() {
 	alert("No more potential matches remaining. Please come back later.");
 	carouselDiv.innerHTML = `<h1>No More Matches :(<h1>
@@ -179,6 +169,7 @@ function alertNoMoreMatches() {
 	carouselDiv.style.height = "80vh";
 }
 
+// Denies the current match
 async function denyMatch(otherID) {
 	try {
 		const res = await fetch(
@@ -195,15 +186,19 @@ async function denyMatch(otherID) {
 		alert("Unable to Deny Match");
 		return;
 	}
+
+	// Removes the match from the list of options and adds another potential match if more exist that aren't shown
 	removeFromCarousel(otherID);
 	addPotentialToCarousel();
 }
 
+// Generates a carousel item to shown a potential match that can be accepted or denied
 function generateCarouselItem(id, profile, profileImage, active = false) {
 	const upperCaseDays = [];
 	for (const day of profile["preferredDays"]) {
 		upperCaseDays.push(day.charAt(0).toUpperCase() + day.slice(1));
 	}
+	// The HTML for the potential match
 	const carouselItemInnterHTML = `<img
 							class="caro-img"
 							src=${profileImage}
