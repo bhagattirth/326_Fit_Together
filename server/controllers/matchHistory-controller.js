@@ -29,6 +29,7 @@ export const getProfileInfo = (req, res, next) => {
 				name: foundItem.fName + " " + foundItem.lName,
 				preference: foundItem.prefDays,
 				email: foundItem.email,
+				phone: foundItem.phoneNumber
 			};
 			res.status(200).send(JSON.stringify(info));
 		}
