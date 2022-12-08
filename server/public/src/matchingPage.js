@@ -162,10 +162,9 @@ function removeFromCarousel(id) {
 
 // Alerts the user that there are no more potential matches currently
 function alertNoMoreMatches() {
-	alert("No more potential matches remaining. Please come back later.");
-	carouselDiv.innerHTML = `<h1>No More Matches :(<h1>
+	carouselDiv.innerHTML = `<div id="noMoreMatches"><h1>No More Matches :(<h1>
 			</br>
-			<h2>Try again later!<h2>`;
+			<h2>Try again later!<h2></div>`;
 	carouselDiv.style.height = "80vh";
 }
 
