@@ -1,12 +1,15 @@
 import user from "./user.js";
 const urlBase = "http://localhost:5000";
+
+//Keeps track of the members ids that are being displayed for the user
 let userMap = { user1: null, user2: null, user3: null };
+
+//Indexes to keep track of prev and next page
 let firstEntryOnPage = 0;
 let lastEntryOnPage = 2;
-let jsonSize = 0;
-const profilePictureImage = document.getElementById("profilePicture");
 
-await validateUser();
+//Used for prev and next page to determine if there is a next page
+let jsonSize = 0;
 
 async function validateUser() {
 	// validate accessToken
@@ -67,25 +70,13 @@ async function validateUser() {
 	logoutBtn.addEventListener("click", user.logout);
 }
 
-async function logout() {
-	const res = await fetch(`${urlBase}/auth/logout`, {
-		method: "POST",
-		credentials: "include",
-		headers: { "Content-type": "application/json" },
-		body: null,
-	});
-
-	const msg = await res.json();
-
-	if (res.ok) {
-		location.href = "index.html";
-	} else {
-		alert("failed to logout");
-	}
-}
-
+//The main function - Loads Past Member Entries into the page
 const loadUsers = async (id) => {
+
+	//The array of past workouts of the user that is fetch from the database
 	let json = null;
+
+	//Attempts to fetch the pastworkout array
 	try {
 		const res = await fetch(`${urlBase}/matchHistory/${id}/getPast`, {
 			method: "GET",
@@ -101,26 +92,50 @@ const loadUsers = async (id) => {
 		return;
 	}
 
+	//resets the map
 	userMap = { user1: null, user2: null, user3: null };
-
 	jsonSize = json.length;
 
+	//Will go from 1 upto 3 - used to add things into usermap
 	let count = 1;
+
+	//Grabs firstEntryOnPageth member in the array upto lastEntryOnPageth member (at most 3)
 	let i = firstEntryOnPage;
 	while (i <= lastEntryOnPage && i < json.length) {
-		const userInfo = await getUserInfo(json[i].id);
+		//Grabs essential member data used for displaying
+		const userInfo = await getMembersInfo(json[i].id);
 
+		//adds member id to the userMap to make it easier to do api calls
 		userMap["user" + count] = json[i].id;
+
+		//Uses Essential member data to display it on one of the entries
 		addProfileInfo(userInfo, count);
+
+		//Creates carousel for a spefic entry
 		createCarousel(json[i], count);
+
+		//Displays current user's rating for the member
 		showRating(json[i], count);
+
 		i++;
 		count++;
 	}
+
+	//Hide or reveal entry slots depending on how many users are going to be displayed
 	displayUser();
 };
 
-async function getUserInfo(id) {
+
+/*
+	Takes member's id and returns a dictionary of member info needed for displaying
+	member info:{
+		imgURL: Image URL
+		name: Member's first and last name,
+		preference: Member's prefered workout days,
+		email: member's email,
+	}
+*/
+async function getMembersInfo(id) {
 	try {
 		const res = await fetch(
 			`${urlBase}/matchHistory/${id}/getProfileInfo`,
@@ -141,25 +156,31 @@ async function getUserInfo(id) {
 	}
 }
 
+//Uses member info to display it on the ith entry slot
 function addProfileInfo(userData, i) {
+
+	//Gets the elements for a entry slot that needs to be updated
 	let profileInfo = document.getElementById("profile" + i);
 	let profilePic = document.getElementById("profilePic" + i);
 	let prefDate = document.getElementById("prefDate" + i);
 	let name = document.createElement("SPAN");
 
+	//Displays the members full name on the entry slot
 	name.classList.add("prev-matches-name");
 	name.innerHTML = userData.name;
 
+	//Displays user email and profile img on the entry slot
 	profileInfo.innerHTML = "";
 	profileInfo.appendChild(name);
 	profileInfo.innerHTML += "</br>";
-	// profileInfo.innerHTML+= "Last Workout On: " + userData.lastWorkout;
 	profileInfo.innerHTML += "</br>";
 	profileInfo.innerHTML += "Contact: " + userData.email;
 	profilePic.src = userData.imgURL;
 
+	//Resets all Date Text if it exist
 	prefDate.innerText = "";
 
+	//If Member has prefered day set then it adds it to the pref date modal
 	if (userData.preference.length > 0) {
 		for (let i = 0; i < userData.preference.length; i++) {
 			if (userData.preference.length - 1 === i) {
@@ -173,7 +194,19 @@ function addProfileInfo(userData, i) {
 	}
 }
 
+//Takes in a workout information and creates a carousel on the ith entry
 function createCarousel(pastWorkouts, i) {
+
+	/*
+		Appending Structure:
+		carousel <- carouselBody <- cards created from createWorkoutCard,
+		leftButton, rightButton
+
+		leftButton <- spanIcon, spanIcon2
+		rightButton <- spanIconR, spanIconR2
+	*/
+
+	//The information needed to display workouts on carousel (all arrays)
 	const workouts = pastWorkouts.workout;
 	const workoutTitles = pastWorkouts.workoutTitle;
 	const workoutDates = pastWorkouts.date;
@@ -185,6 +218,7 @@ function createCarousel(pastWorkouts, i) {
 
 	let isFirst = true;
 
+	//Creates workouts cards and appends it the carousel for element in array
 	for (let i in workouts) {
 		createWorkoutCard(
 			workouts[i],
@@ -196,7 +230,7 @@ function createCarousel(pastWorkouts, i) {
 		isFirst = false;
 	}
 
-	//Buttons
+	//Buttons for moving back and worth in the carousel
 	let leftButton = document.createElement("button");
 	leftButton.classList.add("carousel-control-prev", "carousel-arrow-color");
 	setAttributes(leftButton, {
@@ -241,6 +275,7 @@ function createCarousel(pastWorkouts, i) {
 	carouselBody.appendChild(rightButton);
 	carousel.appendChild(carouselBody);
 
+	//Displays Carousel if there is atleast one workout with that memeber
 	if (workouts.length === 0) {
 		document.getElementById("carouselRightButton" + i).style.display =
 			"none";
@@ -252,24 +287,17 @@ function createCarousel(pastWorkouts, i) {
 	}
 }
 
-function getNextPage() {
-	if (lastEntryOnPage + 1 < jsonSize) {
-		firstEntryOnPage = firstEntryOnPage + 3;
-		lastEntryOnPage = lastEntryOnPage + 3;
-		loadUsers(user.getUserId());
-	}
-}
-
-function prevPage() {
-	if (0 < lastEntryOnPage - 3) {
-		firstEntryOnPage = firstEntryOnPage - 3;
-		lastEntryOnPage = lastEntryOnPage - 3;
-		loadUsers(user.getUserId());
-	}
-}
-
+//Helper function that creates workout cards and adds it to carousel
 function createWorkoutCard(exercises, title, date, cBody, isFirst) {
+
+	/* Appending Structure for the card:
+	   cBody (the carousel body) <- cardItem (workout card)
+	   cardItem <- card <- cardBody <- card-Title, boldText, exerciseText
+	*/
+
 	let carouselItem = document.createElement("div");
+
+	//If it is the first card, we set it active on the carousel
 	isFirst
 		? carouselItem.classList.add("carousel-item", "active")
 		: carouselItem.classList.add("carousel-item");
@@ -280,11 +308,13 @@ function createWorkoutCard(exercises, title, date, cBody, isFirst) {
 	let cardBody = document.createElement("div");
 	card.classList.add("card-body");
 
+	//Adds date of the workout into the tile of the card
 	let cardTitle = document.createElement("h3");
 	cardTitle.classList.add("card-title");
 	cardTitle.innerHTML = date;
 	cardBody.appendChild(cardTitle);
 
+	//adds workout Type to boldText
 	let boldText = document.createElement("strong");
 	boldText.innerHTML = title + ":";
 	cardBody.appendChild(boldText);
@@ -292,6 +322,7 @@ function createWorkoutCard(exercises, title, date, cBody, isFirst) {
 	let exerciseText = document.createElement("p");
 	exerciseText.classList.add("card-text");
 
+	//Adds workouts to the card
 	for (let i = 0; i < exercises.length; i++) {
 		exerciseText.innerHTML += exercises[i] + "</br>";
 	}
@@ -302,10 +333,12 @@ function createWorkoutCard(exercises, title, date, cBody, isFirst) {
 	cBody.appendChild(carouselItem);
 }
 
+//Displays user's rating for that member and creates the rating dropdown
 function showRating(userData, i) {
 	let dropDown = document.getElementById("selectRating" + i);
 	dropDown.innerHTML = "";
 
+	//Creates the rating dropdown 
 	["1/5", "2/5", "3/5", "4/5", "5/5"].forEach(function (e) {
 		let option = document.createElement("option");
 		option.setAttribute("value", e.substring(0, 1));
@@ -319,17 +352,22 @@ function showRating(userData, i) {
 	});
 }
 
+//Helper Function Used to add multiple attributes at once
 function setAttributes(el, attrs) {
 	for (var key in attrs) {
 		el.setAttribute(key, attrs[key]);
 	}
 }
 
+//Button Event To add a valid workout to a entry
 const addWorkoutListner = (i) => async () => {
+
+	//Reads the workout data entered into the fields
 	let workouts = document.getElementById("workout" + i).value;
 	let date = document.getElementById("date" + i).value;
 	let wType = document.getElementById("wType" + i).value;
 
+	//Adds workout data to pastworkout if it is valid
 	if (
 		workouts === "" ||
 		date === "" ||
@@ -355,6 +393,7 @@ const addWorkoutListner = (i) => async () => {
 		});
 		const msg = await res.json();
 
+		//Reloads page page with the new workout if it was successful added
 		if (!res.ok) {
 			alert("Failed to Add Workout");
 		} else {
@@ -363,6 +402,7 @@ const addWorkoutListner = (i) => async () => {
 	}
 };
 
+//Button Event To Update a members rating
 const updateRatingListiner = (i) => async () => {
 	let newRating = document.getElementById("selectRating" + i).value;
 	const res = await fetch(`${urlBase}/matchHistory/ratingUpdate`, {
@@ -384,6 +424,7 @@ const updateRatingListiner = (i) => async () => {
 	}
 };
 
+//Button Event Used to Delete User From User workout record
 const deleteUserListiner = (i) => async () => {
 	let userI = "user" + i;
 
@@ -407,6 +448,7 @@ const deleteUserListiner = (i) => async () => {
 	}
 };
 
+//Displays entry slots if there is member data on that slot
 function displayUser() {
 	if (userMap["user1"] !== null) {
 		document.getElementById("previousMatchesOne").style.display = "";
@@ -427,31 +469,78 @@ function displayUser() {
 	}
 }
 
+//Next button event that allows user to move to the next page
+function getNextPage() {
+	if (lastEntryOnPage + 1 < jsonSize) {
+		firstEntryOnPage = firstEntryOnPage + 3;
+		lastEntryOnPage = lastEntryOnPage + 3;
+
+		//Reloads entries with next members data
+		loadUsers(user.getUserId());
+	}
+}
+
+//Previous button event that allows user to go to the last page
+function prevPage() {
+
+	//Checks if it can move move pages
+	if (0 < lastEntryOnPage - 3) {
+		firstEntryOnPage = firstEntryOnPage - 3;
+		lastEntryOnPage = lastEntryOnPage - 3;
+
+		//Reloads entries with previous members data
+		loadUsers(user.getUserId());
+	}
+}
+
+
+await validateUser();
+
+//Loads users past workout entries
 loadUsers(user.getUserId());
 
+//Allows user to update rating when pressing the update button for the first entry
 document
 	.getElementById("updateRating1")
 	.addEventListener("click", updateRatingListiner(1));
+
+//Allows user to add workout when adding a valid workout for entry 1 when clicking the button
 document.getElementById("add1").addEventListener("click", addWorkoutListner(1));
+
+//Removes entry 1 when clicking this button
 document
 	.getElementById("removeMatch1")
 	.addEventListener("click", deleteUserListiner(1));
 
+
+//Allows user to update rating when pressing the update button for the second entry
 document
 	.getElementById("updateRating2")
 	.addEventListener("click", updateRatingListiner(2));
+
+//Allows user to add workout when adding a valid workout for entry 2 when clicking the button
 document.getElementById("add2").addEventListener("click", addWorkoutListner(2));
+
+//Removes entry 2 when clicking the remove button
 document
 	.getElementById("removeMatch2")
 	.addEventListener("click", deleteUserListiner(2));
 
+
+//Allows user to update rating when pressing the update button for the third entry
 document
 	.getElementById("updateRating3")
 	.addEventListener("click", updateRatingListiner(3));
+
+//Allows user to add workout when adding a valid workout for entry 2 when clicking the button
 document.getElementById("add3").addEventListener("click", addWorkoutListner(3));
+
+//Removes entry 3 when clicking the remove button
 document
 	.getElementById("removeMatch3")
 	.addEventListener("click", deleteUserListiner(3));
 
+
+//Enables buttons the prev and next buttons to go back and forth on pages
 document.getElementById("next").addEventListener("click", getNextPage);
 document.getElementById("back").addEventListener("click", prevPage);

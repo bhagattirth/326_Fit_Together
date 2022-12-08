@@ -1,5 +1,6 @@
 import user from "./user.js";
 const urlBase = "http://localhost:5000";
+// Import elements from html
 const editProfileButton = document.getElementById("editProfile");
 const updateProfileButton = document.getElementById("updateProfile");
 const selectProfilePictureButton = document.getElementById(
@@ -27,10 +28,10 @@ const dayCheckboxes = {
 };
 const selectedImageText = document.getElementById("profilePictureSelectedDiv");
 const profilePicturePreview = document.getElementById("profilePicturePreview");
-const profilePictureImage = document.getElementById("profilePicture");
 
 let profilePicture = null;
 
+// The text boxes to be read from
 const textBoxes = [
 	firstName,
 	lastName,
@@ -39,6 +40,7 @@ const textBoxes = [
 	workoutLength,
 ];
 
+// Setting up button event listeners
 selectURLButton.addEventListener("click", updateProfilePicture);
 editProfileButton.addEventListener("click", editProfile);
 updateProfileButton.addEventListener("click", async () => {
@@ -48,6 +50,7 @@ deleteProfileButton.addEventListener("click", async () => {
 	await deleteProfile(user.getUserId());
 });
 
+// Sets the user profile picture in the top right
 async function updateProfilePicture() {
 	var image = new Image();
 	image.onload = function () {
@@ -63,6 +66,7 @@ async function updateProfilePicture() {
 	image.src = imageURL.value;
 }
 
+// Validates user then gets information pertaining to the user and displays it
 await validateUser();
 await initialize(user.getUserId());
 
@@ -86,6 +90,7 @@ async function validateUser() {
 			<img
 				class="user-icon dropdown-toggle"
 				data-bs-toggle="dropdown"
+				id = "profilePictureInDropdown"
 				src="${imageLink}"
 				alt="user icon"
 			/>
@@ -125,6 +130,7 @@ async function validateUser() {
 	logoutBtn.addEventListener("click", user.logout);
 }
 
+// Fetches user information before populating fields
 async function initialize(id) {
 	try {
 		const res = await fetch(`${urlBase}/profile/${id}/information`, {
@@ -141,27 +147,9 @@ async function initialize(id) {
 		alert("Profile information could not be found");
 		return;
 	}
-
-	await setProfilePicture(id);
 }
 
-async function setProfilePicture(id) {
-	try {
-		const res = await fetch(`${urlBase}/profile/${id}/picture`, {
-			method: "GET",
-			credentials: "include",
-		});
-		if (!res.ok || res.status === 400) {
-			throw new Error("Something went wrong please try again later");
-		}
-		const msg = await res.json();
-		profilePictureImage.src = msg.profilePic;
-	} catch (err) {
-		alert("Profile Picture could not be retrieved");
-		return;
-	}
-}
-
+// Enables editing of the profile by enabling user input
 function editProfile() {
 	editProfileButton.disabled = true;
 	updateProfileButton.disabled = false;
@@ -176,7 +164,19 @@ function editProfile() {
 	deleteProfileButton.disabled = false;
 }
 
+// Updates the user's profile with the set information
 async function updateProfile(id) {
+	// Form validation
+	const validationErrors = validateUserInput();
+	if (validationErrors.length > 0) {
+		const errMsg = validationErrors.reduce(
+			(prev, cur) => prev + "\n" + cur,
+			""
+		);
+		alert("The following errors exist with the profile input:" + errMsg);
+		return;
+	}
+	// Disable input for changes since editing is complete
 	deleteProfileButton.disabled = true;
 	editProfileButton.disabled = false;
 	updateProfileButton.disabled = true;
@@ -188,7 +188,11 @@ async function updateProfile(id) {
 	for (const box of Object.keys(dayCheckboxes)) {
 		dayCheckboxes[box].disabled = true;
 	}
+
+	// Generate a JSON of the profile information
 	const jsonObject = generateJSON();
+
+	// Update the user information on the database with the generated JSON
 	try {
 		const res = await fetch(`${urlBase}/profile/${id}/information`, {
 			method: "PUT",
@@ -199,15 +203,18 @@ async function updateProfile(id) {
 		if (!res.ok || res.status === 400) {
 			throw new Error("Something went wrong please try again later");
 		}
-
-		populateProfile(jsonObject);
+		//populateProfile(jsonObject);
 	} catch (err) {
 		alert("Profile changes could not be saved");
 		return;
 	}
+
+	// Clears selected image
 	selectedImageText.innerHTML = "";
 	profilePicturePreview.src = "";
 	profilePicturePreview.hidden = true;
+
+	// Updates the profile image on the server
 	if (profilePicture !== null) {
 		try {
 			const res = await fetch(`${urlBase}/profile/${id}/picture`, {
@@ -224,11 +231,14 @@ async function updateProfile(id) {
 			alert("Profile Image changes could not be saved");
 			return;
 		}
-		setProfilePicture(user.getUserId());
+		// Update profile picture on the page
+		document.getElementById("profilePictureInDropdown").src =
+			profilePicture;
 		profilePicture = null;
 	}
 }
 
+// Fills in the on screen profile information from a profile object (object returned from backend)
 function populateProfile(profileObject) {
 	firstName.value = profileObject["firstName"];
 	lastName.value = profileObject["lastName"];
@@ -243,6 +253,7 @@ function populateProfile(profileObject) {
 	}
 }
 
+// Generates a profile object from the on screen profile information
 function generateJSON() {
 	const json = {};
 	json["firstName"] = firstName.value;
@@ -262,6 +273,7 @@ function generateJSON() {
 	return json;
 }
 
+// Deletes the user profile
 async function deleteProfile(id) {
 	const deleteProfile = confirm(
 		"Are you sure to delete your profile? This action cannot be reverted."
@@ -286,4 +298,47 @@ async function deleteProfile(id) {
 		alert("Issue deleting profile. Please try again later.");
 		return;
 	}
+}
+
+// Validates that profile information fields are filled correctly
+function validateUserInput() {
+	// Pushes all errors to be displayed as they are encountered
+	const errors = [];
+	if (!firstName.value.match(/^\S.{0,30}$/))
+		errors.push(
+			"Invalid First Name (cannot begin with whitespace, must be between 1-31 characters)"
+		);
+	if (!lastName.value.match(/^\S.{0,30}$/))
+		errors.push(
+			"Invalid Last Name (cannot begin with whitespace, must be between 1-31 characters)"
+		);
+	if (
+		!(
+			phoneNumber.value.match(/^\d\d\d-\d\d\d-\d\d\d\d$/) ||
+			phoneNumber.value.match(/^\d\d\d\d\d\d\d\d\d\d$/)
+		)
+	)
+		errors.push(
+			"Invalid Phone Number (must be in XXX-XXX-XXXX or XXXXXXXXXX format)"
+		);
+	if (!workoutStyle.value.match(/^\S.{0,40}$/))
+		errors.push(
+			"Invalid Workout Style (cannot begin with whitespace, must be between 1-41 characters)"
+		);
+	if (!workoutLength.value.match(/^\d{0,2}(\.\d{0,2})?$/))
+		errors.push("Invalid Average Workout Length (must be in HH, or HH.hh)");
+	const startTimeArr = startTime.value.split(":");
+	const endTimeArr = endTime.value.split(":");
+	if (startTimeArr[0] === endTimeArr[0] && startTimeArr[1] === endTimeArr[1])
+		errors.push(
+			"Invalid Start/End Time (Start and End Time cannot be the same)"
+		);
+	let count = 0;
+	for (const dayKey of Object.keys(dayCheckboxes)) {
+		if (dayCheckboxes[dayKey].checked === true) {
+			count += 1;
+		}
+	}
+	if (count === 0) errors.push("Must Select at least on Preferred Day");
+	return errors;
 }
