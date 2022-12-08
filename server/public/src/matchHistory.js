@@ -143,7 +143,9 @@ const loadUsers = async (id) => {
 		name: Member's first and last name,
 		preference: Member's prefered workout days,
 		email: member's email,
-		phone: member's phone number
+		phone: member's phone number,
+		startTime: member's prefered start workout time,
+		endTime: member's prefered workout end time
 	}
 */
 async function getMembersInfo(id) {
@@ -200,12 +202,23 @@ function addProfileInfo(userData, i) {
 	//If Member has prefered day set then it adds it to the pref date modal
 	if (userData.preference.length > 0) {
 		for (let i = 0; i < userData.preference.length; i++) {
+			//represents the prefered days and uppercases the string
+			let day = userData.preference[i];
+			day = day.charAt(0).toUpperCase() + day.slice(1);
+
 			if (userData.preference.length - 1 === i) {
-				prefDate.innerText += userData.preference[i];
+				prefDate.innerText += day;
 			} else {
-				prefDate.innerText += userData.preference[i] + ", ";
+				prefDate.innerText += day + ", ";
 			}
 		}
+		//If Member has prefered workout times then it will be displayed
+		if(userData.startTime !== "00:00" && userData.endTime !== "00:00"){
+			prefDate.innerHTML += "</br>";
+			prefDate.innerHTML += userData.startTime + " - " + userData.endTime;
+		}
+
+
 	} else {
 		prefDate.innerText = "The Member Hasn't Set Preferred Days";
 	}
