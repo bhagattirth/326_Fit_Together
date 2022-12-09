@@ -320,6 +320,11 @@ body {
 }
 
 /* MATCH HISTORY*/
+#noWorkoutText1, 
+#noWorkoutText2 {
+	text-align: center;
+}
+
 .workouts-carousel-item {
 	height: 300px;
 }

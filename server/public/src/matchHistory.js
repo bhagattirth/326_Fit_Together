@@ -1,6 +1,15 @@
 import user from "./user.js";
 const urlBase = "http://localhost:5000";
 
+//Temporary used for testing
+document.getElementById("noWorkoutText1").style.display = "none";
+document.getElementById("noWorkoutText2").style.display = "none";
+document.getElementById("previousMatchesOne").style.display = "none";
+document.getElementById("previousMatchesTwo").style.display = "none";
+document.getElementById("previousMatchesThree").style.display = "none";
+document.getElementById("back").style.display = "none";
+document.getElementById("next").style.display = "none";
+
 //Keeps track of the members ids that are being displayed for the user
 let userMap = { user1: null, user2: null, user3: null };
 
@@ -123,6 +132,7 @@ const loadUsers = async (id) => {
 
 	//Hide or reveal entry slots depending on how many users are going to be displayed
 	displayUser();
+	showPrevAndNextButton();
 };
 
 
@@ -133,6 +143,9 @@ const loadUsers = async (id) => {
 		name: Member's first and last name,
 		preference: Member's prefered workout days,
 		email: member's email,
+		phone: member's phone number,
+		startTime: member's prefered start workout time,
+		endTime: member's prefered workout end time
 	}
 */
 async function getMembersInfo(id) {
@@ -174,7 +187,13 @@ function addProfileInfo(userData, i) {
 	profileInfo.appendChild(name);
 	profileInfo.innerHTML += "</br>";
 	profileInfo.innerHTML += "</br>";
-	profileInfo.innerHTML += "Contact: " + userData.email;
+	profileInfo.innerHTML += "Email: " + userData.email;
+	
+	//Displays phone number if member has entered one
+	if(userData.phone !== "000-000-0000"){
+		profileInfo.innerHTML += "</br>";
+		profileInfo.innerHTML += "Phone: " + userData.phone;
+	}
 	profilePic.src = userData.imgURL;
 
 	//Resets all Date Text if it exist
@@ -183,12 +202,23 @@ function addProfileInfo(userData, i) {
 	//If Member has prefered day set then it adds it to the pref date modal
 	if (userData.preference.length > 0) {
 		for (let i = 0; i < userData.preference.length; i++) {
+			//represents the prefered days and uppercases the string
+			let day = userData.preference[i];
+			day = day.charAt(0).toUpperCase() + day.slice(1);
+
 			if (userData.preference.length - 1 === i) {
-				prefDate.innerText += userData.preference[i];
+				prefDate.innerText += day;
 			} else {
-				prefDate.innerText += userData.preference[i] + ", ";
+				prefDate.innerText += day + ", ";
 			}
 		}
+		//If Member has prefered workout times then it will be displayed
+		if(userData.startTime !== "00:00" && userData.endTime !== "00:00"){
+			prefDate.innerHTML += "</br>";
+			prefDate.innerHTML += userData.startTime + " - " + userData.endTime;
+		}
+
+
 	} else {
 		prefDate.innerText = "The Member Hasn't Set Preferred Days";
 	}
@@ -218,18 +248,30 @@ function createCarousel(pastWorkouts, i) {
 
 	let isFirst = true;
 
-	//Creates workouts cards and appends it the carousel for element in array
-	for (let i in workouts) {
+	
+	//	If there is no workout listed for the member yet,
+	//	create a card reminding the user to fill in data.
+	if(workouts.length === 0){
 		createWorkoutCard(
-			workouts[i],
-			workoutTitles[i],
-			workoutDates[i],
+			[[""]],
+			[["Click to Add Workout to Add Info"]],
+			[["Add Workout Data"]],
 			carouselBody,
 			isFirst
-		);
-		isFirst = false;
+		)
+	}else{
+		//Otherwise, show the display all the workouts in the carousel
+		for (let i in workouts) {
+			createWorkoutCard(
+				workouts[i],
+				workoutTitles[i],
+				workoutDates[i],
+				carouselBody,
+				isFirst
+			);
+			isFirst = false;
+		}
 	}
-
 	//Buttons for moving back and worth in the carousel
 	let leftButton = document.createElement("button");
 	leftButton.classList.add("carousel-control-prev", "carousel-arrow-color");
@@ -274,17 +316,6 @@ function createCarousel(pastWorkouts, i) {
 	carouselBody.appendChild(leftButton);
 	carouselBody.appendChild(rightButton);
 	carousel.appendChild(carouselBody);
-
-	//Displays Carousel if there is atleast one workout with that memeber
-	if (workouts.length === 0) {
-		document.getElementById("carouselRightButton" + i).style.display =
-			"none";
-		document.getElementById("carouselLeftButton" + i).style.display =
-			"none";
-	} else {
-		document.getElementById("carouselRightButton" + i).style.display = "";
-		document.getElementById("carouselLeftButton" + i).style.display = "";
-	}
 }
 
 //Helper function that creates workout cards and adds it to carousel
@@ -372,7 +403,7 @@ const addWorkoutListner = (i) => async () => {
 		workouts === "" ||
 		date === "" ||
 		wType === "" ||
-		!date.match(/^\d{2}[./-]\d{2}[./-]\d{4}$/)
+		!date.match(/^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/]\d{4}$/)
 	) {
 		alert("Please Fill in the Fields Correctly");
 	} else {
@@ -467,6 +498,14 @@ function displayUser() {
 	} else {
 		document.getElementById("previousMatchesThree").style.display = "none";
 	}
+
+	if (userMap["user1"] === null && userMap["user2"] === null  && userMap["user3"] === null){
+		document.getElementById("noWorkoutText1").style.display = "";
+		document.getElementById("noWorkoutText2").style.display = "";
+	}else{
+		document.getElementById("noWorkoutText1").style.display = "none";
+		document.getElementById("noWorkoutText2").style.display = "none";
+	}
 }
 
 //Next button event that allows user to move to the next page
@@ -493,11 +532,27 @@ function prevPage() {
 	}
 }
 
+//Disply Next and Prev button if only there entries in the next page
+function showPrevAndNextButton(){
+	//displays the Prev button if previous entries exist
+	if(lastEntryOnPage + 1 < jsonSize){
+		document.getElementById("next").style.display = "";
+	}else{
+		document.getElementById("next").style.display = "none";
+	}
+	//displays the next button if next entries exist
+	if(0 < lastEntryOnPage - 3){
+		document.getElementById("back").style.display = "";
+	}else{
+		document.getElementById("back").style.display = "none";
+	}
+}
 
 await validateUser();
 
 //Loads users past workout entries
 loadUsers(user.getUserId());
+
 
 //Allows user to update rating when pressing the update button for the first entry
 document
