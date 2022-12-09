@@ -133,6 +133,15 @@ const loadUsers = async (id) => {
 	//Hide or reveal entry slots depending on how many users are going to be displayed
 	displayUser();
 	showPrevAndNextButton();
+
+	//If the current page is empty and there is a prev page just go back to it
+	if(
+	 userMap["user1"] === null &&
+	 userMap["user2"] === null && 
+	 userMap["user3"] === null
+	 ){
+		prevPage();
+	 }
 };
 
 

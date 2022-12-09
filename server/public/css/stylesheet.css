@@ -107,10 +107,10 @@ body {
 	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
-.carousel-item {
+.matchingPage-carousel-item {
 	height: 700px;
 	width: 500px;
-	margin: auto;
+	margin: auto; 
 	margin-top: 3em;
 	margin-bottom: 5em;
 	padding: 1.5em;
@@ -414,12 +414,6 @@ body {
 
 .carousel-item-revert{
 	height:300px;
-	margin-top: revert;
-	margin-bottom: revert;
-	padding: revert;
-	border-radius: revert;
-	background-color: revert;
-	box-shadow: revert;
 }
 
 .matchHistory-card{

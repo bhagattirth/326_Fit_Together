@@ -241,7 +241,7 @@ function generateCarouselItem(id, profile, profileImage, active = false) {
 				</div>`;
 	const carouselItemWrapper = document.createElement("div");
 	carouselItemWrapper.setAttribute("id", `${"carouselItem" + id}`);
-	carouselItemWrapper.classList.add("carousel-item");
+	carouselItemWrapper.classList.add("carousel-item", "matchingPage-carousel-item");
 	if (active) {
 		carouselItemWrapper.classList.add("active");
 	}
