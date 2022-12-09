@@ -254,9 +254,9 @@ function createCarousel(pastWorkouts, i) {
 	//	create a card reminding the user to fill in data.
 	if(workouts.length === 0){
 		createWorkoutCard(
-			[[""]],
+			[["Then the Page Will Display It"]],
 			[["Click to Add Workout to Add Info"]],
-			[["Add Workout Data"]],
+			[["No Workout Data Added"]],
 			carouselBody,
 			isFirst
 		)
@@ -331,8 +331,8 @@ function createWorkoutCard(exercises, title, date, cBody, isFirst) {
 
 	//If it is the first card, we set it active on the carousel
 	isFirst
-		? carouselItem.classList.add("carousel-item", "active", "carousel-item-revert")
-		: carouselItem.classList.add("carousel-item", "carousel-item-revert");
+		? carouselItem.classList.add("carousel-item", "active", "carousel-item-revert", "w-100")
+		: carouselItem.classList.add("carousel-item", "carousel-item-revert", "w-100");
 
 	let card = document.createElement("div");
 	card.classList.add("card", "h-100", "matchHistory-card");

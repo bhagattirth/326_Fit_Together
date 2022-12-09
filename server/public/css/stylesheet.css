@@ -325,17 +325,25 @@ body {
 	background-color: #dbd4d3;
 }
 
-#plus1,
-#plus2,
-#plus3 {
-	padding: 0;
-	border: none;
-	background: none;
-}
-
 #noWorkoutText1, 
 #noWorkoutText2 {
 	text-align: center;
+}
+
+.prev-matches-header {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.prev-matches-name {
+	font-size: 210%;
+	font-weight: 500;
+}
+
+.prev-matches-info {
+	font-size: 150%;
+	font-weight: 400;
 }
 
 .accordion-item{
@@ -394,8 +402,17 @@ body {
 	height: revert;
 }
 
+.matchHistory-fill-in{
+	background-color: #edf0f1;
+}
+
+#noRemoval1,
+#noRemoval2,
+#noRemoval3 {
+	margin-right: 1em;
+}
+
 .carousel-item-revert{
-	width: 460px;
 	height:300px;
 	margin-top: revert;
 	margin-bottom: revert;
@@ -420,10 +437,6 @@ body {
 	height: 300px;
 }
 
-.matchHistory-fill-in{
-	background-color: #edf0f1;
-}
-
 .carousel-control-next,
 .carousel-control-prev,
 .carousel-indicators {
@@ -437,8 +450,17 @@ body {
 
 .add-workout-icon {
 	object-fit: cover;
+	filter: grayscale(95%);
 	width: 140px;
 	height: 140px;
+}
+
+#plus1,
+#plus2,
+#plus3 {
+	padding: 0;
+	border: none;
+	background: none;
 }
 
 .prev-match-img {
@@ -448,21 +470,7 @@ body {
 	margin-right: 4em;
 }
 
-.prev-matches-header {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
 
-.prev-matches-name {
-	font-size: 210%;
-	font-weight: 500;
-}
-
-.prev-matches-info {
-	font-size: 150%;
-	font-weight: 400;
-}
 
 .hidden-file-picker {
 	display: none;
