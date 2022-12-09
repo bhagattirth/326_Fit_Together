@@ -13,7 +13,7 @@
 		/>
 		<link href="./css/stylesheet.css" rel="stylesheet" />
 	</head>
-	<body>
+	<body id="matchHistory-background">
 		<div>
 			<!-- Nav bar -->
 			<nav class="navbar navbar-dark navbar-expand-lg bg-dark">
@@ -28,7 +28,8 @@
 			</nav>
 		</div>
 
-		<br />
+		<h1 class="title"> Match History</h1>
+		<br/>
 
 		<h2 id="noWorkoutText1"> There Is Nothing Here</h2>
 		<h5 id ="noWorkoutText2"> Go Get A Match First!</h5>
@@ -73,7 +74,7 @@
 										<br /><br />
 										<!-- Remove Match Button 1 - brings a conformation modal -->
 										<button
-											class="btn btn-danger"
+											class="matchHistory-btn"
 											type="button"
 											id="removeOne"
 											data-bs-toggle="modal"
@@ -85,30 +86,35 @@
 										<!-- Delete Conformation Modal 1 -->
 										<div class="modal" id="delModal1">
 											<div class="modal-dialog">
-												<div class="modal-content">
+												<div class="modal-content modal-revert">
 													<div class="modal-header">
 														<h4 class="modal-title">
 															Are You Sure?
 														</h4>
 														<button
 															type="button"
-															class="close"
+															class="close matchHistory-btn"
 															data-bs-dismiss="modal"
 														>
 															&times;
 														</button>
 													</div>
 													<div class="modal-body">
-														<div class="form-group">
+														<div class="form-group form-group-revert">
+															<p> 
+																Removing the match will permenantly 
+																remove the match history and it will prevent
+																you from getting matched up with them again.
+															</p>
 															<button
-																class="btn btn-success"
+																class="matchHistory-btn"
 																data-bs-dismiss="modal"
 															>
 																No
 															</button>
 															<button
 																type="button"
-																class="btn btn-danger"
+																class="matchHistory-btn"
 																data-bs-dismiss="modal"
 																id="removeMatch1"
 																value="1"
@@ -125,7 +131,7 @@
 										<button
 											value="1"
 											;
-											class="btn btn-success"
+											class="matchHistory-btn"
 											type="button"
 											id="availability1"
 											data-bs-toggle="modal"
@@ -137,7 +143,7 @@
 										<!-- Preference modal 1 displays members workout days prefered -->
 										<div class="modal" id="prefModal1">
 											<div class="modal-dialog">
-												<div class="modal-content">
+												<div class="modal-content modal-revert">
 													<div class="modal-header">
 														<h4 class="modal-title">
 															Member's Workout
@@ -145,7 +151,7 @@
 														</h4>
 														<button
 															type="button"
-															class="close"
+															class="close matchHistory-btn"
 															data-bs-dismiss="modal"
 														>
 															&times;
@@ -178,7 +184,7 @@
 										<button
 											type="button"
 											id="updateRating1"
-											class="btn btn-success"
+											class="matchHistory-btn"
 										>
 											Update
 										</button>
@@ -199,7 +205,7 @@
 											</div>
 											<div class="col-4">
 												<!-- add workout button 1 - clicking will bring add workout modal -->
-												<div class="card">
+												<div class="card add-workout-card">
 													<div class="card-body">
 														<h3 class="card-title">
 															Add Workout
@@ -210,6 +216,7 @@
 															alt="Plus Symbol"
 														/>
 														<button
+															id="plus1"
 															class="btn btn-transparent stretched-link"
 															type="button"
 															data-bs-toggle="modal"
@@ -224,7 +231,7 @@
 																class="modal-dialog"
 															>
 																<div
-																	class="modal-content"
+																	class="modal-content modal-revert"
 																>
 																	<div
 																		class="modal-header"
@@ -237,7 +244,7 @@
 																		</h4>
 																		<button
 																			type="button"
-																			class="close"
+																			class="close matchHistory-btn"
 																			data-bs-dismiss="modal"
 																		>
 																			&times;
@@ -311,7 +318,7 @@
 																			<button
 																				type="button"
 																				id="add1"
-																				class="btn btn-success"
+																				class="matchHistory-btn"
 																				data-bs-dismiss="modal"
 																			>
 																				Enter
@@ -378,7 +385,7 @@
 
 										<!-- Remove Match Button 2 - brings a conformation modal -->
 										<button
-											class="btn btn-danger"
+											class="matchHistory-btn"
 											type="button"
 											id="removeTwo"
 											data-bs-toggle="modal"
@@ -390,30 +397,30 @@
 										<!-- Remove Confirmation Modal 2 -->
 										<div class="modal" id="delModal2">
 											<div class="modal-dialog">
-												<div class="modal-content">
+												<div class="modal-content modal-revert">
 													<div class="modal-header">
 														<h4 class="modal-title">
 															Are You Sure?
 														</h4>
 														<button
 															type="button"
-															class="close"
+															class="close matchHistory-btn"
 															data-bs-dismiss="modal"
 														>
 															&times;
 														</button>
 													</div>
 													<div class="modal-body">
-														<div class="form-group">
+														<div class="form-group form-group-revert">
 															<button
-																class="btn btn-success"
+																class="matchHistory-btn"
 																data-bs-dismiss="modal"
 															>
 																No
 															</button>
 															<button
 																type="button"
-																class="btn btn-danger"
+																class="matchHistory-btn"
 																data-bs-dismiss="modal"
 																id="removeMatch2"
 																value="1"
@@ -430,7 +437,7 @@
 
 										<!-- preference button 2 - clicking brings preference modal-->
 										<button
-											class="btn btn-success"
+											class="matchHistory-btn"
 											type="button"
 											id="availability2"
 											data-bs-toggle="modal"
@@ -442,7 +449,7 @@
 										<!-- Preference modal 2 displays members workout days prefered -->
 										<div class="modal" id="prefModal2">
 											<div class="modal-dialog">
-												<div class="modal-content">
+												<div class="modal-content modal-revert">
 													<div class="modal-header">
 														<h4 class="modal-title">
 															Member's Workout
@@ -450,7 +457,7 @@
 														</h4>
 														<button
 															type="button"
-															class="close"
+															class="close matchHistory-btn"
 															data-bs-dismiss="modal"
 														>
 															&times;
@@ -482,7 +489,7 @@
 										<button
 											type="button"
 											id="updateRating2"
-											class="btn btn-success"
+											class="matchHistory-btn"
 										>
 											Update
 										</button>
@@ -503,7 +510,7 @@
 											</div>
 											<div class="col-4">
 												<!-- add workout button 2 - clicking will bring add workout modal -->
-												<div class="card">
+												<div class="card add-workout-card">
 													<div class="card-body">
 														<h3 class="card-title">
 															Add Workout
@@ -514,6 +521,7 @@
 															alt="Plus Symbol"
 														/>
 														<button
+															id="plus2"
 															class="btn btn-transparent stretched-link"
 															type="button"
 															data-bs-toggle="modal"
@@ -528,7 +536,7 @@
 																class="modal-dialog"
 															>
 																<div
-																	class="modal-content"
+																	class="modal-content modal-revert"
 																>
 																	<div
 																		class="modal-header"
@@ -541,7 +549,7 @@
 																		</h4>
 																		<button
 																			type="button"
-																			class="close"
+																			class="close matchHistory-btn"
 																			data-bs-dismiss="modal"
 																		>
 																			&times;
@@ -617,7 +625,7 @@
 																			<button
 																				type="button"
 																				id="add2"
-																				class="btn btn-success"
+																				class="matchHistory-btn"
 																				data-bs-dismiss="modal"
 																			>
 																				Enter
@@ -683,7 +691,7 @@
 										<br /><br />
 										<!-- Remove member button 3 brings up remove confirmation modal -->
 										<button
-											class="btn btn-danger"
+											class="matchHistory-btn"
 											type="button"
 											id="removeThree"
 											data-bs-toggle="modal"
@@ -695,30 +703,30 @@
 										<!-- Remove Confirmation modal 3 -->
 										<div class="modal" id="delModal3">
 											<div class="modal-dialog">
-												<div class="modal-content">
+												<div class="modal-content modal-revert">
 													<div class="modal-header">
 														<h4 class="modal-title">
 															Are You Sure?
 														</h4>
 														<button
 															type="button"
-															class="close"
+															class="close matchHistory-btn"
 															data-bs-dismiss="modal"
 														>
 															&times;
 														</button>
 													</div>
 													<div class="modal-body">
-														<div class="form-group">
+														<div class="form-group form-group-revert">
 															<button
-																class="btn btn-success"
+																class="matchHistory-btn"
 																data-bs-dismiss="modal"
 															>
 																No
 															</button>
 															<button
 																type="button"
-																class="btn btn-danger"
+																class="matchHistory-btn"
 																data-bs-dismiss="modal"
 																id="removeMatch3"
 																value="3"
@@ -734,7 +742,7 @@
 
 										<!-- preference button 3 - clicking brings preference modal-->
 										<button
-											class="btn btn-success"
+											class="matchHistory-btn"
 											type="button"
 											id="availability3"
 											data-bs-toggle="modal"
@@ -746,7 +754,7 @@
 
 										<div class="modal" id="prefModal3">
 											<div class="modal-dialog">
-												<div class="modal-content">
+												<div class="modal-content modal-revert">
 													<div class="modal-header">
 														<h4 class="modal-title">
 															Member's Workout
@@ -754,7 +762,7 @@
 														</h4>
 														<button
 															type="button"
-															class="close"
+															class="close matchHistory-btn"
 															data-bs-dismiss="modal"
 														>
 															&times;
@@ -786,7 +794,7 @@
 										<button
 											type="button"
 											id="updateRating3"
-											class="btn btn-success"
+											class="matchHistory-btn"
 										>
 											Update
 										</button>
@@ -807,7 +815,7 @@
 											</div>
 											<div class="col-4">
 												<!-- add workout button 3 - clicking will bring add workout modal -->
-												<div class="card">
+												<div class="card add-workout-card">
 													<div class="card-body">
 														<h3 class="card-title">
 															Add Workout
@@ -818,6 +826,7 @@
 															alt="Plus Symbol"
 														/>
 														<button
+															id="plus3"
 															class="btn btn-transparent stretched-link"
 															type="button"
 															data-bs-toggle="modal"
@@ -832,7 +841,7 @@
 																class="modal-dialog"
 															>
 																<div
-																	class="modal-content"
+																	class="modal-content modal-revert"
 																>
 																	<div
 																		class="modal-header"
@@ -845,7 +854,7 @@
 																		</h4>
 																		<button
 																			type="button"
-																			class="close"
+																			class="close matchHistory-btn"
 																			data-bs-dismiss="modal"
 																		>
 																			&times;
@@ -919,7 +928,7 @@
 																			<button
 																				type="button"
 																				id="add3"
-																				class="btn btn-success"
+																				class="matchHistory-btn"
 																				data-bs-dismiss="modal"
 																			>
 																				Enter
@@ -942,29 +951,29 @@
 			</div>
 		</div>
 
-		<br />
+		<br/>
 
 		
 		<div class="container">
 			<div class="row">
 				<div class="col text-center mb-2">
 					<!-- The Previous page button -->
-					<button class="btn btn-primary" type="button" id="back">
+					<button class="matchHistory-btn" type="button" id="back">
 						Previous
 					</button>
 				</div>
 				<div class="col text-center mb-2">
 					<!-- The next page button -->
-					<button class="btn btn-primary" type="button" id="next">
+					<button class="matchHistory-btn" type="button" id="next">
 						Next
 					</button>
 				</div>
 			</div>
 		</div>
 
-		<!-- <footer class="footer">
+		<footer class="footer" id="matchHistory-footer">
 			<small class="copyright-text">&copy; Copyright 2022, UFit</small>
-		</footer> -->
+		</footer>
 
 		<script type="module" src="./src/matchHistory.js" defer></script>
 		<script
