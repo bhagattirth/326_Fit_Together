@@ -1,10 +1,10 @@
 import user from "./user.js";
 const urlBase = "http://localhost:5000";
 
-//Temporary used for testing
+//Inital default webpage
 document.getElementById("noWorkoutText1").style.display = "none";
 document.getElementById("noWorkoutText2").style.display = "none";
-document.getElementById("previousMatchesOne").style.display = "none";
+document.getElementById("previousMatchesOne").style.visibility = "hidden";
 document.getElementById("previousMatchesTwo").style.display = "none";
 document.getElementById("previousMatchesThree").style.display = "none";
 document.getElementById("back").style.display = "none";
@@ -201,6 +201,7 @@ function addProfileInfo(userData, i) {
 
 	//If Member has prefered day set then it adds it to the pref date modal
 	if (userData.preference.length > 0) {
+		prefDate.innerText += "Days: "
 		for (let i = 0; i < userData.preference.length; i++) {
 			//represents the prefered days and uppercases the string
 			let day = userData.preference[i];
@@ -215,7 +216,7 @@ function addProfileInfo(userData, i) {
 		//If Member has prefered workout times then it will be displayed
 		if(userData.startTime !== "00:00" && userData.endTime !== "00:00"){
 			prefDate.innerHTML += "</br>";
-			prefDate.innerHTML += userData.startTime + " - " + userData.endTime;
+			prefDate.innerHTML += "Time: " + userData.startTime + " - " + userData.endTime;
 		}
 
 
@@ -330,11 +331,11 @@ function createWorkoutCard(exercises, title, date, cBody, isFirst) {
 
 	//If it is the first card, we set it active on the carousel
 	isFirst
-		? carouselItem.classList.add("carousel-item", "active")
-		: carouselItem.classList.add("carousel-item");
+		? carouselItem.classList.add("carousel-item", "active", "carousel-item-revert")
+		: carouselItem.classList.add("carousel-item", "carousel-item-revert");
 
 	let card = document.createElement("div");
-	card.classList.add("card");
+	card.classList.add("card", "h-100", "matchHistory-card");
 
 	let cardBody = document.createElement("div");
 	card.classList.add("card-body");
@@ -482,9 +483,9 @@ const deleteUserListiner = (i) => async () => {
 //Displays entry slots if there is member data on that slot
 function displayUser() {
 	if (userMap["user1"] !== null) {
-		document.getElementById("previousMatchesOne").style.display = "";
+		document.getElementById("previousMatchesOne").style.visibility = "visible";
 	} else {
-		document.getElementById("previousMatchesOne").style.display = "none";
+		document.getElementById("previousMatchesOne").style.visibility = "hidden";
 	}
 
 	if (userMap["user2"] !== null) {

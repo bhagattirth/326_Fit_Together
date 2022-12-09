@@ -338,6 +338,10 @@ body {
 	text-align: center;
 }
 
+.accordion-item{
+	border: #d6d4e5;
+}
+
 .accordion-button{
 	background-color: #d6e4e5;
 	border-color: black;
@@ -349,7 +353,7 @@ body {
 }
 
 .accordion-body{
-	background-color: #D3DADB ;
+	background-color: #D3DADB;
 }
 
 .matchHistory-btn {
@@ -390,19 +394,41 @@ body {
 	height: revert;
 }
 
-.workouts-carousel-item {
-	height: 300px;
+.carousel-item-revert{
+	width: 460px;
+	height:300px;
+	margin-top: revert;
+	margin-bottom: revert;
+	padding: revert;
+	border-radius: revert;
+	background-color: revert;
+	box-shadow: revert;
+}
+
+.matchHistory-card{
+	background-color: #edf0f1;
+	border-color: 1px #a7b5b7;
+}
+
+#selectRating1,
+#selectRating2,
+#selectRating3 {
+	background-color: #edf0f1;
 }
 
 .border-2 {
 	height: 300px;
 }
 
+.matchHistory-fill-in{
+	background-color: #edf0f1;
+}
+
 .carousel-control-next,
 .carousel-control-prev,
 .carousel-indicators {
 	filter: invert(100%);
-	margin-bottom: 4em;
+	margin-bottom: 10em;
 }
 
 .add-workout-card{
@@ -909,6 +935,3 @@ effect 3
 	margin: auto;
 }
 
-#removeMatch1:hover {
-
-}
