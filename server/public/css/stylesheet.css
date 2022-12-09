@@ -332,7 +332,8 @@ body {
 }
 
 /* MATCH HISTORY*/
-#noWorkoutText1, #noWorkoutText2{
+#noWorkoutText1, 
+#noWorkoutText2 {
 	text-align: center;
 }
 
