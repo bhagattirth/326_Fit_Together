@@ -1,7 +1,7 @@
 # Needs to check by someone else - not 100% sure if correct
 # Setup
 
-To run the project, you must in `\326_Fit_Together\server` and run `node app.js`. `app.js` is the file that will run the website on the server locally or remotly.
+To run the project, you must be in `\326_Fit_Together\server` and run `node app.js`. `app.js` is the file that will run the website on the server locally or remotely.
 However, the project won't build on the get-go; the project needs additonal things before it can run.
 
 First, make there is a `package.json` and `package-lock.json` in the project folder. If they are missing, use `npm init` to get `package.json` and `npm install` to get `package-lock.json`.
