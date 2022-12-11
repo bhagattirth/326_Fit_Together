@@ -43,8 +43,7 @@ const userSchema = new mongoose.Schema({
 			rating: String,
 		},
 	],
-	rating: Number,
-	numberOfRatings: Number,
+
 	oneWayMatches: [String],
 	twoWayMatches: [String],
 	rating: { type: Number, default: 0 },
