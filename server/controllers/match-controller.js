@@ -39,6 +39,7 @@ export const findPotentialMatches = (req, res, next) => {
 								startTime: curUser.startTime,
 								endTime: curUser.endTime,
 								preferredDays: curUser.prefDays,
+								rating: curUser.rating,
 							},
 						};
 					}

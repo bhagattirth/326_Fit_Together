@@ -215,6 +215,11 @@ function generateCarouselItem(id, profile, profileImage, active = false) {
                         <div class="moreInfo" id = ${
 							"moreInfoDiv" + id
 						} hidden = "true">
+							<p class="info-sec">Average User Rating:      ${
+								profile["rating"] === 0
+									? "No Ratings Yet"
+									: "rating"
+							}</p>
                             <p class="info-sec">Workouts Per Week:      ${
 								profile["workoutsPerWeek"]
 							}</p>
@@ -241,7 +246,10 @@ function generateCarouselItem(id, profile, profileImage, active = false) {
 				</div>`;
 	const carouselItemWrapper = document.createElement("div");
 	carouselItemWrapper.setAttribute("id", `${"carouselItem" + id}`);
-	carouselItemWrapper.classList.add("carousel-item", "matchingPage-carousel-item");
+	carouselItemWrapper.classList.add(
+		"carousel-item",
+		"matchingPage-carousel-item"
+	);
 	if (active) {
 		carouselItemWrapper.classList.add("active");
 	}

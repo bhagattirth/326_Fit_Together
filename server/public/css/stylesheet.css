@@ -108,9 +108,9 @@ body {
 }
 
 .matchingPage-carousel-item {
-	height: 700px;
+	height: 800px;
 	width: 500px;
-	margin: auto; 
+	margin: auto;
 	margin-top: 3em;
 	margin-bottom: 5em;
 	padding: 1.5em;
@@ -321,11 +321,11 @@ body {
 
 /* MATCH HISTORY*/
 
-#matchHistory-background{
+#matchHistory-background {
 	background-color: #dbd4d3;
 }
 
-#noWorkoutText1, 
+#noWorkoutText1,
 #noWorkoutText2 {
 	text-align: center;
 }
@@ -346,11 +346,11 @@ body {
 	font-weight: 400;
 }
 
-.accordion-item{
+.accordion-item {
 	border: #d6d4e5;
 }
 
-.accordion-button{
+.accordion-button {
 	background-color: #d6e4e5;
 	border-color: black;
 }
@@ -360,8 +360,8 @@ body {
 	color: black;
 }
 
-.accordion-body{
-	background-color: #D3DADB;
+.accordion-body {
+	background-color: #d3dadb;
 }
 
 .matchHistory-btn {
@@ -402,7 +402,7 @@ body {
 	height: revert;
 }
 
-.matchHistory-fill-in{
+.matchHistory-fill-in {
 	background-color: #edf0f1;
 }
 
@@ -412,11 +412,11 @@ body {
 	margin-right: 1em;
 }
 
-.carousel-item-revert{
-	height:300px;
+.carousel-item-revert {
+	height: 300px;
 }
 
-.matchHistory-card{
+.matchHistory-card {
 	background-color: #edf0f1;
 	border-color: 1px #a7b5b7;
 }
@@ -438,8 +438,8 @@ body {
 	margin-bottom: 10em;
 }
 
-.add-workout-card{
-	background-color: #D3DADB;
+.add-workout-card {
+	background-color: #d3dadb;
 }
 
 .add-workout-icon {
@@ -463,8 +463,6 @@ body {
 	object-fit: cover;
 	margin-right: 4em;
 }
-
-
 
 .hidden-file-picker {
 	display: none;
@@ -595,7 +593,6 @@ body#background {
 	font-size: 0.75em;
 	text-align: left;
 }
-
 
 .hidden-file-picker {
 	display: none;
@@ -936,4 +933,3 @@ effect 3
 #noMoreMatches {
 	margin: auto;
 }
-
