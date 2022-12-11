@@ -26,7 +26,7 @@ async function validateUser() {
 
 	// if not valid, return
 	if (!id) {
-		location.href = "homepage.html";
+		location.href = "login.html";
 		return;
 	}
 	// update user id here
@@ -81,7 +81,6 @@ async function validateUser() {
 
 //The main function - Loads Past Member Entries into the page
 const loadUsers = async (id) => {
-
 	//The array of past workouts of the user that is fetch from the database
 	let json = null;
 
@@ -135,15 +134,14 @@ const loadUsers = async (id) => {
 	showPrevAndNextButton();
 
 	//If the current page is empty and there is a prev page just go back to it
-	if(
-	 userMap["user1"] === null &&
-	 userMap["user2"] === null && 
-	 userMap["user3"] === null
-	 ){
+	if (
+		userMap["user1"] === null &&
+		userMap["user2"] === null &&
+		userMap["user3"] === null
+	) {
 		prevPage();
-	 }
+	}
 };
-
 
 /*
 	Takes member's id and returns a dictionary of member info needed for displaying
@@ -180,7 +178,6 @@ async function getMembersInfo(id) {
 
 //Uses member info to display it on the ith entry slot
 function addProfileInfo(userData, i) {
-
 	//Gets the elements for a entry slot that needs to be updated
 	let profileInfo = document.getElementById("profile" + i);
 	let profilePic = document.getElementById("profilePic" + i);
@@ -197,9 +194,9 @@ function addProfileInfo(userData, i) {
 	profileInfo.innerHTML += "</br>";
 	profileInfo.innerHTML += "</br>";
 	profileInfo.innerHTML += "Email: " + userData.email;
-	
+
 	//Displays phone number if member has entered one
-	if(userData.phone !== "000-000-0000"){
+	if (userData.phone !== "000-000-0000") {
 		profileInfo.innerHTML += "</br>";
 		profileInfo.innerHTML += "Phone: " + userData.phone;
 	}
@@ -210,7 +207,7 @@ function addProfileInfo(userData, i) {
 
 	//If Member has prefered day set then it adds it to the pref date modal
 	if (userData.preference.length > 0) {
-		prefDate.innerText += "Days: "
+		prefDate.innerText += "Days: ";
 		for (let i = 0; i < userData.preference.length; i++) {
 			//represents the prefered days and uppercases the string
 			let day = userData.preference[i];
@@ -223,12 +220,11 @@ function addProfileInfo(userData, i) {
 			}
 		}
 		//If Member has prefered workout times then it will be displayed
-		if(userData.startTime !== "00:00" && userData.endTime !== "00:00"){
+		if (userData.startTime !== "00:00" && userData.endTime !== "00:00") {
 			prefDate.innerHTML += "</br>";
-			prefDate.innerHTML += "Time: " + userData.startTime + " - " + userData.endTime;
+			prefDate.innerHTML +=
+				"Time: " + userData.startTime + " - " + userData.endTime;
 		}
-
-
 	} else {
 		prefDate.innerText = "The Member Hasn't Set Preferred Days";
 	}
@@ -236,7 +232,6 @@ function addProfileInfo(userData, i) {
 
 //Takes in a workout information and creates a carousel on the ith entry
 function createCarousel(pastWorkouts, i) {
-
 	/*
 		Appending Structure:
 		carousel <- carouselBody <- cards created from createWorkoutCard,
@@ -258,18 +253,17 @@ function createCarousel(pastWorkouts, i) {
 
 	let isFirst = true;
 
-	
 	//	If there is no workout listed for the member yet,
 	//	create a card reminding the user to fill in data.
-	if(workouts.length === 0){
+	if (workouts.length === 0) {
 		createWorkoutCard(
 			[["Then the Page Will Display It"]],
 			[["Click to Add Workout to Add Info"]],
 			[["No Workout Data Added"]],
 			carouselBody,
 			isFirst
-		)
-	}else{
+		);
+	} else {
 		//Otherwise, show the display all the workouts in the carousel
 		for (let i in workouts) {
 			createWorkoutCard(
@@ -330,7 +324,6 @@ function createCarousel(pastWorkouts, i) {
 
 //Helper function that creates workout cards and adds it to carousel
 function createWorkoutCard(exercises, title, date, cBody, isFirst) {
-
 	/* Appending Structure for the card:
 	   cBody (the carousel body) <- cardItem (workout card)
 	   cardItem <- card <- cardBody <- card-Title, boldText, exerciseText
@@ -340,8 +333,17 @@ function createWorkoutCard(exercises, title, date, cBody, isFirst) {
 
 	//If it is the first card, we set it active on the carousel
 	isFirst
-		? carouselItem.classList.add("carousel-item", "active", "carousel-item-revert", "w-100")
-		: carouselItem.classList.add("carousel-item", "carousel-item-revert", "w-100");
+		? carouselItem.classList.add(
+				"carousel-item",
+				"active",
+				"carousel-item-revert",
+				"w-100"
+		  )
+		: carouselItem.classList.add(
+				"carousel-item",
+				"carousel-item-revert",
+				"w-100"
+		  );
 
 	let card = document.createElement("div");
 	card.classList.add("card", "h-100", "matchHistory-card");
@@ -379,7 +381,7 @@ function showRating(userData, i) {
 	let dropDown = document.getElementById("selectRating" + i);
 	dropDown.innerHTML = "";
 
-	//Creates the rating dropdown 
+	//Creates the rating dropdown
 	["1/5", "2/5", "3/5", "4/5", "5/5"].forEach(function (e) {
 		let option = document.createElement("option");
 		option.setAttribute("value", e.substring(0, 1));
@@ -402,7 +404,6 @@ function setAttributes(el, attrs) {
 
 //Button Event To add a valid workout to a entry
 const addWorkoutListner = (i) => async () => {
-
 	//Reads the workout data entered into the fields
 	let workouts = document.getElementById("workout" + i).value;
 	let date = document.getElementById("date" + i).value;
@@ -492,9 +493,11 @@ const deleteUserListiner = (i) => async () => {
 //Displays entry slots if there is member data on that slot
 function displayUser() {
 	if (userMap["user1"] !== null) {
-		document.getElementById("previousMatchesOne").style.visibility = "visible";
+		document.getElementById("previousMatchesOne").style.visibility =
+			"visible";
 	} else {
-		document.getElementById("previousMatchesOne").style.visibility = "hidden";
+		document.getElementById("previousMatchesOne").style.visibility =
+			"hidden";
 	}
 
 	if (userMap["user2"] !== null) {
@@ -509,10 +512,14 @@ function displayUser() {
 		document.getElementById("previousMatchesThree").style.display = "none";
 	}
 
-	if (userMap["user1"] === null && userMap["user2"] === null  && userMap["user3"] === null){
+	if (
+		userMap["user1"] === null &&
+		userMap["user2"] === null &&
+		userMap["user3"] === null
+	) {
 		document.getElementById("noWorkoutText1").style.display = "";
 		document.getElementById("noWorkoutText2").style.display = "";
-	}else{
+	} else {
 		document.getElementById("noWorkoutText1").style.display = "none";
 		document.getElementById("noWorkoutText2").style.display = "none";
 	}
@@ -531,7 +538,6 @@ function getNextPage() {
 
 //Previous button event that allows user to go to the last page
 function prevPage() {
-
 	//Checks if it can move move pages
 	if (0 < lastEntryOnPage - 3) {
 		firstEntryOnPage = firstEntryOnPage - 3;
@@ -543,17 +549,17 @@ function prevPage() {
 }
 
 //Disply Next and Prev button if only there entries in the next page
-function showPrevAndNextButton(){
+function showPrevAndNextButton() {
 	//displays the Prev button if previous entries exist
-	if(lastEntryOnPage + 1 < jsonSize){
+	if (lastEntryOnPage + 1 < jsonSize) {
 		document.getElementById("next").style.display = "";
-	}else{
+	} else {
 		document.getElementById("next").style.display = "none";
 	}
 	//displays the next button if next entries exist
-	if(0 < lastEntryOnPage - 3){
+	if (0 < lastEntryOnPage - 3) {
 		document.getElementById("back").style.display = "";
-	}else{
+	} else {
 		document.getElementById("back").style.display = "none";
 	}
 }
@@ -562,7 +568,6 @@ await validateUser();
 
 //Loads users past workout entries
 loadUsers(user.getUserId());
-
 
 //Allows user to update rating when pressing the update button for the first entry
 document
@@ -577,7 +582,6 @@ document
 	.getElementById("removeMatch1")
 	.addEventListener("click", deleteUserListiner(1));
 
-
 //Allows user to update rating when pressing the update button for the second entry
 document
 	.getElementById("updateRating2")
@@ -591,7 +595,6 @@ document
 	.getElementById("removeMatch2")
 	.addEventListener("click", deleteUserListiner(2));
 
-
 //Allows user to update rating when pressing the update button for the third entry
 document
 	.getElementById("updateRating3")
@@ -604,7 +607,6 @@ document.getElementById("add3").addEventListener("click", addWorkoutListner(3));
 document
 	.getElementById("removeMatch3")
 	.addEventListener("click", deleteUserListiner(3));
-
 
 //Enables buttons the prev and next buttons to go back and forth on pages
 document.getElementById("next").addEventListener("click", getNextPage);

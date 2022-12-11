@@ -16,7 +16,7 @@ async function validateUser() {
 
 	// if not valid, return
 	if (!id) {
-		location.href = "homepage.html";
+		location.href = "login.html";
 		return;
 	}
 	// update user id here

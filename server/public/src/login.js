@@ -106,7 +106,7 @@ const loginUser = async (e) => {
 	text.hidden = false;
 
 	// redirect back to homepage here
-	location.href = "profile.html";
+	location.href = "index.html";
 };
 
 // sign up user
