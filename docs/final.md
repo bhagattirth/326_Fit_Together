@@ -317,7 +317,8 @@ Allows the user to view whom they workout out with in the past. For each member,
 
 ## Authentication/Authorization
 ---
-TODO
+The way that the user is authenticated on the website, is that when a user logs in or creates an account we store a json webtoken in the cookies. Whenever the user tries to access a protected page of the website, the backend first makes sure that the webtoken stored in the browser is valid and not expired, if so the user is given access to the page, and if not, they are denied access. All pages of the website, except for the homepage and login/signup page are protected by this authentication, so the user must be logged in to access and use the website. 
+
 ## Division of Labor
 ---
 
