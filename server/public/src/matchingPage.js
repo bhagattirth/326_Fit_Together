@@ -218,13 +218,13 @@ function generateCarouselItem(id, profile, profileImage, active = false) {
 							<p class="info-sec">Average User Rating:      ${
 								profile["rating"] === 0
 									? "No Ratings Yet"
-									: "rating"
+									: profile["rating"]
 							}</p>
                             <p class="info-sec">Workouts Per Week:      ${
 								profile["workoutsPerWeek"]
 							}</p>
 							<p class="info-sec">
-                            Average Workout Length: ${
+                            Average Workout Length (in hours): ${
 								profile["averageWorkoutLength"]
 							}</p>
 							<p class="info-sec">

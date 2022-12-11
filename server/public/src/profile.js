@@ -144,7 +144,9 @@ async function initialize(id) {
 
 		populateProfile(msg);
 	} catch (err) {
-		alert("Profile information could not be found");
+		alert(
+			"Profile information could not be found. Ensure you're logged in."
+		);
 		return;
 	}
 }
