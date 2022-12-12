@@ -123,6 +123,7 @@ body {
 	display: flex;
 }
 
+/*Dup*/
 .name {
 	color: #061826;
 	font-size: 1.5rem;
@@ -551,6 +552,7 @@ body#background {
 	text-align: center;
 }
 
+/*Dup*/
 #signupToggle {
 	background: none;
 	border: none;
@@ -748,12 +750,14 @@ effect 3
 	overflow: var(--ha-screen-reader-overflow, hidden);
 }
 
+/*Dup*/
 .main {
 	margin: 0 auto 6em auto;
 	width: 80%;
 	background-color: #dbd4d3;
 }
 
+/*Dup*/
 .profile-inputs {
 	padding: 0.2em 0 3em 0;
 	margin: 2em auto;
@@ -776,6 +780,7 @@ effect 3
 	background-color: #dbd4d3;
 }
 
+/*Dup*/
 .profile-btns {
 	width: 500px;
 	display: flex;
