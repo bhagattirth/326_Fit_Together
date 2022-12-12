@@ -9,11 +9,11 @@ To access the full site please sign in or create an account.
 ---
 Team Member and Github Username: **Kenneth Moore - kjmoore12, Tirth Bhagat - bhagattirth, Mark McEnnis - Mark5013**
 
-Our idea relates to the application “Tinder” (hence the name), however, instead of matching with individuals looking for a relationship, you match with individuals who are looking for workout partners. This relates to “Tinder” as you will be suggested partners with similar workout splits and times and you can either choose to match or not to match. In this, all matches will be similar to “Super-Liking” from Tinder in that it will notify the person you match with of your interest. From there, they can also accept or not. If you accept, you will be able to get their contact information provided when creating their account. After a workout with a partner, you can log it as well as rate the partner, etc.
+Our idea relates to the application “Tinder” (hence the name), however, instead of matching with individuals looking for a relationship, you match with individuals who are looking for workout partners. This relates to “Tinder” as you will be suggested partners with similar workout splits and times and you can either choose to match or not to match. In this, all matches will be similar to regular liking from Tinder in that it will not notify the person you match with of your interest. Rather, the decision has to be made by both potential partners individually to accept or not. If you accept, you will be able to get their contact information provided when creating their account. After a workout with a partner, you can log it as well as rate the partner, etc.
 
 The application would be specific to the UMass rec center. As students, we found it very difficult to get a consistent workout. Sometimes you don't have anybody to spot you while doing weight training or simply a person to motivate you. The idea of "UFit" is to fix the issues of working out alone. The application is a source for students and people of like to discover someone new that can enhance their workout experience.
 
-From what we saw online, there is no “gym buddy” alternative that is using the same functionality as this idea. The “gym buddy” app online we found is for trainers and gym facilities to book on. Our application would be more like Tinder, where it matches you with others based on interests and such, and you can match if you’d think it would be a good match.
+From what we saw online, there is no “gym buddy” alternative that is using the same functionality as this idea. The “gym buddy” app online we found is for trainers and gym facilities to book on. Our website would be more like Tinder, where it matches you with others based on interests and such, and you can match if you’d think it would be a good match.
 
 ## User Interface
 ---
@@ -34,7 +34,7 @@ Allows users to login and access the full site. However, if the user doesn't hav
 
 ### Profile Page
 
-Allows the user to input his workout schedule and preference, so other members can see it.
+Allows the user to input his workout schedule and preferences, contact information, and profile picture so other members can see it.
 
 <img src="https://github.com/bhagattirth/326_Fit_Together/blob/main/docs/raw_images/profile_web_final.png" >
 
