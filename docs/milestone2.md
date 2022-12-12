@@ -290,7 +290,7 @@ DELETE Operation (Deleting user profile)
 
 ### Divison of  Labor
 
-The work among everybody was split evenly. Mark was in charge of maintaining github directory structure (and checking if everything worked properly) as well as writing app.js, authority.js for the login page and index, and his respective controller and helper files. Similarly, Kenneth Moore was responsable of doing the samething for the match and profile pages. And Tirth was responsible for doing the same for matchHistory (only one since it was the longest) and writing the md file.
+Mark was in charge of maintaining the GitHub directory structure (and checking if everything worked properly) as well as writing app.js, and authority.js for the login and index page, and his respective controller and helper files. Similarly, Kenneth Moore was responsible for doing the same thing for the match and profile pages. And Tirth was accountable for doing the same for matchHistory (one since it was the longest) and writing the md file.
 
 
 
