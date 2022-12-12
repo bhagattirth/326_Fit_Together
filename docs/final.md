@@ -20,35 +20,35 @@ From what we saw online, there is no “gym buddy” alternative that is using t
 
 ### Home Page
 
-This is the first page people see when they get to the site. The page offers information about the service and allows people to head to the login/signup page to access the entire site. If the user is already logged in, they can hit the profile button, allowing them to modify their profile or get match to a “gym buddy.”
+This is the first page people see when they get to the site. The page offers information about the service and allows people to head to the login/signup page to access the entire site. If the user is already logged in, they can hit the profile button, allowing them to modify their profile or get match button to a “gym buddy.” 
 
 <img src="https://github.com/bhagattirth/326_Fit_Together/blob/main/docs/raw_images/index_web_final.png" >
 
 
 ### Login Page
 
-Allows users to login and access the full site. However, if the user doesn't have an account, they can make one on this page.
+Allows users to login and access the full site. However, if the user doesn't have an account, they can make one on this page by clicking on the blue text and a "create account" modal should appear.
 
 <img src="https://github.com/bhagattirth/326_Fit_Together/blob/main/docs/raw_images/login_web_final.png">
 
 
 ### Profile Page
 
-Allows the user to input his workout schedule and preferences, contact information, and profile picture so other members can see it.
+Allows the user to input his workout schedule and preferences, contact information, and profile picture so other members can see it (using the edit and update button). Also, allows the user to delete their account if they want.
 
 <img src="https://github.com/bhagattirth/326_Fit_Together/blob/main/docs/raw_images/profile_web_final.png" >
 
 
 ### Matching Page
 
-This page allows members to find “gym buddies” that they want to work out with. The page tries to find a match for the user, you are able to see the other participant’s profile. Then, you have the choice of working out with them (by clicking the check mark) or finding a different one (by using the “x” button).
+This page allows members to find “gym buddies” that they want to work out with. The page tries to find a match for the user, you are able to see the other participant’s profile. Then, you have the choice of working out with them (by clicking the check mark) or finding a different one (by using the “x” button). The "more info" button allows the user to see some of the other member's profile info and average rating to help them with their decision.
 
 <img src="https://github.com/bhagattirth/326_Fit_Together/blob/main/docs/raw_images/matchingPage_web_final.png"  >
 
 
 ### Match History
 
-Allows the user to view whom they workout out with in the past. For each member, the user is able to rate, catalog past workouts, and view preferences. And they are able to request to work out with the same member by calling or emailing them.
+Allows the user to view whom they workout out with in the past. For each member, the user is able to rate, catalog past workouts, and view preferences. And they are able to request to work out with the same member by calling or emailing them. Also, the user has the option of deleting a member entry which will effectively block the member for the user and destroy all logs.
 
 <img src="https://github.com/bhagattirth/326_Fit_Together/blob/main/docs/raw_images/matchHistory_web_final.png" >
 
