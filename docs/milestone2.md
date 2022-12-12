@@ -1,6 +1,6 @@
 # UFit API
 
-**HEROKU LINK:** https://ufit12.herokuapp.com/
+**HEROKU LINK:** https://ufit12.herokuapp.com/public
 
 Requests: The methods which can be used when interacting with the server backend
 
