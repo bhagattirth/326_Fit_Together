@@ -1,4 +1,3 @@
-import { modal } from "./htmlElements.js";
 import user from "./user.js";
 
 const urlBase = "http://localhost:5000";
