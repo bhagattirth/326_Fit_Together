@@ -1,46 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta charset="UTF-8" >
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" >
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" >
 		<title>Login - UFit</title>
 		<link
 			href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
 			rel="stylesheet"
 			integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
 			crossorigin="anonymous"
-		/>
-		<link href="./css/stylesheet.css" rel="stylesheet" />
+		>
+		<link href="./css/stylesheet.css" rel="stylesheet" >
 	</head>
 
 	<body id="background">
 		<div id="rectangleBox">
 			<h2>Login</h2>
-			<form>
-				<label for="email" class="form-label">Email:</label>
-				<input
-					type="email"
-					id="email"
-					class="form-control"
-					placeholder="my@email.com"
-				/><br />
-				<label for="password" class="form-label">Password:</label>
-				<input
-					type="password"
-					id="password"
-					class="form-control"
-					placeholder="Password"
-				/><br />
+			<form class="login-form">
+				<div class="field field_v1 login-creds">
+					<label class="form-label ha-screen-reader" for="email"
+						>Email</label
+					>
+					<input
+						type="email"
+						id="email"
+						class="form-control field__input"
+						placeholder="my@email.com"
+					>
+					<span class="field__label-wrap" aria-hidden="true">
+						<span id="email-label" class="field__label">Email</span>
+					</span>
+				</div>
+				<p id="email-error-text" hidden>Invalid email</p>
+
+				<div class="field field_v1 login-creds">
+					<label for="password" class="ha-screen-reader form-label"
+						>Password</label
+					>
+					<input
+						type="password"
+						id="password"
+						class="form-control field__input"
+						placeholder="Password"
+					>
+					<span class="field__label-wrap" aria-hidden="true">
+						<span id="password-label" class="field__label"
+							>Password</span
+						>
+					</span>
+				</div>
+				<p id="password-error-text" hidden>Invalid Password</p>
+				<p id="error-text" hidden>
+					Invalid email/password combination
+				</p>
 			</form>
-			<p id="error-text" hidden="true">
-				Invalid email/password combination
-			</p>
-			<button type="button" class="btn btn-primary" id="login">
+			<button type="button" class="button-17 login-btn" id="login">
 				Login
 			</button>
-			<br />
-			<br />
+			<br>
+			<br>
 			<button
 				type="button"
 				class="text-primary"
@@ -58,6 +77,7 @@
 							<button
 								type="button"
 								class="close"
+								id="close"
 								data-bs-dismiss="modal"
 							>
 								&times;
@@ -65,66 +85,146 @@
 						</div>
 						<div class="modal-body">
 							<div class="form-group">
-								<label for="firstName" class="form-label"
-									>First Name:</label
+								<div class="signup-input field field_v1">
+									<label
+										for="firstName"
+										class="form-label ha-screen-reader"
+										>First Name</label
+									>
+									<input
+										type="text"
+										id="firstName"
+										class="form-control field__input"
+										placeholder="Name"
+									>
+									<span
+										class="field__label-wrap"
+										aria-hidden="true"
+									>
+										<span
+											class="field__label"
+											id="first-name-text"
+											>First Name</span
+										>
+									</span>
+								</div>
+								<p id="first-name-error-text" hidden>
+									Please enter a first name
+								</p>
+								<div class="signup-input field field_v1">
+									<label
+										for="lastName"
+										class="form-label ha-screen-reader"
+										>Last Name</label
+									>
+									<input
+										type="text"
+										id="lastName"
+										class="form-control field__input"
+										placeholder="Last Name"
+									>
+									<span
+										class="field__label-wrap"
+										aria-hidden="true"
+									>
+										<span
+											class="field__label"
+											id="last-name-text"
+											>Last Name</span
+										>
+									</span>
+								</div>
+								<p id="last-name-error-text" hidden>
+									Please enter a last name
+								</p>
+								<div class="signup-input field field_v1">
+									<label
+										for="newEmail"
+										class="form-label ha-screen-reader"
+										>Email</label
+									>
+									<input
+										type="email"
+										id="newEmail"
+										class="form-control field__input"
+										placeholder="my@email.com"
+									>
+									<span
+										class="field__label-wrap"
+										aria-hidden="true"
+									>
+										<span
+											class="field__label"
+											id="signup-email-text"
+											>Email</span
+										>
+									</span>
+								</div>
+								<p id="signup-email-error-text" hidden>
+									Invalid email
+								</p>
+								<div class="signup-input field field_v1">
+									<label
+										for="newPassword"
+										class="form-label ha-screen-reader"
+										>Password</label
+									>
+									<input
+										type="password"
+										id="newPassword"
+										class="form-control field__input"
+										placeholder="Password"
+									>
+									<span
+										class="field__label-wrap"
+										aria-hidden="true"
+									>
+										<span
+											class="field__label"
+											id="signup-password-text"
+											>Password</span
+										>
+									</span>
+								</div>
+								<p
+									id="signup-password-error-text"
+									hidden
 								>
-								<input
-									type="text"
-									id="firstName"
-									class="form-control"
-									placeholder="Name"
-								/><br />
-								<label for="lastName" class="form-label"
-									>Last Name:</label
+									Password must be 8 characters long, 1
+									uppercase, 1 lowercase, and 1 special/number
+									character
+								</p>
+								<div class="signup-input field field_v1">
+									<label
+										for="confirmPassword"
+										class="form-label ha-screen-reader"
+										>Confirm Password</label
+									>
+									<input
+										type="password"
+										id="confirmPassword"
+										class="form-control field__input"
+										placeholder="Password"
+									>
+									<span
+										class="field__label-wrap"
+										aria-hidden="true"
+									>
+										<span
+											class="field__label"
+											id="confirm-password-text"
+											>Confirm Password</span
+										>
+									</span>
+								</div>
+								<p
+									id="confirm-password-error-text"
+									hidden
 								>
-								<input
-									type="text"
-									id="lastName"
-									class="form-control"
-									placeholder="Last Name"
-								/><br />
-								<label for="newEmail" class="form-label"
-									>Enter Email:</label
-								>
-								<input
-									type="email"
-									id="newEmail"
-									class="form-control"
-									placeholder="my@email.com"
-								/><br />
-								<label for="confirmEmail" class="form-label"
-									>Confirm Email:</label
-								>
-								<input
-									type="email"
-									id="confirmEmail"
-									class="form-control"
-									placeholder="my@email.com"
-								/><br />
-								<label for="newPassword" class="form-label"
-									>Enter New Password:</label
-								>
-								<input
-									type="password"
-									id="newPassword"
-									class="form-control"
-									placeholder="Password"
-								/><br />
-								<label for="confirmPassword" class="form-label"
-									>Confirm Password:</label
-								>
-								<input
-									type="password"
-									id="confirmPassword"
-									class="form-control"
-									placeholder="Password"
-								/><br />
+									Passwords dont match
+								</p>
 							</div>
-							<button
-								class="btn btn-success"
-								data-bs-dismiss="modal"
-								id="signup"
-							>
+							<button class="button-17" id="signup">
 								Sign Up
 							</button>
 						</div>

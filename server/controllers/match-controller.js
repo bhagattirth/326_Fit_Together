@@ -1,13 +1,16 @@
 import { User } from "../app.js";
 
+// Finds the potential matches for a user
 export const findPotentialMatches = (req, res, next) => {
 	const id = req.params.id;
+	// Find the user and ensure they exist
 	User.findOne({ id: id }, (err, user) => {
 		if (err) {
 			res.status(400).send({ message: err });
 		} else if (!user) {
 			res.status(400).send({ message: "Couldn't find user" });
 		} else {
+			// Find all users not in the current user's blocked, oneWayMatches, twoWayMatches lists, and that aren't the user themselves
 			User.find(
 				{
 					$and: [
@@ -23,6 +26,7 @@ export const findPotentialMatches = (req, res, next) => {
 						res.status(400).send({ message: err });
 					}
 					for (const curUser of usersArr) {
+						// Generate a potential match object pertaining to the current potential match user
 						potentialMatches[curUser.id] = {
 							profileImage: curUser.profilePic,
 							profile: {
@@ -35,9 +39,11 @@ export const findPotentialMatches = (req, res, next) => {
 								startTime: curUser.startTime,
 								endTime: curUser.endTime,
 								preferredDays: curUser.prefDays,
+								rating: curUser.rating,
 							},
 						};
 					}
+					// Return the potential matches
 					res.status(200).send(JSON.stringify(potentialMatches));
 				}
 			);
@@ -45,16 +51,17 @@ export const findPotentialMatches = (req, res, next) => {
 	});
 };
 
+// Blocks a user
 export const addToBlockList = (req, res, next) => {
 	const id = req.params.id;
 	const otherID = req.params.otherID;
-	console.log(id);
 	User.findOne({ id: id }, async (err, user) => {
 		if (err) {
 			res.status(400).send({ message: err });
 		} else if (!user) {
 			res.status(400).send({ message: "Could not find user" });
 		} else {
+			// Adds otherID to user's blocklist
 			user.blocked.push(otherID);
 			await user.save();
 			res.status(200).send(JSON.stringify({ userID: id }));
@@ -62,6 +69,7 @@ export const addToBlockList = (req, res, next) => {
 	});
 };
 
+// Adds a 1-way or 2-way match, depending on the current relation between the two users
 export const addMatch = (req, res, next) => {
 	const id = req.params.id;
 	const otherID = req.params.otherID;
@@ -75,21 +83,25 @@ export const addMatch = (req, res, next) => {
 				if (innerErr) {
 					res.status(400).send("Could not find other user");
 				} else {
+					// If the other user already has a one way match with the calling user, make a two way match
 					if (otherUser.oneWayMatches.includes(id)) {
 						otherUser.twoWayMatches.push(id);
+
+						// Remove the calling user from other user's oneWayMatch list (it is now a twoWayMatch)
 						const index = otherUser.oneWayMatches.indexOf(id);
 						if (index > -1) {
 							otherUser.oneWayMatches.splice(index, 1);
 						}
 						user.twoWayMatches.push(otherID);
-						otherUser.pastWorkouts.push({
+						// Generate empty pastWorkouts entries for the two users
+						otherUser.pastWorkouts.unshift({
 							id: id,
 							date: [],
 							workoutTitle: [],
 							workout: [],
 							rating: "0",
 						});
-						user.pastWorkouts.push({
+						user.pastWorkouts.unshift({
 							id: otherID,
 							date: [],
 							workoutTitle: [],
@@ -98,6 +110,7 @@ export const addMatch = (req, res, next) => {
 						});
 						await otherUser.save();
 					} else {
+						// If the other user has one way match with the current user, add a oneWayMatch
 						user.oneWayMatches.push(otherID);
 					}
 					await user.save();

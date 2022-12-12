@@ -19,15 +19,7 @@ const dummyProfileData = {
 	preferredTime: "10 AM - 12 PM",
 	preferredDays: ["monday", "tuesday"],
 };
-router.delete(
-	"/:id",
-	validateToken,
-	deleteProfile
-	// (req, res) => {
-	// 	// delete profile associated with id
-	// 	res.send(true);
-	// }
-);
+router.delete("/:id", validateToken, deleteProfile);
 
 router
 	.route("/:id/information")

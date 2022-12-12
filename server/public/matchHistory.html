@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta charset="UTF-8" >
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" >
 		<title>Match History - UFit</title>
 
 		<link
@@ -10,52 +10,30 @@
 			rel="stylesheet"
 			integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
 			crossorigin="anonymous"
-		/>
-		<link href="./css/stylesheet.css" rel="stylesheet" />
+		>
+		<link href="./css/stylesheet.css" rel="stylesheet" >
 	</head>
-	<body>
+	<body id="matchHistory-background">
 		<div>
+			<!-- Nav bar -->
 			<nav class="navbar navbar-dark navbar-expand-lg bg-dark">
 				<div class="container-fluid">
-					<a class="navbar-brand" href="index.html"
+					<a class="navbar-brand" href="index.html" id="logo"
 						><img
 							class="company-logo"
 							src="https://cdn-icons-png.flaticon.com/512/1053/1053916.png"
 							alt="company logo"
-					/></a>
-					<div class="dropdown">
-						<img
-							class="user-icon dropdown-toggle"
-							data-bs-toggle="dropdown"
-							id="profilePicture"
-							src="https://cdn.vectorstock.com/i/preview-1x/23/81/default-avatar-profile-icon-vector-18942381.jpg"
-							alt="user icon"
-						/>
-						<ul class="dropdown-menu">
-							<li>
-								<a class="dropdown-item" href="profile.html"
-									>Profile</a
-								>
-							</li>
-							<li>
-								<a class="dropdown-item" href="matchingPage.html"
-									>Find A Fit</a
-								>
-							</li>
-							<li>
-								<a class="dropdown-item" href="#" id="logoutOption"
-									>Logout</a
-								>
-							</li>
-						</ul>
-					</div>
-					
+					></a>
 				</div>
 			</nav>
 		</div>
 
-		<br />
+		<h1 class="title"> Match History</h1>
+		<br>
 
+		<h2 id="noWorkoutText1"> There Is Nothing Here</h2>
+		<h5 id ="noWorkoutText2"> Go Find A Match!</h5>
+		<!-- Entry slot 1 -->
 		<div class="accordion w-75 mx-auto" id="previousMatchesOne">
 			<div class="accordion-item">
 				<h2 class="accordion-header" id="matchOne">
@@ -68,15 +46,17 @@
 						aria-controls="collapseOne"
 					>
 						<span class="prev-matches-header">
+							<!-- Profile Image of the Member - updated by matchHistory.js -->
 							<img
 								class="card-img-top prev-match-img"
-								id = "profilePic1"
+								id="profilePic1"
 								src="#"
-								alt="Buff Dude"
-							/>
+								alt="Profile Image 1"
+							>
+							<!-- Members name and contact info filled in by matchHistory.js -->
 							<span class="prev-matches-info" id="profile1">
 							</span>
-							<br />
+							<br>
 						</span>
 					</button>
 				</h2>
@@ -90,89 +70,127 @@
 						<div class="container-fluid">
 							<div class="row">
 								<div class="col-2 text-center">
-									<div class="card-body">	
-										<br /><br />
+									<div class="card-body">
+										<br>
+										<br>
+										<!-- Remove Match Button 1 - brings a conformation modal -->
 										<button
-											class="btn btn-danger"
+											class="matchHistory-btn"
 											type="button"
 											id="removeOne"
-											data-bs-toggle="modal" data-bs-target="#delModal1"
+											data-bs-toggle="modal"
+											data-bs-target="#delModal1"
 										>
 											Remove Match
 										</button>
-
+										
+										<!-- Delete Conformation Modal 1 -->
 										<div class="modal" id="delModal1">
 											<div class="modal-dialog">
-											  <div class="modal-content">
-										  
-												<div class="modal-header">
-												  <h4 class="modal-title">Are You Sure?</h4>
-												  <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
-												</div>														  
-													<div class="modal-body">																		
-														<div class="form-group">
-															<button class="btn btn-success" data-bs-dismiss="modal">No</button>
-															<button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="removeMatch1" value="1">Yes</button>
+												<div class="modal-content modal-revert">
+													<div class="modal-header">
+														<h4 class="modal-title">
+															Are You Sure?
+														</h4>
+														<button
+															type="button"
+															class="close matchHistory-btn"
+															data-bs-dismiss="modal"
+														>
+															&times;
+														</button>
+													</div>
+													<div class="modal-body">
+														<div class="form-group form-group-revert">
+															<h5> 
+																Removing the match will 
+                                                                eliminate their match history entry, and it will prevent
+                                                                you from getting matched up with them again. 
+															</h5>
+															<button
+																class="matchHistory-btn"
+																data-bs-dismiss="modal"
+																id="noRemoval1"
+															>
+																No
+															</button>
+															<button
+																type="button"
+																class="matchHistory-btn"
+																data-bs-dismiss="modal"
+																id="removeMatch1"
+																value="1"
+															>
+																Yes
+															</button>
 														</div>
-													</div>														  
-											  </div>
+													</div>
+												</div>
 											</div>
 										</div>
-
-										<div class="modal" id="myModal">
-											<div class="modal-dialog">
-											  <div class="modal-content">
-												<div class="modal-header">
-												  <h4 class="modal-title">Add Workout</h4>
-												  <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
-												</div>										
-												<div class="modal-body">
-												  Modal body..
-												</div>
-												<div class="modal-footer">
-												  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-												</div>
-										  
-											  </div>
-											</div>
-										</div>
-										<br /><br />
+										<br>
+										<br>
+										<!-- preference button 1 - clicking brings preference modal-->
 										<button
-											value="1";
-											class="btn btn-success"
+											value="1"
+											class="matchHistory-btn"
 											type="button"
 											id="availability1"
-											data-bs-toggle="modal" data-bs-target="#prefModal1"
+											data-bs-toggle="modal"
+											data-bs-target="#prefModal1"
 										>
 											View Availability Preferences
 										</button>
+
+										<!-- Preference modal 1 displays members workout days prefered -->
 										<div class="modal" id="prefModal1">
 											<div class="modal-dialog">
-											    <div class="modal-content">
-										  
+												<div class="modal-content modal-revert">
 													<div class="modal-header">
-														<h4 class="modal-title">Member's Workout Days</h4>
-														<button type="button" class="close" data-bs-dismiss="modal">&times;</button>
-													</div>													  
-													<div class="modal-body">		
-														<span id="prefDate1"></span>																
+														<h4 class="modal-title">
+															Member's Workout
+															Days
+														</h4>
+														<button
+															type="button"
+															class="close matchHistory-btn"
+															data-bs-dismiss="modal"
+														>
+															&times;
+														</button>
 													</div>
-											    </div>
+													<div class="modal-body">
+														<!-- Members prefered workout days - Filled in By matchHistory.js -->
+														<h5
+															id="prefDate1"
+														> Member Data</h5>
+													</div>
+												</div>
 											</div>
 										</div>
-										<br /><br />
-											<label for="selectRating1"
-												>Rate This Workout Partner:</label
-											>
-											<select
-												class="form-select"
-												aria-label="selectRating1"
-												aria-readonly="true"
-												id="selectRating1"
-											>
-											</select>
-											<br>
-											<button type="button" id ="updateRating1" class="btn btn-success">Update</button>
+										<br> 
+										<br>
+
+										<!-- Member Rating Dropdown 1 created in matchHistory.js -->
+										<label for="selectRating1"
+											>Rate This Workout Partner:</label
+										>
+										<select
+											class="form-select"
+											aria-label="selectRating1"
+											aria-readonly="true"
+											id="selectRating1"
+										></select>
+										<br>
+
+										<!-- Update Rating Button 1 -->
+										<button
+											type="button"
+											id="updateRating1"
+											class="matchHistory-btn"
+										>
+											Update
+										</button>
 									</div>
 								</div>
 
@@ -181,15 +199,16 @@
 										<h2>Past Workouts</h2>
 										<div class="row">
 											<div class="col-8">
+												<!-- Workout Carousel 1 - Filled in by matchHistory.js -->
 												<div
 													id="carousel1"
 													class="carousel slide"
 													data-bs-ride="false"
-												>
-												</div>
+												></div>
 											</div>
 											<div class="col-4">
-												<div class="card">
+												<!-- add workout button 1 - clicking will bring add workout modal -->
+												<div class="card add-workout-card">
 													<div class="card-body">
 														<h3 class="card-title">
 															Add Workout
@@ -198,38 +217,120 @@
 															class="card-img-top add-workout-icon"
 															src="https://www.freepnglogos.com/uploads/plus-icon/plus-icon-plus-sign-icon-vector-graphic-pixabay-7.png"
 															alt="Plus Symbol"
-														/>
+														>
 														<button
+															id="plus1"
 															class="btn btn-transparent stretched-link"
 															type="button"
-															data-bs-toggle="modal" data-bs-target="#myModal1"
-														></button>  
-														<div class="modal" id="myModal1">
-															<div class="modal-dialog">
-															  <div class="modal-content">
-																<div class="modal-header">
-																  <h4 class="modal-title">Add Workout</h4>
-																  <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
-																</div>	
-																<form>													  
-																	<div class="modal-body">																		
-																		<div class="form-group">
-																			<label for="date1">Date</label>
-																			<input type="text" class="form-control" id="date1" aria-describedby="date1" placeholder="Enter a Valid Date">
-																			<label for="wType1">Workout Type</label>
-																			<input type="text" class="form-control" id="wType1" aria-describedby="wType1" placeholder="Workout Type">
-																			<label for="workout1"> Workout </label>
-																			<input type="text" class="form-control" id="workout1" aria-describedby="workout1" placeholder="Enter workout">
-																			<small id="workoutTip1" class="form-text text-muted">Please Seperate Each Exercise by a Comma if you Want To Make Different Entries.</small>
-																		</div>
-																	</div>														  
-																	<div class="modal-footer">
-																		<button type="button" id="add1" class="btn btn-success" data-bs-dismiss="modal">Enter</button>
+															data-bs-toggle="modal"
+															data-bs-target="#myModal1"
+														></button>
+														<!-- add workout modal 1 -->
+														<div
+															class="modal"
+															id="myModal1"
+														>
+															<div
+																class="modal-dialog"
+															>
+																<div
+																	class="modal-content modal-revert"
+																>
+																	<div
+																		class="modal-header"
+																	>
+																		<h4
+																			class="modal-title"
+																		>
+																			Add
+																			Workout
+																		</h4>
+																		<button
+																			type="button"
+																			class="close matchHistory-btn"
+																			data-bs-dismiss="modal"
+																		>
+																			&times;
+																		</button>
 																	</div>
-																</form>
-															  </div>
+																	<form>
+																		<div
+																			class="modal-body"
+																		>
+																			<div
+																				class="form-group"
+																			>
+																				<label
+																					for="date1"
+																					>Date</label
+																				>
+																				<input
+																					type="text"
+																					class="form-control matchHistory-fill-in"
+																					id="date1"
+																					aria-describedby="date1"
+																					placeholder="DD/MM/YYYY"
+																				>
+																				<label
+																					for="wType1"
+																					>Workout
+																					Type</label
+																				>
+																				<input
+																					type="text"
+																					class="form-control matchHistory-fill-in"
+																					id="wType1"
+																					aria-describedby="wType1"
+																					placeholder="Workout Type"
+																				>
+																				<label
+																					for="workout1"
+																				>
+																					Workout
+																				</label>
+																				<input
+																					type="text"
+																					class="form-control matchHistory-fill-in"
+																					id="workout1"
+																					aria-describedby="workout1"
+																					placeholder="Enter workout"
+																				>
+																				<small
+																					id="workoutTip1"
+																					class="form-text text-muted"
+																					>Please
+																					Seperate
+																					Each
+																					Exercise
+																					by
+																					a
+																					Comma
+																					if
+																					you
+																					Want
+																					To
+																					Make
+																					Different
+																					Entries.</small
+																				>
+																			</div>
+																		</div>
+																		<div
+																			class="modal-footer"
+																		>
+																			<button
+																				type="button"
+																				id="add1"
+																				class="matchHistory-btn"
+																				data-bs-dismiss="modal"
+																			>
+																				Enter
+																			</button>
+																		</div>
+																	</form>
+																</div>
 															</div>
-														</div>	
+														</div>
 													</div>
 												</div>
 											</div>
@@ -243,6 +344,7 @@
 			</div>
 		</div>
 
+		<!-- Entry Slot 2 -->
 		<div class="accordion w-75 mx-auto" id="previousMatchesTwo">
 			<div class="accordion-item">
 				<h2 class="accordion-header" id="matchTwo">
@@ -255,15 +357,17 @@
 						aria-controls="collapseTwo"
 					>
 						<span class="prev-matches-header">
+							<!-- Profile Image of the Member - updated by matchHistory.js -->
 							<img
 								class="card-img-top prev-match-img"
 								src="#"
-								alt="Buff Dude"
+								alt="Profile Image 2"
 								id="profilePic2"
-							/>
+							>
+							<!-- Members name and contact info filled in by matchHistory.js -->
 							<span class="prev-matches-info" id="profile2">
 							</span>
-							<br />
+							<br>
 						</span>
 					</button>
 				</h2>
@@ -280,38 +384,71 @@
 									class="col-2 text-center align-self-center"
 								>
 									<div class="card-body">
-										
-										<br /><br />
+										<br>
+										<br>
+
+										<!-- Remove Match Button 2 - brings a conformation modal -->
 										<button
-											class="btn btn-danger"
+											class="matchHistory-btn"
 											type="button"
 											id="removeTwo"
-											data-bs-toggle="modal" 
+											data-bs-toggle="modal"
 											data-bs-target="#delModal2"
 										>
 											Remove Match
 										</button>
+
+										<!-- Remove Confirmation Modal 2 -->
 										<div class="modal" id="delModal2">
 											<div class="modal-dialog">
-											  <div class="modal-content">
-										  
-												<div class="modal-header">
-												  <h4 class="modal-title">Are You Sure?</h4>
-												  <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
-												</div>														  
-													<div class="modal-body">																		
-														<div class="form-group">
-															<button class="btn btn-success" data-bs-dismiss="modal">No</button>
-															<button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="removeMatch2" value="1">Yes</button>
+												<div class="modal-content modal-revert">
+													<div class="modal-header">
+														<h4 class="modal-title">
+															Are You Sure?
+														</h4>
+														<button
+															type="button"
+															class="close matchHistory-btn"
+															data-bs-dismiss="modal"
+														>
+															&times;
+														</button>
+													</div>
+													<div class="modal-body">
+														<div class="form-group form-group-revert">
+															<h5> 
+																Removing the match will 
+                                                                eliminate their match history entry, and it will prevent
+                                                                you from getting matched up with them again.
+															</h5>
+															<button
+																class="matchHistory-btn"
+																data-bs-dismiss="modal"
+																id="noRemoval2"
+															>
+																No
+															</button>
+															<button
+																type="button"
+																class="matchHistory-btn"
+																data-bs-dismiss="modal"
+																id="removeMatch2"
+																value="1"
+															>
+																Yes
+															</button>
 														</div>
-													</div>														  
-											  </div>
+													</div>
+												</div>
 											</div>
 										</div>
-								
-										<br /><br />
+
+										<br>
+										<br>
+
+										<!-- preference button 2 - clicking brings preference modal-->
 										<button
-											class="btn btn-success"
+											class="matchHistory-btn"
 											type="button"
 											id="availability2"
 											data-bs-toggle="modal"
@@ -320,23 +457,36 @@
 											View Availability Preferences
 										</button>
 
-
+										<!-- Preference modal 2 displays members workout days prefered -->
 										<div class="modal" id="prefModal2">
 											<div class="modal-dialog">
-											    <div class="modal-content">
-										  
+												<div class="modal-content modal-revert">
 													<div class="modal-header">
-														<h4 class="modal-title">Member's Workout Days</h4>
-														<button type="button" class="close" data-bs-dismiss="modal">&times;</button>
-													</div>													  
+														<h4 class="modal-title">
+															Member's Workout
+															Days
+														</h4>
+														<button
+															type="button"
+															class="close matchHistory-btn"
+															data-bs-dismiss="modal"
+														>
+															&times;
+														</button>
+													</div>
 													<div class="modal-body">
-														<span id="prefDate2"></span>																										
-													</div>														  														
-											    </div>
+														<!-- Members prefered workout days - Filled in By matchHistory.js -->
+														<h5
+															id="prefDate2"
+														> Member Data</h5>
+													</div>
+												</div>
 											</div>
 										</div>
 
-										<br /><br />
+										<br>
+										<br>
+										<!-- Member Rating Dropdown 2 created in matchHistory.js -->
 										<label for="selectRating2"
 											>Rate This Workout Partner:</label
 										>
@@ -345,10 +495,16 @@
 											aria-label="selectRating2"
 											aria-readonly="true"
 											id="selectRating2"
-										>
-										</select>
+										></select>
 										<br>
-										<button type="button" id ="updateRating2" class="btn btn-success">Update</button>
+										<!-- Update Rating Button 2 -->
+										<button
+											type="button"
+											id="updateRating2"
+											class="matchHistory-btn"
+										>
+											Update
+										</button>
 									</div>
 								</div>
 
@@ -357,15 +513,16 @@
 										<h2>Past Workouts</h2>
 										<div class="row">
 											<div class="col-8">
+												<!-- Workout Carousel 2 - Filled in by matchHistory.js -->
 												<div
 													id="carousel2"
 													class="carousel slide"
 													data-bs-ride="false"
-												>
-												</div>
+												></div>
 											</div>
 											<div class="col-4">
-												<div class="card">
+												<!-- add workout button 2 - clicking will bring add workout modal -->
+												<div class="card add-workout-card">
 													<div class="card-body">
 														<h3 class="card-title">
 															Add Workout
@@ -374,40 +531,122 @@
 															class="card-img-top add-workout-icon"
 															src="https://www.freepnglogos.com/uploads/plus-icon/plus-icon-plus-sign-icon-vector-graphic-pixabay-7.png"
 															alt="Plus Symbol"
-														/>
+														>
 														<button
+															id="plus2"
 															class="btn btn-transparent stretched-link"
 															type="button"
-															data-bs-toggle="modal" data-bs-target="#myModal2"
-														></button>  
-														<div class="modal" id="myModal2">
-															<div class="modal-dialog">
-															  <div class="modal-content">
-																<div class="modal-header">
-																  <h4 class="modal-title">Add Workout</h4>
-																  <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
-																</div>	
-																<form>													  
-																	<div class="modal-body">																		
-																		<div class="form-group">
-																			<label for="date2">Date</label>
-																			<input type="text" class="form-control" id="date2" aria-describedby="date2" placeholder="Enter a Valid Date">
-
-																			<label for="wType2">Workout Type</label>
-																			<input type="text" class="form-control" id="wType2" aria-describedby="wType2" placeholder="Workout Type">
-																			
-																			<label for="workout2"> Workout </label>																			
-																			<input type="text" class="form-control" id="workout2" aria-describedby="workout2" placeholder="Enter Workout">
-																			<small id="workoutTip2" class="form-text text-muted">Please Seperate Each Exercise by a Comma if you Want To Make Different Entries.</small>
-																		</div>
-																	</div>														  
-																	<div class="modal-footer">
-																		<button type="button" id="add2" class="btn btn-success" data-bs-dismiss="modal">Enter</button>
+															data-bs-toggle="modal"
+															data-bs-target="#myModal2"
+														></button>
+														<!-- add workout modal 2 -->
+														<div
+															class="modal"
+															id="myModal2"
+														>
+															<div
+																class="modal-dialog"
+															>
+																<div
+																	class="modal-content modal-revert"
+																>
+																	<div
+																		class="modal-header"
+																	>
+																		<h4
+																			class="modal-title"
+																		>
+																			Add
+																			Workout
+																		</h4>
+																		<button
+																			type="button"
+																			class="close matchHistory-btn"
+																			data-bs-dismiss="modal"
+																		>
+																			&times;
+																		</button>
 																	</div>
-																</form>
-															  </div>
+																	<form>
+																		<div
+																			class="modal-body"
+																		>
+																			<div
+																				class="form-group"
+																			>
+																				<label
+																					for="date2"
+																					>Date</label
+																				>
+																				<input
+																					type="text"
+																					class="form-control matchHistory-fill-in"
+																					id="date2"
+																					aria-describedby="date2"
+																					placeholder="DD/MM/YYYY"
+																				>
+
+																				<label
+																					for="wType2"
+																					>Workout
+																					Type</label
+																				>
+																				<input
+																					type="text"
+																					class="form-control matchHistory-fill-in"
+																					id="wType2"
+																					aria-describedby="wType2"
+																					placeholder="Workout Type"
+																				>
+
+																				<label
+																					for="workout2"
+																				>
+																					Workout
+																				</label>
+																				<input
+																					type="text"
+																					class="form-control matchHistory-fill-in"
+																					id="workout2"
+																					aria-describedby="workout2"
+																					placeholder="Enter Workout"
+																				>
+																				<small
+																					id="workoutTip2"
+																					class="form-text text-muted"
+																					>Please
+																					Seperate
+																					Each
+																					Exercise
+																					by
+																					a
+																					Comma
+																					if
+																					you
+																					Want
+																					To
+																					Make
+																					Different
+																					Entries.</small
+																				>
+																			</div>
+																		</div>
+																		<div
+																			class="modal-footer"
+																		>
+																			<button
+																				type="button"
+																				id="add2"
+																				class="matchHistory-btn"
+																				data-bs-dismiss="modal"
+																			>
+																				Enter
+																			</button>
+																		</div>
+																	</form>
+																</div>
 															</div>
-														</div>	
+														</div>
 													</div>
 												</div>
 											</div>
@@ -421,6 +660,7 @@
 			</div>
 		</div>
 
+		<!-- Entry Slot 3 -->
 		<div class="accordion w-75 mx-auto" id="previousMatchesThree">
 			<div class="accordion-item">
 				<h2 class="accordion-header" id="matchThree">
@@ -433,15 +673,17 @@
 						aria-controls="collapseThree"
 					>
 						<span class="prev-matches-header">
+							<!-- Profile Image of the Member - updated by matchHistory.js -->
 							<img
 								class="card-img-top prev-match-img"
-								src= "#"
-								alt="Buff Dude"
+								src="#"
+								alt="Profile Image 3"
 								id="profilePic3"
-							/>
+							>
+							<!-- Members name and contact info filled in by matchHistory.js -->
 							<span class="prev-matches-info" id="profile3">
 							</span>
-							<br />
+							<br>
 						</span>
 					</button>
 				</h2>
@@ -458,36 +700,69 @@
 									class="col-2 text-center align-self-center"
 								>
 									<div class="card-body">
-										<br /><br />
+										<br>
+										<br>
+										<!-- Remove member button 3 brings up remove confirmation modal -->
 										<button
-											class="btn btn-danger"
+											class="matchHistory-btn"
 											type="button"
 											id="removeThree"
-											data-bs-toggle="modal" 
+											data-bs-toggle="modal"
 											data-bs-target="#delModal3"
 										>
 											Remove Match
 										</button>
+
+										<!-- Remove Confirmation modal 3 -->
 										<div class="modal" id="delModal3">
 											<div class="modal-dialog">
-											  <div class="modal-content">
-										  
-												<div class="modal-header">
-												  <h4 class="modal-title">Are You Sure?</h4>
-												  <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
-												</div>														  
-													<div class="modal-body">																		
-														<div class="form-group">
-															<button class="btn btn-success" data-bs-dismiss="modal">No</button>
-															<button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="removeMatch3" value="3">Yes</button>
+												<div class="modal-content modal-revert">
+													<div class="modal-header">
+														<h4 class="modal-title">
+															Are You Sure?
+														</h4>
+														<button
+															type="button"
+															class="close matchHistory-btn"
+															data-bs-dismiss="modal"
+														>
+															&times;
+														</button>
+													</div>
+													<div class="modal-body">
+														<div class="form-group form-group-revert">
+															<h5> 
+																Removing the match will 
+                                                                eliminate their match history entry, and it will prevent
+                                                                you from getting matched up with them again.
+															</h5>
+															<button
+																class="matchHistory-btn"
+																data-bs-dismiss="modal"
+																id="noRemoval3"
+															>
+																No
+															</button>
+															<button
+																type="button"
+																class="matchHistory-btn"
+																data-bs-dismiss="modal"
+																id="removeMatch3"
+																value="3"
+															>
+																Yes
+															</button>
 														</div>
-													</div>														  
-											  </div>
+													</div>
+												</div>
 											</div>
 										</div>
-										<br /><br />
+										<br>
+										<br>
+
+										<!-- preference button 3 - clicking brings preference modal-->
 										<button
-											class="btn btn-success"
+											class="matchHistory-btn"
 											type="button"
 											id="availability3"
 											data-bs-toggle="modal"
@@ -495,23 +770,37 @@
 										>
 											View Availability Preferences
 										</button>
+										<!-- Preference modal 3 displays members workout days prefered -->
+
 										<div class="modal" id="prefModal3">
 											<div class="modal-dialog">
-											    <div class="modal-content">
-										  
+												<div class="modal-content modal-revert">
 													<div class="modal-header">
-														<h4 class="modal-title">Member's Workout Days</h4>
-														<button type="button" class="close" data-bs-dismiss="modal">&times;</button>
-													</div>													  
-													<div class="modal-body">	
-														<span id="prefDate3"></span>																									
-													</div>														  														
-											    </div>
+														<h4 class="modal-title">
+															Member's Workout
+															Days
+														</h4>
+														<button
+															type="button"
+															class="close matchHistory-btn"
+															data-bs-dismiss="modal"
+														>
+															&times;
+														</button>
+													</div>
+													<div class="modal-body">
+														<!-- Members prefered workout days - Filled in By matchHistory.js -->
+														<h5
+															id="prefDate3"
+														> Member Data</h5>
+													</div>
+												</div>
 											</div>
 										</div>
 
-
-										<br /><br />
+										<br>
+										<br>
+										<!-- Member Rating Dropdown 3 created in matchHistory.js -->
 										<label for="selectRating3"
 											>Rate This Workout Partner:</label
 										>
@@ -520,10 +809,16 @@
 											aria-label="selectRating3"
 											aria-readonly="true"
 											id="selectRating3"
-										>									
-										</select>
+										></select>
 										<br>
-										<button type="button" id ="updateRating3" class="btn btn-success">Update</button>
+										<!-- Update Rating Button 3 -->
+										<button
+											type="button"
+											id="updateRating3"
+											class="matchHistory-btn"
+										>
+											Update
+										</button>
 									</div>
 								</div>
 
@@ -532,15 +827,16 @@
 										<h2>Past Workouts</h2>
 										<div class="row">
 											<div class="col-8">
+												<!-- Workout Carousel 3 - Filled in by matchHistory.js -->
 												<div
 													id="carousel3"
 													class="carousel slide"
 													data-bs-ride="false"
-												>
-												</div>
+												></div>
 											</div>
 											<div class="col-4">
-												<div class="card">
+												<!-- add workout button 3 - clicking will bring add workout modal -->
+												<div class="card add-workout-card">
 													<div class="card-body">
 														<h3 class="card-title">
 															Add Workout
@@ -549,38 +845,120 @@
 															class="card-img-top add-workout-icon"
 															src="https://www.freepnglogos.com/uploads/plus-icon/plus-icon-plus-sign-icon-vector-graphic-pixabay-7.png"
 															alt="Plus Symbol"
-														/>
+														>
 														<button
+															id="plus3"
 															class="btn btn-transparent stretched-link"
 															type="button"
-															data-bs-toggle="modal" data-bs-target="#myModal3"
-														></button>  
-														<div class="modal" id="myModal3">
-															<div class="modal-dialog">
-															  <div class="modal-content">
-																<div class="modal-header">
-																  <h4 class="modal-title">Add Workout</h4>
-																  <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
-																</div>	
-																<form>													  
-																	<div class="modal-body">																		
-																		<div class="form-group">
-																			<label for="date3">Date</label>
-																			<input type="text" class="form-control" id="date3" aria-describedby="date3" placeholder="Enter a Valid Date - DD/MM/YYYY">
-																			<label for="wType3">Workout Type</label>
-																			<input type="text" class="form-control" id="wType3" aria-describedby="wType3" placeholder="Workout Type">
-																			<label for="workout3"> Workout </label>
-																			<input type="text" class="form-control" id="workout3" aria-describedby="workout3" placeholder="Enter workout">
-																			<small id="workoutTip3" class="form-text text-muted">Please Seperate Each Exercise by a Comma if you Want To Make Different Entries.</small>
-																		</div>
-																	</div>														  
-																	<div class="modal-footer">
-																		<button type="button" id="add3" class="btn btn-success" data-bs-dismiss="modal">Enter</button>
+															data-bs-toggle="modal"
+															data-bs-target="#myModal3"
+														></button>
+														<!-- add workout modal 3 -->
+														<div
+															class="modal"
+															id="myModal3"
+														>
+															<div
+																class="modal-dialog"
+															>
+																<div
+																	class="modal-content modal-revert"
+																>
+																	<div
+																		class="modal-header"
+																	>
+																		<h4
+																			class="modal-title"
+																		>
+																			Add
+																			Workout
+																		</h4>
+																		<button
+																			type="button"
+																			class="close matchHistory-btn"
+																			data-bs-dismiss="modal"
+																		>
+																			&times;
+																		</button>
 																	</div>
-																</form>
-															  </div>
+																	<form>
+																		<div
+																			class="modal-body"
+																		>
+																			<div
+																				class="form-group"
+																			>
+																				<label
+																					for="date3"
+																					>Date</label
+																				>
+																				<input
+																					type="text"
+																					class="form-control matchHistory-fill-in"
+																					id="date3"
+																					aria-describedby="date3"
+																					placeholder="DD/MM/YYYY"
+																				>
+																				<label
+																					for="wType3"
+																					>Workout
+																					Type</label
+																				>
+																				<input
+																					type="text"
+																					class="form-control matchHistory-fill-in"
+																					id="wType3"
+																					aria-describedby="wType3"
+																					placeholder="Workout Type"
+																				>
+																				<label
+																					for="workout3"
+																				>
+																					Workout
+																				</label>
+																				<input
+																					type="text"
+																					class="form-control matchHistory-fill-in"
+																					id="workout3"
+																					aria-describedby="workout3"
+																					placeholder="Enter workout"
+																				>
+																				<small
+																					id="workoutTip3"
+																					class="form-text text-muted"
+																					>Please
+																					Seperate
+																					Each
+																					Exercise
+																					by
+																					a
+																					Comma
+																					if
+																					you
+																					Want
+																					To
+																					Make
+																					Different
+																					Entries.</small
+																				>
+																			</div>
+																		</div>
+																		<div
+																			class="modal-footer"
+																		>
+																			<button
+																				type="button"
+																				id="add3"
+																				class="matchHistory-btn"
+																				data-bs-dismiss="modal"
+																			>
+																				Enter
+																			</button>
+																		</div>
+																	</form>
+																</div>
 															</div>
-														</div>	
+														</div>
 													</div>
 												</div>
 											</div>
@@ -594,22 +972,31 @@
 			</div>
 		</div>
 
-		<br />
+		<br>
 
+		
 		<div class="container">
 			<div class="row">
 				<div class="col text-center mb-2">
-					<button class="btn btn-primary" type="button" id="back">
+					<!-- The Previous page button -->
+					<button class="matchHistory-btn" type="button" id="back">
 						Previous
 					</button>
 				</div>
 				<div class="col text-center mb-2">
-					<button class="btn btn-primary" type="button" id="next">Next</button>
+					<!-- The next page button -->
+					<button class="matchHistory-btn" type="button" id="next">
+						Next
+					</button>
 				</div>
 			</div>
 		</div>
 
-		<script type="module" src="./src/matchHistory.js" defer></script>
+		<footer class="footer" id="matchHistory-footer">
+			<small class="copyright-text">&copy; Copyright 2022, UFit</small>
+		</footer>
+
+		<script type="module" src="./src/matchHistory.js"></script>
 		<script
 			src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
 			integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"

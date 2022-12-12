@@ -23,6 +23,44 @@ class User {
 		}
 	}
 
+	async checkToken() {
+		// check if token is valid
+		const res = await fetch(`${urlBase}/auth/validateUser`, {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
+
+		// if not valid, return null
+		if (!res.ok) {
+			return null;
+		}
+
+		const msg = await res.json();
+
+		// update user id here
+		return msg.id;
+	}
+
+	async getProfilePicture() {
+		// fetch image link for user
+		const res = await fetch(`${urlBase}/profile/${this.userId}/picture`, {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
+
+		// if res is not ok, alert user that image failed to load
+		if (!res.ok) {
+			return null;
+		}
+
+		const parsedRes = await res.json();
+		return parsedRes.profilePic;
+	}
+
 	getUserId() {
 		return this.userId;
 	}

@@ -57,7 +57,7 @@ export const signupUser = async (req, res, next) => {
 		!validateEmail(email) ||
 		!validatePassword(password) ||
 		fName.trim().length === 0 ||
-		lName.trinm().length === 0
+		lName.trim().length === 0
 	) {
 		res.status(400).send({ id: "Invalid credentials" });
 		return;

@@ -5,47 +5,71 @@ const logoutButton = document.getElementById("logoutOption");
 const nextButton = document.getElementById("nextButton");
 const maxPotentialMatchesAtOnce = 10;
 let curPotentialMatches = 0;
-logoutButton.addEventListener("click", logout);
 const profilePictureImage = document.getElementById("profilePicture");
 
 await validateUser();
 await initialize(user.getUserId());
 
 async function validateUser() {
-	const res = await fetch(`${urlBase}/auth/validateUser`, {
-		method: "GET",
-		headers: {
-			"Content-Type": "application/json",
-		},
-	});
+	// validate accessToken
+	const id = await user.checkToken();
 
 	// if not valid, return
-	if (!res.ok) {
-		alert("Issue finding profile information");
+	if (!id) {
+		location.href = "login.html";
+		return;
 	}
-	const msg = await res.json();
 	// update user id here
-	user.setUserId(msg.id);
+	user.setUserId(id);
+
+	// get image link
+	const imageLink = await user.getProfilePicture();
+
+	// create dropdown
+	const html = `<div id='profile-dropdown' class="dropdown">
+			<img
+				class="user-icon dropdown-toggle"
+				data-bs-toggle="dropdown"
+				src="${imageLink}"
+				alt="user icon"
+			/>
+			<ul class="dropdown-menu">
+				<li>
+					<a id="profile" class="dropdown-item" href="profile.html">
+						Profile
+					</a>
+				</li>
+				<li>
+					<a id="findFit" class="dropdown-item" href="matchingPage.html">
+						Find a Fit!
+					</a>
+				</li>
+				<li>
+					<a id="Matches" class="dropdown-item" href="matchHistory.html">
+						Matches
+					</a>
+				</li>
+				<li>
+					<a id="logout" class="dropdown-item" href="#">
+						Log out
+					</a>
+				</li>
+			</ul>
+		</div>`;
+	const wrapper = document.createElement("div");
+	wrapper.classList.add("dropdown");
+	wrapper.innerHTML = html;
+
+	// insert element into page
+	const dropdown = document.getElementById("logo");
+	dropdown.insertAdjacentElement("afterend", wrapper);
+
+	// logout button functionality
+	const logoutBtn = document.getElementById("logout");
+	logoutBtn.addEventListener("click", user.logout);
 }
 
-// Replace from shared once set up
-async function logout() {
-	const res = await fetch(`${urlBase}/auth/logout`, {
-		method: "POST",
-		credentials: "include",
-		headers: { "Content-type": "application/json" },
-		body: null,
-	});
-
-	const msg = await res.json();
-
-	if (res.ok) {
-		location.href = "index.html";
-	} else {
-		alert("failed to logout");
-	}
-}
-
+// Initializes the find a fit page by pulling the potential matches of the user
 async function initialize(id) {
 	try {
 		const res = await fetch(`${urlBase}/matches/${id}/potential`, {
@@ -66,9 +90,12 @@ async function initialize(id) {
 	);
 	const potentialMatchesKeys = Object.keys(potentialMatches);
 	curPotentialMatches = potentialMatchesKeys.length;
+
+	// Checks if there are potential matches to scroll through
 	if (curPotentialMatches === 0) {
 		alertNoMoreMatches();
 	} else {
+		// Generates the potential match carousel items if they exist
 		let firstIteration = true;
 		carouselDiv.innerHTML = "";
 		for (const potentialMatchID of potentialMatchesKeys) {
@@ -85,27 +112,9 @@ async function initialize(id) {
 			firstIteration = false;
 		}
 	}
-
-	setProfilePicture(id);
 }
 
-async function setProfilePicture(id) {
-	try {
-		const res = await fetch(`${urlBase}/profile/${id}/picture`, {
-			method: "GET",
-			credentials: "include",
-		});
-		if (!res.ok || res.status === 400) {
-			throw new Error("Something went wrong please try again later");
-		}
-		const msg = await res.json();
-		profilePictureImage.src = msg.profilePic;
-	} catch (err) {
-		alert("Profile Picture could not be retrieved");
-		return;
-	}
-}
-
+// Accepts a match when the accept button is pressed
 async function acceptMatch(otherID) {
 	try {
 		const res = await fetch(
@@ -122,10 +131,12 @@ async function acceptMatch(otherID) {
 		alert("Unable to Accept Match");
 		return;
 	}
+	// Removes the match from the list of options and adds another potential match if more exist that aren't shown
 	removeFromCarousel(otherID);
 	addPotentialToCarousel();
 }
 
+// Adds a potential match that was previously not shown to the list of potential matches that are shown
 function addPotentialToCarousel() {
 	const potentialMatch = user.getPotentialMatches(1);
 	const keys = Object.keys(potentialMatch);
@@ -139,6 +150,7 @@ function addPotentialToCarousel() {
 	}
 }
 
+// Removes a currently shown potential match from the list of potential matches that are shown
 function removeFromCarousel(id) {
 	curPotentialMatches--;
 	if (curPotentialMatches === 0) {
@@ -148,14 +160,15 @@ function removeFromCarousel(id) {
 	document.getElementById("carouselItem" + id).remove();
 }
 
+// Alerts the user that there are no more potential matches currently
 function alertNoMoreMatches() {
-	alert("No more potential matches remaining. Please come back later.");
-	carouselDiv.innerHTML = `<h1>No More Matches :(<h1>
+	carouselDiv.innerHTML = `<div id="noMoreMatches"><h1>No More Matches :(<h1>
 			</br>
-			<h2>Try again later!<h2>`;
-	carouselDiv;
+			<h2>Try again later!<h2></div>`;
+	carouselDiv.style.height = "80vh";
 }
 
+// Denies the current match
 async function denyMatch(otherID) {
 	try {
 		const res = await fetch(
@@ -172,15 +185,19 @@ async function denyMatch(otherID) {
 		alert("Unable to Deny Match");
 		return;
 	}
+
+	// Removes the match from the list of options and adds another potential match if more exist that aren't shown
 	removeFromCarousel(otherID);
 	addPotentialToCarousel();
 }
 
+// Generates a carousel item to shown a potential match that can be accepted or denied
 function generateCarouselItem(id, profile, profileImage, active = false) {
 	const upperCaseDays = [];
 	for (const day of profile["preferredDays"]) {
 		upperCaseDays.push(day.charAt(0).toUpperCase() + day.slice(1));
 	}
+	// The HTML for the potential match
 	const carouselItemInnterHTML = `<img
 							class="caro-img"
 							src=${profileImage}
@@ -188,27 +205,36 @@ function generateCarouselItem(id, profile, profileImage, active = false) {
 						/>
 						<p class="name">${profile["firstName"]} ${profile["lastName"]}</p>
 						<div>
-							<p>Workout Split: ${profile["workoutStyle"]}</p>
+							<p class="workout-split">Workout Split: ${profile["workoutStyle"]}</p>
 						</div>
 						<div>
-							<button class="btn btn-secondary" type="button" id=${"moreInfoButton" + id}>
+							<button class="show-info" type="button" id=${"moreInfoButton" + id}>
 								More info
 							</button>
 						</div>
-                        <div id = ${"moreInfoDiv" + id} hidden = "true">
-                            Workouts Per Week:      ${
+                        <div class="moreInfo" id = ${
+							"moreInfoDiv" + id
+						} hidden = "true">
+							<p class="info-sec">Average User Rating:      ${
+								profile["rating"] === 0
+									? "No Ratings Yet"
+									: profile["rating"]
+							}</p>
+                            <p class="info-sec">Workouts Per Week:      ${
 								profile["workoutsPerWeek"]
-							}
-							</br>
-                            Average Workout Length: ${
+							}</p>
+							<p class="info-sec">
+                            Average Workout Length (in hours): ${
 								profile["averageWorkoutLength"]
-							}
-							</br>
-                            Start Time:      ${profile["startTime"]}
-							</br>
-                            End Time:         ${profile["endTime"]}
-							</br>
-                            Preferred Days:         ${upperCaseDays.join(", ")}
+							}</p>
+							<p class="info-sec">
+                            Start Time:      ${profile["startTime"]}</p>
+							<p class="info-sec">
+                            End Time:         ${profile["endTime"]}</p>
+							<p class="info-sec">
+                            Preferred Days:         ${upperCaseDays.join(
+								", "
+							)}</p>
                         </div>
 						<div class="selection">
 					<button class="select-btn" id=${"acceptMatchButton" + id}>
@@ -220,7 +246,10 @@ function generateCarouselItem(id, profile, profileImage, active = false) {
 				</div>`;
 	const carouselItemWrapper = document.createElement("div");
 	carouselItemWrapper.setAttribute("id", `${"carouselItem" + id}`);
-	carouselItemWrapper.classList.add("carousel-item");
+	carouselItemWrapper.classList.add(
+		"carousel-item",
+		"matchingPage-carousel-item"
+	);
 	if (active) {
 		carouselItemWrapper.classList.add("active");
 	}
