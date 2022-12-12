@@ -123,6 +123,7 @@ body {
 	display: flex;
 }
 
+/*Dup*/
 .name {
 	color: #061826;
 	font-size: 1.5rem;
@@ -523,26 +524,6 @@ body {
 	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
-#carouselDiv {
-	display: flex;
-}
-
-.name {
-	color: #061826;
-	font-size: 1.5rem;
-}
-
-.workout-split {
-	color: #061826;
-	font-size: 1.25rem;
-}
-
-.info-sec {
-	color: #061826;
-	font-size: 1.1rem;
-	margin: 0.3em;
-}
-
 .select-btn {
 	background: none;
 	border: none;
@@ -571,6 +552,7 @@ body#background {
 	text-align: center;
 }
 
+/*Dup*/
 #signupToggle {
 	background: none;
 	border: none;
@@ -594,50 +576,6 @@ body#background {
 	text-align: left;
 }
 
-.hidden-file-picker {
-	display: none;
-}
-
-.profile-picture-preview {
-	width: 200px;
-	height: 200px;
-	object-fit: cover;
-}
-
-.profile-btn {
-	background-color: #fbeee0;
-	border: 2px solid #422800;
-	border-radius: 30px;
-	box-shadow: #422800 4px 4px 0 0;
-	color: #422800;
-	cursor: pointer;
-	display: inline-block;
-	font-weight: 600;
-	font-size: 18px;
-	padding: 0 18px;
-	line-height: 50px;
-	text-align: center;
-	text-decoration: none;
-	user-select: none;
-	-webkit-user-select: none;
-	touch-action: manipulation;
-}
-
-.profile-btn:hover {
-	background-color: #fff;
-}
-
-.profile-btn:active {
-	box-shadow: #422800 2px 2px 0 0;
-	transform: translate(2px, 2px);
-}
-
-@media (min-width: 768px) {
-	.profile-btn {
-		min-width: 120px;
-		padding: 0 25px;
-	}
-}
 
 .field__input {
 	--uiFieldPlaceholderColor: var(--fieldPlaceholderColor, #767676);
@@ -812,12 +750,14 @@ effect 3
 	overflow: var(--ha-screen-reader-overflow, hidden);
 }
 
+/*Dup*/
 .main {
 	margin: 0 auto 6em auto;
 	width: 80%;
 	background-color: #dbd4d3;
 }
 
+/*Dup*/
 .profile-inputs {
 	padding: 0.2em 0 3em 0;
 	margin: 2em auto;
@@ -840,6 +780,7 @@ effect 3
 	background-color: #dbd4d3;
 }
 
+/*Dup*/
 .profile-btns {
 	width: 500px;
 	display: flex;
